@@ -29,7 +29,11 @@
           required
         />
       </div>
-      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">
+      <button
+        :disabled="isProcessing"
+        class="btn btn-lg btn-primary btn-block mb-3"
+        type="submit"
+      >
         Submit
       </button>
       <div class="text-center mb-3">
@@ -43,23 +47,43 @@
 </template>
 
 <script>
+import authorizationAPI from './../apis/authorization'
+import { Toast } from './../utils/helpers'
 export default {
   name: 'SignIn',
   data() {
     return {
+      isProcessing: false,
       email: '',
       password: ''
     }
   },
   methods: {
-    handleSubmit(e) {
-      const data = JSON.stringify({
-        email: this.email,
-        password: this.password
-      })
-
-      // TODO: 向後端驗證使用者登入資訊是否合法
-      console.log('data', data)
+    async handleSubmit() {
+      try {
+        this.isProcessing = true
+        if (!this.email || !this.password) {
+          Toast.fire({
+            type: 'warning',
+            title: '請填入 email 和 password'
+          })
+          return
+        }
+        const response = await authorizationAPI.signIn({
+          email: this.email,
+          password: this.password
+        })
+        const { data } = response
+        localStorage.setItem('token', data.token)
+        this.$router.push('/posts')
+      } catch (error) {
+        this.password = ''
+        this.isProcessing = false
+        Toast.fire({
+          type: 'warning',
+          title: '請確認您輸入的帳號密碼錯誤'
+        })
+      }
     }
   }
 }
