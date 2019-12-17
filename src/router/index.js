@@ -24,6 +24,11 @@ const routes = [
     component: Posts
   },
   {
+    path: '/users/:id',
+    name: 'users',
+    component: () => import('../views/User.vue')
+  },
+  {
     path: '*',
     name: 'not-found',
     component: NotFound
