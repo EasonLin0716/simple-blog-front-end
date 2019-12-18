@@ -1,6 +1,6 @@
 <template>
   <div id="user-posts">
-    <h5>Latest</h5>
+    <h5 id="latest">Latest</h5>
     <div v-for="post in posts" :key="post.id">
       <div class="card">
         <div id="info">
@@ -79,6 +79,10 @@ export default {
 h6 {
   margin: 0;
   padding: 0;
+}
+
+#latest {
+  margin-top: 30px;
 }
 
 #cover {
