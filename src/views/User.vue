@@ -1,16 +1,19 @@
 <template>
   <div id="profile">
     <UserInfo :user="user" />
+    <UserPosts :posts="posts" :user="user" />
   </div>
 </template>
 
 <script>
 import userAPI from '../apis/user'
 import UserInfo from '../components/UserInfo'
+import UserPosts from '../components/UserPosts'
 export default {
   name: 'User',
   components: {
-    UserInfo
+    UserInfo,
+    UserPosts
   },
   data() {
     return {

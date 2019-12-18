@@ -16,3 +16,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.icon {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+}
+</style>
