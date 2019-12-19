@@ -8,15 +8,17 @@
     <article>
       {{ post.content }}
     </article>
+    <PostFooter :author="author" :post="post" />
   </div>
 </template>
 
 <script>
 import postsAPI from '../apis/posts'
 import PostUserInfo from '../components/PostUserInfo'
+import PostFooter from '../components/PostFooter'
 export default {
   name: 'Post',
-  components: { PostUserInfo },
+  components: { PostUserInfo, PostFooter },
   data() {
     return {
       post: {
@@ -98,6 +100,9 @@ export default {
 #cover {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+}
+
+article {
+  margin: 20px 0 40px 0;
 }
 </style>

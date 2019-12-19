@@ -8,6 +8,7 @@ import { faBell } from '@fortawesome/free-regular-svg-icons'
 import { faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+
 // ---icons registering end---
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
