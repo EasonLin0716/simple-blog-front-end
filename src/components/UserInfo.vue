@@ -13,28 +13,6 @@
       </div>
     </div>
     <br />
-    <div id="links">
-      <div id="link">
-        <router-link :to="'/users/' + user.id">
-          Profile
-        </router-link>
-      </div>
-      <div id="link">
-        <router-link :to="'/users/' + user.id + '/claps'">
-          Claps
-        </router-link>
-      </div>
-      <div id="link">
-        <router-link :to="'/users/' + user.id + '/highlights'">
-          Highlights
-        </router-link>
-      </div>
-      <div id="link">
-        <router-link :to="'/users/' + user.id + '/responses'">
-          Responses
-        </router-link>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -64,15 +42,6 @@ export default {
 
 #info #content {
   padding-right: 40px;
-}
-
-#links {
-  display: flex;
-  border-bottom: 1px solid rgb(200, 200, 200);
-}
-
-#links #link {
-  margin: 0 20px 10px 0;
 }
 
 h1 {

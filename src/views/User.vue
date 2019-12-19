@@ -1,6 +1,8 @@
 <template>
   <div id="profile">
     <UserInfo :user="user" />
+    <UserNavTab :userId="user.id" />
+    <!-- TODO: 路由切換時更換組件 -->
     <UserPosts :posts="posts" :user="user" />
   </div>
 </template>
@@ -8,11 +10,13 @@
 <script>
 import userAPI from '../apis/user'
 import UserInfo from '../components/UserInfo'
+import UserNavTab from '../components/UserNavTab'
 import UserPosts from '../components/UserPosts'
 export default {
   name: 'User',
   components: {
     UserInfo,
+    UserNavTab,
     UserPosts
   },
   data() {
