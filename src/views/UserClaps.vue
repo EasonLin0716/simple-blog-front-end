@@ -44,7 +44,6 @@ export default {
           throw new Error(statusText)
         }
         const { user, posts } = data
-        console.log(data)
         this.user = {
           ...this.user,
           id: user.id,
