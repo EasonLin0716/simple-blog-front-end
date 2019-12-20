@@ -1,7 +1,16 @@
 <template>
   <div id="links">
-    <div id="link" v-for="tab in tabs" :key="tab.id">
-      <router-link :to="tab.path">{{ tab.title }}</router-link>
+    <div id="link">
+      <router-link :to="this.userId">Profile</router-link>
+    </div>
+    <div id="link">
+      <router-link :to="this.userId + '/claps'">Claps</router-link>
+    </div>
+    <div id="link">
+      <router-link :to="this.userId + '/highlights'">Highlights</router-link>
+    </div>
+    <div id="link">
+      <router-link :to="this.userId + '/responses'">Responses</router-link>
     </div>
   </div>
 </template>
@@ -15,30 +24,7 @@ export default {
     }
   },
   data() {
-    return {
-      tabs: [
-        {
-          id: 1,
-          title: 'Profile',
-          path: `/users/${this.userId}`
-        },
-        {
-          id: 2,
-          title: 'Claps',
-          path: `/users/${this.userId}/claps`
-        },
-        {
-          id: 3,
-          title: 'Highlights',
-          path: `/users/${this.userId}/highlights`
-        },
-        {
-          id: 4,
-          title: 'Responses',
-          path: `/users/${this.userId}/responses`
-        }
-      ]
-    }
+    return {}
   }
 }
 </script>
