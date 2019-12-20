@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       user: {
-        id: null,
+        id: 0,
         name: '',
         avatar: '',
         introduction: '',

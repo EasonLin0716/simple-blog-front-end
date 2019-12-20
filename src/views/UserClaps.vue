@@ -2,6 +2,7 @@
   <div id="user-claps">
     <UserInfo :user="user" />
     <UserNavTab :userId="user.id" />
+    <UserClapsPosts :posts="posts" :user="user" />
   </div>
 </template>
 
@@ -9,16 +10,18 @@
 import userAPI from '../apis/user'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
+import UserClapsPosts from '../components/UserClapsPosts'
 export default {
   name: 'User',
   components: {
     UserInfo,
-    UserNavTab
+    UserNavTab,
+    UserClapsPosts
   },
   data() {
     return {
       user: {
-        id: null,
+        id: 0,
         name: '',
         avatar: '',
         introduction: '',
@@ -32,15 +35,16 @@ export default {
     }
   },
   methods: {
-    async fetchUser(userId) {
+    async fetchUserClaps(userId) {
       try {
-        const { data, statusText } = await userAPI.get({
+        const { data, statusText } = await userAPI.getClaps({
           userId
         })
         if (statusText !== 'OK') {
           throw new Error(statusText)
         }
         const { user, posts } = data
+        console.log(data)
         this.user = {
           ...this.user,
           id: user.id,
@@ -61,12 +65,12 @@ export default {
   },
   created() {
     const { id: userId } = this.$route.params
-    this.fetchUser(userId)
+    this.fetchUserClaps(userId)
   },
   beforeRouteUpdate(to, from, next) {
     // 路由改變時重新抓取資料
     const { id: userId } = to.params
-    this.fetchUser(userId)
+    this.fetchUserClaps(userId)
     next()
   }
 }
