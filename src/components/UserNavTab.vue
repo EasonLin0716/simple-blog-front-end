@@ -1,16 +1,20 @@
 <template>
   <div id="links">
     <div id="link">
-      <router-link :to="this.userId">Profile</router-link>
+      <router-link :to="'/users/' + this.userId">Profile</router-link>
     </div>
     <div id="link">
-      <router-link :to="this.userId + '/claps'">Claps</router-link>
+      <router-link :to="'/users/' + this.userId + '/claps'">Claps</router-link>
     </div>
     <div id="link">
-      <router-link :to="this.userId + '/highlights'">Highlights</router-link>
+      <router-link :to="'/users/' + this.userId + '/highlights'"
+        >Highlights</router-link
+      >
     </div>
     <div id="link">
-      <router-link :to="this.userId + '/responses'">Responses</router-link>
+      <router-link :to="'/users/' + this.userId + '/responses'"
+        >Responses</router-link
+      >
     </div>
   </div>
 </template>

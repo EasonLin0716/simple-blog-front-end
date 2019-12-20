@@ -1,8 +1,7 @@
 <template>
-  <div id="profile">
+  <div id="user-responses">
     <UserInfo :user="user" />
     <UserNavTab :userId="user.id" />
-    <UserPosts :posts="posts" :user="user" />
   </div>
 </template>
 
@@ -10,13 +9,11 @@
 import userAPI from '../apis/user'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
-import UserPosts from '../components/UserPosts'
 export default {
   name: 'User',
   components: {
     UserInfo,
-    UserNavTab,
-    UserPosts
+    UserNavTab
   },
   data() {
     return {
@@ -76,7 +73,7 @@ export default {
 </script>
 
 <style scoped>
-#profile {
+#user-responses {
   width: 728px;
   padding: 0 24px;
   margin: 0 auto;

@@ -34,6 +34,21 @@ const routes = [
     component: () => import('../views/User.vue')
   },
   {
+    path: '/users/:id/claps',
+    name: 'users',
+    component: () => import('../views/UserClaps.vue')
+  },
+  {
+    path: '/users/:id/highlights',
+    name: 'users',
+    component: () => import('../views/UserHighlights.vue')
+  },
+  {
+    path: '/users/:id/responses',
+    name: 'users',
+    component: () => import('../views/UserResponses.vue')
+  },
+  {
     path: '*',
     name: 'not-found',
     component: NotFound
