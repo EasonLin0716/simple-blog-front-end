@@ -20,14 +20,18 @@
         <h6>Responses</h6>
       </div>
       <div id="reply-place">
-        <textarea
-          class="form-control"
-          name="reply"
-          id="reply"
-          cols="30"
-          rows="3"
-          placeholder="Write a response..."
-        ></textarea>
+        <form @submit.stop.prevent="postReply">
+          <textarea
+            class="form-control"
+            name="replyTextarea"
+            id="replyTextarea"
+            v-model="replyTextarea"
+            cols="30"
+            rows="3"
+            placeholder="Write a response..."
+          ></textarea>
+          <button type="submit" class="btn btn-success">Publish</button>
+        </form>
       </div>
       <div class="card" v-for="reply in replies" :key="reply.id" id="replies">
         <div id="info">
@@ -49,6 +53,12 @@
 <script>
 import repliesAPI from '../apis/replies'
 
+const dummyUser = {
+  id: 1,
+  name: 'root',
+  avatar: 'https://fakeimg.pl/300x300/'
+}
+
 export default {
   name: 'Replies',
   data() {
@@ -59,7 +69,8 @@ export default {
       postTitle: '',
       author: '',
       clapTimes: null,
-      replyTimes: null
+      replyTimes: null,
+      replyTextarea: ''
     }
   },
   methods: {
@@ -83,6 +94,22 @@ export default {
       } catch (error) {
         // console.error(error)
       }
+    },
+    async postReply(postId) {
+      if (!this.replyTextarea) {
+        // TODO: 提示使用者不能輸入空白留言
+        return
+      }
+      const { data, statusText } = await repliesAPI.postReply({
+        PostId: postId,
+        UserId: dummyUser.id,
+        content: this.replyTextarea
+      })
+      if (statusText !== 'OK' || data.status !== 'success') {
+        throw new Error(statusText)
+      }
+      // TODO: 將留言內容 PUSH 進 replies 中
+      this.replyTextarea = ''
     }
   },
   created() {
