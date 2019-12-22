@@ -20,7 +20,7 @@
         <h6>Responses</h6>
       </div>
       <div id="reply-place">
-        <form @submit.stop.prevent="postReply">
+        <form @submit.stop.prevent="handlePostReply">
           <textarea
             class="form-control"
             name="replyTextarea"
@@ -53,16 +53,16 @@
 <script>
 import repliesAPI from '../apis/replies'
 
-const dummyUser = {
-  id: 1,
-  name: 'root',
-  avatar: 'https://fakeimg.pl/300x300/'
-}
-
 export default {
   name: 'Replies',
   data() {
     return {
+      dummyUser: {
+        id: 1,
+        name: 'root',
+        avatar: 'https://fakeimg.pl/300x300/'
+      },
+      postId: 0,
       clap: require('../../static/images/clap.svg'),
       clapHands: require('../../static/images/clap-hands.svg'),
       replies: [],
@@ -80,6 +80,7 @@ export default {
         if (statusText !== 'OK') {
           throw new Error(statusText)
         }
+        this.postId = data.post.id
         this.postTitle = data.post.title
         this.author = data.post.User.name
         this.clapTimes = data.post.clapTimes
@@ -95,21 +96,31 @@ export default {
         // console.error(error)
       }
     },
-    async postReply(postId) {
-      if (!this.replyTextarea) {
-        // TODO: 提示使用者不能輸入空白留言
-        return
+    async handlePostReply() {
+      try {
+        if (!this.replyTextarea) {
+          // TODO: 提示使用者不能輸入空白留言
+          return
+        }
+        await repliesAPI.postReply({
+          content: this.replyTextarea,
+          postId: this.postId,
+          id: this.dummyUser.id
+        })
+        this.replies.push({
+          content: this.replyTextarea,
+          monthDay:
+            new Date().toString().slice(4, 7) +
+            ' ' +
+            new Date().toString().slice(8, 10),
+          replier: this.dummyUser.name,
+          avatar: this.dummyUser.avatar
+        })
+        this.replyTextarea = ''
+      } catch (error) {
+        // TODO: 顯示錯誤資訊
+        // console.log(error)
       }
-      const { data, statusText } = await repliesAPI.postReply({
-        PostId: postId,
-        UserId: dummyUser.id,
-        content: this.replyTextarea
-      })
-      if (statusText !== 'OK' || data.status !== 'success') {
-        throw new Error(statusText)
-      }
-      // TODO: 將留言內容 PUSH 進 replies 中
-      this.replyTextarea = ''
     }
   },
   created() {

@@ -5,7 +5,7 @@ export default {
     return apiHelper.get(`/posts/${postId}/replies`)
   },
 
-  postReply({ postId }) {
-    return apiHelper.post(`/posts/${postId}/reply`)
+  postReply(data) {
+    return apiHelper.post(`/posts/reply`, data)
   }
 }
