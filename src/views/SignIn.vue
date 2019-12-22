@@ -75,6 +75,8 @@ export default {
         })
         const { data } = response
         localStorage.setItem('token', data.token)
+        // 將資料傳入 Vuex
+        this.$store.commit('setCurrentUser', data.user)
         this.$router.push('/posts')
       } catch (error) {
         this.password = ''

@@ -9,16 +9,25 @@
         <font-awesome-icon :icon="['far', 'bell']" id="bell" />
         <button id="upgrade">Upgrade</button>
         <a href="#"
-          ><img src="https://fakeimg.pl/32x32/" id="profile" alt="profile"
-        /></a>
+          ><template v-if="isAuthenticated">
+            <img :src="currentUser.avatar" id="profile" alt="profile"
+          /></template>
+          <template v-else>
+            <img src="https://fakeimg.pl/32x32/" id="profile" alt="profile" />
+          </template>
+        </a>
       </div>
     </nav>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
+  }
 }
 </script>
 <style scoped>
