@@ -6,5 +6,8 @@ export default {
   },
   getPost({ postId }) {
     return apiHelper.get(`/posts/${postId}`)
+  },
+  createPost(data) {
+    return apiHelper.post(`/posts`, data)
   }
 }
