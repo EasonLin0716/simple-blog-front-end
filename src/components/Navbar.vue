@@ -2,7 +2,7 @@
   <div id="navbar">
     <nav class="d-flex justify-content-between align-items-center container">
       <div class="col-left pl-4">
-        <a href="/posts"><img src="https://fakeimg.pl/112x22/" alt="logo"/></a>
+        <a href="/"><img src="https://fakeimg.pl/112x22/" alt="logo"/></a>
       </div>
       <div class="col-right d-flex justify-content-between align-items-center">
         <font-awesome-icon icon="search" id="search" />
