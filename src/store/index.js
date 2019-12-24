@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import usersAPI from '../apis/user'
 
 Vue.use(Vuex)
 
@@ -11,7 +12,10 @@ export default new Vuex.Store({
       name: '',
       email: '',
       avatar: '',
-      isAdmin: false
+      isAdmin: false,
+      clappedPostId: [],
+      bookmarkedPostId: [],
+      followingUserId: []
     },
     isAuthenticated: false
   },
@@ -29,6 +33,30 @@ export default new Vuex.Store({
   },
   actions: {
     // 設定其他的非同步函式，例如發送 API 請求等等
+    async fetchCurrentUser({ commit }) {
+      try {
+        const { data, statusText } = await usersAPI.getCurrentUser()
+
+        if (statusText !== 'OK') {
+          throw new Error(statusText)
+        }
+
+        commit('setCurrentUser', {
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          avatar: data.avatar,
+          isAdmin: data.isAdmin,
+          clappedPostId: data.clappedPostId,
+          bookmarkedPostId: data.bookmarkedPostId,
+          followingUserId: data.followingUserId
+        })
+        return true
+      } catch (error) {
+        commit('revokeAuthentication')
+        return false
+      }
+    }
   },
   modules: {}
 })
