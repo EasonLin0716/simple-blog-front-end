@@ -23,33 +23,35 @@
 
 <script>
 import postsAPI from '../apis/posts'
+import { mapState } from 'vuex'
 export default {
   name: 'PostCreate',
   data() {
     return {
       title: '',
-      content: '',
-      dummyUser: {
-        id: 1,
-        name: 'root'
-      }
+      content: ''
     }
   },
   methods: {
     async handleCreatePost() {
       try {
-        await postsAPI.createPost({
+        const { data } = await postsAPI.createPost({
           title: this.title,
           content: this.content,
           // TODO: 上傳圖片、req.user.id
-          avatar: 'https://fakeimg.pl/640x480/'
+          cover: 'https://fakeimg.pl/640x480/',
+          UserId: this.currentUser.id
         })
         // TODO: 偵錯功能
-        // TODO: 將使用者導回個人頁面
+
+        this.$router.push(`/posts/${data.PostId}`)
       } catch (error) {
         // TODO: 錯誤提示
       }
     }
+  },
+  computed: {
+    ...mapState(['currentUser'])
   }
 }
 </script>
