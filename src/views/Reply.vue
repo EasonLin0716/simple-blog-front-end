@@ -52,16 +52,12 @@
 
 <script>
 import repliesAPI from '../apis/replies'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Replies',
   data() {
     return {
-      dummyUser: {
-        id: 1,
-        name: 'root',
-        avatar: 'https://fakeimg.pl/300x300/'
-      },
       postId: 0,
       clap: require('../../static/images/clap.svg'),
       clapHands: require('../../static/images/clap-hands.svg'),
@@ -105,7 +101,7 @@ export default {
         await repliesAPI.postReply({
           content: this.replyTextarea,
           postId: this.postId,
-          id: this.dummyUser.id
+          id: this.currentUser.id
         })
         this.replies.push({
           content: this.replyTextarea,
@@ -113,8 +109,8 @@ export default {
             new Date().toString().slice(4, 7) +
             ' ' +
             new Date().toString().slice(8, 10),
-          replier: this.dummyUser.name,
-          avatar: this.dummyUser.avatar
+          replier: this.currentUser.name,
+          avatar: this.currentUser.avatar
         })
         this.replyTextarea = ''
       } catch (error) {
@@ -122,6 +118,9 @@ export default {
         // console.log(error)
       }
     }
+  },
+  computed: {
+    ...mapState(['currentUser'])
   },
   created() {
     const { id: postId } = this.$route.params
