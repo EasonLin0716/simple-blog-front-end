@@ -7,5 +7,9 @@ export default {
 
   postReply(data) {
     return apiHelper.post(`/posts/reply`, data)
+  },
+
+  getUserReplies({ userId }) {
+    return apiHelper.get(`/users/${userId}/responses`)
   }
 }

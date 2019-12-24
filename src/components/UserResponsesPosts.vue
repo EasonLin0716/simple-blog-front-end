@@ -1,7 +1,7 @@
 <template>
-  <div id="user-posts">
-    <h5 id="latest">Claps</h5>
-    <div v-for="post in posts" :key="post.id">
+  <div id="user-responses-posts">
+    <h5 id="responses">Responses</h5>
+    <div v-for="reply in replies" :key="reply.id">
       <div class="card">
         <div id="info">
           <div id="user-info">
@@ -10,23 +10,19 @@
             </div>
             <div>
               <h6>{{ user.name }}</h6>
-              <span> {{ post.monthDay }}&bull;{{ post.readTime }} </span>
+              <span> {{ reply.monthDay }}&bull;{{ reply.readTime }} </span>
             </div>
           </div>
           <div id="post-info">
-            <div id="cover">
-              <img :src="post.cover" alt="cover" />
-            </div>
             <div id="content">
-              <h2>{{ post.title }}</h2>
-              {{ post.content }}
+              {{ reply.replyContent }}
             </div>
             <div id="icons">
               <!-- claps -->
-              <template v-if="post.clappedTime">
+              <template v-if="reply.postClapTimes">
                 <div id="claps">
                   <img :src="clapHands" alt="clap" />&nbsp;{{
-                    post.clappedTime
+                    reply.postClapTimes
                   }}
                 </div>
               </template>
@@ -44,9 +40,8 @@
 </template>
 
 <script>
-// import userAPI from './../apis/user'
 export default {
-  name: 'UserClapsPosts',
+  name: 'UserResponsesPosts',
   data() {
     return {
       clap: require('../../static/images/clap.svg'),
@@ -54,7 +49,7 @@ export default {
     }
   },
   props: {
-    posts: {
+    replies: {
       type: Array,
       required: true
     },
@@ -65,7 +60,21 @@ export default {
   }
 }
 </script>
+
 <style scoped>
+#user-responses-posts {
+  width: 728px;
+  margin: 0 auto;
+}
+
+#responses {
+  margin-top: 30px;
+}
+
+.card {
+  width: 680px;
+}
+
 #info {
   padding: 25px;
 }
@@ -74,21 +83,6 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-}
-
-h6 {
-  margin: 0;
-  padding: 0;
-}
-
-#latest {
-  margin-top: 30px;
-}
-
-#cover {
-  height: 189px;
-  overflow: hidden;
-  margin: 20px 0 10px 0;
 }
 
 #icons {
@@ -104,14 +98,6 @@ h6 {
 
 #bookmark {
   font-size: 25px;
-}
-
-#user-info {
-  display: flex;
-}
-
-#user-info div {
-  margin-right: 10px;
 }
 
 #user-info span {

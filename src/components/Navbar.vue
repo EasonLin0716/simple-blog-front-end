@@ -8,14 +8,14 @@
         <font-awesome-icon icon="search" id="search" />
         <font-awesome-icon :icon="['far', 'bell']" id="bell" />
         <button id="upgrade">Upgrade</button>
-        <a href="#"
-          ><template v-if="isAuthenticated">
-            <img :src="currentUser.avatar" id="profile" alt="profile"
-          /></template>
-          <template v-else>
-            <img src="https://fakeimg.pl/32x32/" id="profile" alt="profile" />
-          </template>
-        </a>
+        <template v-if="isAuthenticated">
+          <a :href="'/#/users/' + currentUser.id">
+            <img :src="currentUser.avatar" id="profile" alt="profile" />
+          </a>
+        </template>
+        <template v-else>
+          <img src="https://fakeimg.pl/32x32/" id="profile" alt="profile" />
+        </template>
       </div>
     </nav>
   </div>

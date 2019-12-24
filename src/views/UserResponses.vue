@@ -2,23 +2,26 @@
   <div id="user-responses">
     <UserInfo :user="user" />
     <UserNavTab :userId="user.id" />
+    <UserResponsesPosts :user="user" :replies="replies" />
   </div>
 </template>
 
 <script>
-import userAPI from '../apis/user'
+import repliesAPI from '../apis/replies'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
+import UserResponsesPosts from '../components/UserResponsesPosts'
 export default {
   name: 'User',
   components: {
     UserInfo,
-    UserNavTab
+    UserNavTab,
+    UserResponsesPosts
   },
   data() {
     return {
       user: {
-        id: null,
+        id: 0,
         name: '',
         avatar: '',
         introduction: '',
@@ -28,19 +31,19 @@ export default {
         followers: [],
         followings: []
       },
-      posts: []
+      replies: []
     }
   },
   methods: {
-    async fetchUser(userId) {
+    async getUserReplies(userId) {
       try {
-        const { data, statusText } = await userAPI.get({
+        const { data, statusText } = await repliesAPI.getUserReplies({
           userId
         })
         if (statusText !== 'OK') {
           throw new Error(statusText)
         }
-        const { user, posts } = data
+        const { user, replies } = data
         this.user = {
           ...this.user,
           id: user.id,
@@ -53,20 +56,20 @@ export default {
           followers: user.followers,
           followings: user.followings
         }
-        this.posts = posts
+        this.replies = replies
       } catch (error) {
-        // console.error(error)
+        console.error(error)
       }
     }
   },
   created() {
     const { id: userId } = this.$route.params
-    this.fetchUser(userId)
+    this.getUserReplies(userId)
   },
   beforeRouteUpdate(to, from, next) {
     // 路由改變時重新抓取資料
     const { id: userId } = to.params
-    this.fetchUser(userId)
+    this.getUserReplies(userId)
     next()
   }
 }
