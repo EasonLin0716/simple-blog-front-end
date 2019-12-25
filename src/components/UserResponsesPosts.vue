@@ -13,7 +13,24 @@
               <span> {{ reply.monthDay }}&bull;{{ reply.readTime }} </span>
             </div>
           </div>
-          <div id="post-info">
+          <div id="post-info" class="card">
+            <div>
+              <span id="post-title">{{ reply.postTitle }}</span>
+              <div id="icon-box">
+                <div v-if="reply.postClapTimes" id="clap-hands">
+                  <img :src="clapHands" alt="clap" />
+                  {{ reply.postClapTimes }}
+                </div>
+
+                <div>
+                  <font-awesome-icon :icon="['fas', 'comment']" id="comment" />
+                  {{ reply.postReplyTimes }}
+                </div>
+              </div>
+            </div>
+            <span id="post-author">{{ user.name }}</span>
+          </div>
+          <div id="reply-info">
             <div id="content">
               {{ reply.replyContent }}
             </div>
@@ -63,20 +80,73 @@ export default {
 
 <style scoped>
 #user-responses-posts {
-  width: 728px;
+  width: 680px;
   margin: 0 auto;
+}
+
+#user-info {
+  display: flex;
+}
+
+#user-info div {
+  margin-right: 10px;
+}
+
+#user-info span {
+  color: rgb(120, 120, 120);
+  font-size: 14px;
+}
+
+h6 {
+  margin: 0;
 }
 
 #responses {
   margin-top: 30px;
 }
 
-.card {
-  width: 680px;
-}
-
 #info {
   padding: 25px;
+}
+
+#post-info {
+  padding: 23px;
+  margin: 10px 0;
+}
+
+#post-info div {
+  display: flex;
+  justify-content: space-between;
+}
+
+#icon-box {
+  align-items: center;
+}
+
+#icon-box #comment,
+#icon-box img {
+  margin: 0 5px;
+}
+
+#post-title img {
+  width: 5px;
+  height: 5px;
+}
+
+#clap img,
+#clap-hands img {
+  width: 16px;
+  height: 16px;
+}
+
+#post-author {
+  font-size: 14px;
+  color: #999;
+  font-weight: 400;
+}
+
+#post-title {
+  font-size: 20px;
 }
 
 #avatar {
