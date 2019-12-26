@@ -60,7 +60,11 @@
         />
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">
+      <button
+        :disabled="isLoading"
+        class="btn btn-lg btn-primary btn-block mb-3"
+        type="submit"
+      >
         Submit
       </button>
 
@@ -80,26 +84,44 @@
 </template>
 
 <script>
+import authsAPI from '../apis/authorization'
+import { Toast } from './../utils/helpers'
 export default {
   data() {
     return {
       name: '',
       email: '',
       password: '',
-      passwordCheck: ''
+      passwordCheck: '',
+      isLoading: false
     }
   },
   methods: {
-    handleSubmit(e) {
-      const data = JSON.stringify({
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        passwordCheck: this.passwordCheck
-      })
+    async handleSubmit(e) {
+      try {
+        this.isLoading = true
+        const form = e.target // <form></form>
+        const formData = new FormData(form)
+        const { data } = await authsAPI.signUp({ formData })
+        if (data.status === 'error') {
+          Toast.fire({
+            type: 'error',
+            title: '發生錯誤，請重新輸入！'
+          })
+          this.isLoading = false
+        }
 
-      // TODO: 向後端驗證使用者登入資訊是否合法
-      console.log('data', data)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '註冊成功，請輸入帳密登入！'
+          })
+          this.$router.push('/signin')
+        }
+      } catch (error) {
+        this.isLoading = false
+        console.log(error)
+      }
     }
   }
 }
