@@ -2,6 +2,7 @@
   <div id="post-create">
     <form @submit.stop.prevent="handleCreatePost">
       <input
+        name="title"
         type="text"
         v-model="title"
         class="form-control"

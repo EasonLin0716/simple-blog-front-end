@@ -22,21 +22,21 @@ export default {
   data() {
     return {
       post: {
-        id: null,
+        id: 0,
         title: '',
         content: '',
         cover: '',
         applauseFrom: '',
-        clappedTimes: null,
+        clappedTimes: 0,
         monthDay: '',
         readTime: ''
       },
       author: {
-        id: null,
+        id: 0,
         name: '',
         avatar: '',
         introduction: '',
-        isAdmin: null,
+        isAdmin: 0,
         Followers: [],
         Followings: []
       }
@@ -45,9 +45,7 @@ export default {
   methods: {
     async fetchPost(postId) {
       try {
-        const { data, statusText } = await postsAPI.getPost({
-          postId
-        })
+        const { data, statusText } = await postsAPI.getPost(postId)
         if (statusText !== 'OK') {
           throw new Error(statusText)
         }
