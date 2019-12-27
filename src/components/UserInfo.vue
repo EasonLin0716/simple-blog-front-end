@@ -7,27 +7,22 @@
           <a v-if="user.id === currentUser.id" href="#">
             <span class="badge badge-success" id="edit">Edit profile</span>
           </a>
-          <form
+          <button
             v-else-if="!isFollowed"
-            @submit.stop.prevent="handleFollow(user.id)"
+            :disabled="isLoading"
+            class="badge badge-success"
+            v-on:click="handleFollow(user.id)"
           >
-            <button
-              :disabled="isLoading"
-              class="badge badge-success"
-              type="submit"
-            >
-              Follow
-            </button>
-          </form>
-          <form v-else @submit.stop.prevent="handleUnfollow(user.id)">
-            <button
-              :disabled="isLoading"
-              class="badge badge-success"
-              type="submit"
-            >
-              following
-            </button>
-          </form>
+            Follow
+          </button>
+          <button
+            v-else
+            :disabled="isLoading"
+            class="badge badge-success"
+            v-on:click="handleUnfollow(user.id)"
+          >
+            following
+          </button>
         </template>
         <p>{{ user.introduction }}</p>
       </div>
@@ -56,10 +51,7 @@ export default {
   name: 'UserInfo',
   mixins: [emptyImageFilter],
   data() {
-    return {
-      isFollowed: null
-      // TODO: 觀察使用者是否被登入者追蹤
-    }
+    return {}
   },
   props: {
     user: {
@@ -81,16 +73,15 @@ export default {
         1
       )
       this.$emit('after-handle-unfollow', userId)
-    },
-    calcIsFollowed() {
-      this.isFollowed = this.currentUser.followingUserId.includes(this.user.id)
     }
   },
   computed: {
-    ...mapState(['currentUser', 'isAuthenticated'])
-  },
-  beforeUpdate() {
-    this.calcIsFollowed()
+    ...mapState(['currentUser', 'isAuthenticated']),
+    isFollowed: function() {
+      return this.currentUser
+        ? this.currentUser.followingUserId.includes(this.user.id)
+        : false
+    }
   }
 }
 </script>
