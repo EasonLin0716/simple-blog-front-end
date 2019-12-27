@@ -60,8 +60,8 @@ export default {
           isAdmin: user.isAdmin,
           createdAt: user.createdAt,
           updatedAt: user.updatedAt,
-          followers: user.followers,
-          followings: user.followings
+          followers: user.Followers,
+          followings: user.Followings
         }
         this.posts = posts
       } catch (error) {

@@ -70,6 +70,16 @@ const routes = [
     component: () => import('../views/UserResponses.vue')
   },
   {
+    path: '/users/:id/followings',
+    name: 'user-followings',
+    component: () => import('../views/UserFollowings.vue')
+  },
+  {
+    path: '/users/:id/followers',
+    name: 'user-followers',
+    component: () => import('../views/UserFollowers.vue')
+  },
+  {
     path: '*',
     name: 'not-found',
     component: NotFound

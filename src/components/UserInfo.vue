@@ -3,35 +3,45 @@
     <div id="info">
       <div id="content">
         <h1>{{ user.name }}</h1>
-        <a v-if="user.id === currentUser.id" href="#">
-          <span class="badge badge-success" id="edit">Edit profile</span>
-        </a>
-        <form
-          v-else-if="!isFollowed"
-          @submit.stop.prevent="handleFollow(user.id)"
-        >
-          <button
-            :disabled="isLoading"
-            class="badge badge-success"
-            type="submit"
+        <template v-if="isAuthenticated">
+          <a v-if="user.id === currentUser.id" href="#">
+            <span class="badge badge-success" id="edit">Edit profile</span>
+          </a>
+          <form
+            v-else-if="!isFollowed"
+            @submit.stop.prevent="handleFollow(user.id)"
           >
-            Follow
-          </button>
-        </form>
-        <form v-else @submit.stop.prevent="handleUnfollow(user.id)">
-          <button
-            :disabled="isLoading"
-            class="badge badge-success"
-            type="submit"
-          >
-            following
-          </button>
-        </form>
+            <button
+              :disabled="isLoading"
+              class="badge badge-success"
+              type="submit"
+            >
+              Follow
+            </button>
+          </form>
+          <form v-else @submit.stop.prevent="handleUnfollow(user.id)">
+            <button
+              :disabled="isLoading"
+              class="badge badge-success"
+              type="submit"
+            >
+              following
+            </button>
+          </form>
+        </template>
         <p>{{ user.introduction }}</p>
       </div>
       <div>
         <img :src="user.avatar" alt="avatar" />
       </div>
+    </div>
+    <div id="follow">
+      <span v-if="user.followings.length"
+        >{{ user.followings.length }} Following</span
+      >
+      <span v-if="user.followers.length"
+        >{{ user.followers.length }} Followers</span
+      >
     </div>
     <br />
   </div>
@@ -108,5 +118,9 @@ img {
   border-radius: 50%;
   width: 128px;
   height: 128px;
+}
+
+#follow span {
+  margin-right: 10px;
 }
 </style>

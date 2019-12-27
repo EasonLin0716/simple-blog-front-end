@@ -15,7 +15,8 @@ export default new Vuex.Store({
       isAdmin: false,
       clappedPostId: [],
       bookmarkedPostId: [],
-      followingUserId: []
+      followingUserId: [],
+      followerUserId: []
     },
     isAuthenticated: false
   },
@@ -49,7 +50,8 @@ export default new Vuex.Store({
           isAdmin: data.isAdmin,
           clappedPostId: data.clappedPostId,
           bookmarkedPostId: data.bookmarkedPostId,
-          followingUserId: data.followingUserId
+          followingUserId: data.followingUserId,
+          followerUserId: data.followerUserId
         })
         return true
       } catch (error) {
