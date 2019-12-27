@@ -1,6 +1,11 @@
 <template>
   <div id="profile">
-    <UserInfo :user="user" />
+    <UserInfo
+      :user="user"
+      :isLoading="isLoading"
+      @after-handle-follow="afterHandleFollow"
+      @after-handle-unfollow="afterHandleUnfollow"
+    />
     <UserNavTab :userId="user.id" />
     <UserPosts :posts="posts" :user="user" />
   </div>
@@ -11,6 +16,7 @@ import userAPI from '../apis/user'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 import UserPosts from '../components/UserPosts'
+import { Toast } from './../utils/helpers'
 export default {
   name: 'User',
   components: {
@@ -31,7 +37,8 @@ export default {
         followers: [],
         followings: []
       },
-      posts: []
+      posts: [],
+      isLoading: false
     }
   },
   methods: {
@@ -60,6 +67,28 @@ export default {
       } catch (error) {
         // console.error(error)
       }
+    },
+    async afterHandleFollow(userId) {
+      this.isLoading = true
+      const { data } = await userAPI.follow(userId)
+      if (data.status === 'success') {
+        Toast.fire({
+          type: 'success',
+          title: '追蹤成功！'
+        })
+        this.isLoading = false
+      }
+    },
+    async afterHandleUnfollow(userId) {
+      this.isLoading = true
+      const { data } = await userAPI.unfollow(userId)
+      if (data.status === 'success') {
+        Toast.fire({
+          type: 'success',
+          title: '退追成功！'
+        })
+        this.isLoading = false
+      }
     }
   },
   created() {
@@ -71,7 +100,8 @@ export default {
     const { id: userId } = to.params
     this.fetchUser(userId)
     next()
-  }
+  },
+  computed: {}
 }
 </script>
 

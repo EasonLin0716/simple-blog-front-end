@@ -12,5 +12,15 @@ export default {
   },
   getClaps({ userId }) {
     return apiHelper.get(`/users/${userId}/claps`)
+  },
+  follow(userId) {
+    return apiHelper.post(`/users/${userId}/follow`, null, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
+  unfollow(userId) {
+    return apiHelper.delete(`/users/${userId}/follow`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
   }
 }

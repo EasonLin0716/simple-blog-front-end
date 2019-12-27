@@ -56,17 +56,17 @@ const routes = [
   },
   {
     path: '/users/:id/claps',
-    name: 'users',
+    name: 'user-claps',
     component: () => import('../views/UserClaps.vue')
   },
   {
     path: '/users/:id/highlights',
-    name: 'users',
+    name: 'user-highlights',
     component: () => import('../views/UserHighlights.vue')
   },
   {
     path: '/users/:id/responses',
-    name: 'users',
+    name: 'user-responses',
     component: () => import('../views/UserResponses.vue')
   },
   {

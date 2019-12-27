@@ -23,4 +23,22 @@ export default {
   height: 25px;
   display: inline-block;
 }
+
+form {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+button,
+input[type='submit'],
+input[type='reset'] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
 </style>
