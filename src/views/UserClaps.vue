@@ -12,7 +12,7 @@ import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 import UserClapsPosts from '../components/UserClapsPosts'
 export default {
-  name: 'User',
+  name: 'UserClaps',
   components: {
     UserInfo,
     UserNavTab,

@@ -12,7 +12,7 @@ import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 import UserResponsesPosts from '../components/UserResponsesPosts'
 export default {
-  name: 'User',
+  name: 'UserResponses',
   components: {
     UserInfo,
     UserNavTab,

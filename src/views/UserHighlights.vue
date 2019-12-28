@@ -10,7 +10,7 @@ import userAPI from '../apis/user'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 export default {
-  name: 'User',
+  name: 'UserHighlights',
   components: {
     UserInfo,
     UserNavTab
