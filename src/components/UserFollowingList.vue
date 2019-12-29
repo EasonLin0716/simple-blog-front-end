@@ -8,12 +8,12 @@
       id="following-card"
     >
       <div id="avatar-box">
-        <router-link :to="'/users/' + userId">
+        <router-link :to="'/users/' + following.id">
           <img :src="following.avatar" alt="avatar" id="avatar" />
         </router-link>
       </div>
       <div id="user-info">
-        <router-link :to="'/users/' + userId">
+        <router-link :to="'/users/' + following.id">
           <h5>{{ following.name }}</h5>
           <p>{{ following.introduction }}</p>
         </router-link>
@@ -45,6 +45,11 @@ export default {
 <style scoped>
 a {
   text-decoration: none;
+  color: #333;
+}
+
+a:hover {
+  color: #000;
 }
 
 #follows {

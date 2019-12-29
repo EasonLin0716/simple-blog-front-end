@@ -7,13 +7,14 @@
       <div class="col-right d-flex justify-content-between align-items-center">
         <font-awesome-icon icon="search" id="search" />
         <font-awesome-icon :icon="['far', 'bell']" id="bell" />
-        <button id="upgrade">Upgrade</button>
         <template v-if="isAuthenticated">
+          <button id="upgrade">Upgrade</button>
           <a :href="'/#/users/' + currentUser.id">
             <img :src="currentUser.avatar" id="profile" alt="profile" />
           </a>
         </template>
         <template v-else>
+          <a href="/signin" id="sign-in">Signin</a>
           <img src="https://fakeimg.pl/32x32/" id="profile" alt="profile" />
         </template>
       </div>
@@ -58,7 +59,8 @@ export default {
   height: 32px;
   border-radius: 50%;
 }
-#upgrade {
+#upgrade,
+#sign-in {
   padding: 4px 12px;
   border: 0.5px solid #ccc;
   border-radius: 5px;
