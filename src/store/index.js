@@ -37,17 +37,21 @@ export default new Vuex.Store({
       // 將使用者的登入狀態改為 true
       state.isAuthenticated = true
     }
+    // revokeAuthentication(state) {
+    //   state.currentUser = {}
+    //   state.isAuthenticated = false
+    //   state.token = ''
+    //   localStorage.removeItem('token')
+    // }
   },
   actions: {
     // 設定其他的非同步函式，例如發送 API 請求等等
     async fetchCurrentUser({ commit }) {
       try {
         const { data, statusText } = await usersAPI.getCurrentUser()
-
         if (statusText !== 'OK') {
           throw new Error(statusText)
         }
-
         commit('setCurrentUser', {
           id: data.id,
           name: data.name,
@@ -61,7 +65,7 @@ export default new Vuex.Store({
         })
         return true
       } catch (error) {
-        commit('revokeAuthentication')
+        // commit('revokeAuthentication')
         return false
       }
     }

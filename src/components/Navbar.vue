@@ -9,12 +9,13 @@
         <font-awesome-icon :icon="['far', 'bell']" id="bell" />
         <template v-if="isAuthenticated">
           <button id="upgrade">Upgrade</button>
+          <!-- <button id="logout" @click="logout">Logout</button> -->
           <a :href="'/#/users/' + currentUser.id">
             <img :src="currentUser.avatar" id="profile" alt="profile" />
           </a>
         </template>
         <template v-else>
-          <a href="/signin" id="sign-in">Signin</a>
+          <router-link :to="'/signin'" id="sign-in">Signin</router-link>
           <img src="https://fakeimg.pl/32x32/" id="profile" alt="profile" />
         </template>
       </div>
@@ -28,6 +29,11 @@ export default {
   name: 'Navbar',
   computed: {
     ...mapState(['currentUser', 'isAuthenticated'])
+  },
+  methods: {
+    logout() {
+      this.$store.commit('revokeAuthentication')
+    }
   }
 }
 </script>
@@ -60,7 +66,8 @@ export default {
   border-radius: 50%;
 }
 #upgrade,
-#sign-in {
+#sign-in,
+#logout {
   padding: 4px 12px;
   border: 0.5px solid #ccc;
   border-radius: 5px;
