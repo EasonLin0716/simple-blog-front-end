@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import usersAPI from '../apis/user'
+import VuexPersist from 'vuex-persist'
 
 Vue.use(Vuex)
 
+const vuexPersist = new VuexPersist({
+  storage: window.localStorage
+})
+
 export default new Vuex.Store({
+  plugins: [vuexPersist.plugin],
   state: {
     // 在 state 屬性中的資料，每個 Vue 元件都可以使用
     currentUser: {
