@@ -56,6 +56,7 @@ export default new Vuex.Store({
           name: data.name,
           email: data.email,
           avatar: data.avatar,
+          introduction: data.introduction,
           isAdmin: data.isAdmin,
           clappedPostId: data.clappedPostId,
           bookmarkedPostId: data.bookmarkedPostId,

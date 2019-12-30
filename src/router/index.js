@@ -50,6 +50,11 @@ const routes = [
     component: () => import('../views/Reply.vue')
   },
   {
+    path: '/users/edit',
+    name: 'user-edit',
+    component: () => import('../views/UserEdit.vue')
+  },
+  {
     path: '/users/:id',
     name: 'users',
     component: () => import('../views/User.vue')
@@ -79,6 +84,7 @@ const routes = [
     name: 'user-followers',
     component: () => import('../views/UserFollowers.vue')
   },
+
   {
     path: '*',
     name: 'not-found',

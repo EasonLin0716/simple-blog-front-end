@@ -4,9 +4,9 @@
       <div id="content">
         <h1>{{ user.name }}</h1>
         <template v-if="isAuthenticated">
-          <a v-if="user.id === currentUser.id" href="#">
+          <router-link :to="'/users/edit'" v-if="user.id === currentUser.id">
             <span class="badge badge-success" id="edit">Edit profile</span>
-          </a>
+          </router-link>
           <button
             v-else-if="!isFollowed"
             :disabled="isLoading"
@@ -93,6 +93,7 @@ export default {
 #info {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 #info #content {
