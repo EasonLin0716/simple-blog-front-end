@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       user: {
-        id: null,
+        id: 0,
         name: '',
         avatar: '',
         introduction: '',
@@ -27,8 +27,7 @@ export default {
         updatedAt: '',
         followers: [],
         followings: []
-      },
-      posts: []
+      }
     }
   },
   methods: {
@@ -37,10 +36,11 @@ export default {
         const { data, statusText } = await userAPI.get({
           userId
         })
+        console.log(data)
         if (statusText !== 'OK') {
           throw new Error(statusText)
         }
-        const { user, posts } = data
+        const { user } = data
         this.user = {
           ...this.user,
           id: user.id,
@@ -50,10 +50,9 @@ export default {
           isAdmin: user.isAdmin,
           createdAt: user.createdAt,
           updatedAt: user.updatedAt,
-          followers: user.followers,
-          followings: user.followings
+          followers: user.Followers,
+          followings: user.Followings
         }
-        this.posts = posts
       } catch (error) {
         // console.error(error)
       }
