@@ -36,13 +36,12 @@ export default new Vuex.Store({
       }
       // 將使用者的登入狀態改為 true
       state.isAuthenticated = true
+    },
+    revokeAuthentication(state) {
+      state.currentUser = {}
+      state.isAuthenticated = false
+      localStorage.removeItem('token')
     }
-    // revokeAuthentication(state) {
-    //   state.currentUser = {}
-    //   state.isAuthenticated = false
-    //   state.token = ''
-    //   localStorage.removeItem('token')
-    // }
   },
   actions: {
     // 設定其他的非同步函式，例如發送 API 請求等等
@@ -65,6 +64,7 @@ export default new Vuex.Store({
         })
         return true
       } catch (error) {
+        console.log(error)
         // commit('revokeAuthentication')
         return false
       }

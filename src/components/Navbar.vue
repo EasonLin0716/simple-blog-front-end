@@ -9,7 +9,7 @@
         <font-awesome-icon :icon="['far', 'bell']" id="bell" />
         <template v-if="isAuthenticated">
           <button id="upgrade">Upgrade</button>
-          <!-- <button id="logout" @click="logout">Logout</button> -->
+          <button id="logout" @click="logout">Logout</button>
           <a :href="'/#/users/' + currentUser.id">
             <img :src="currentUser.avatar" id="profile" alt="profile" />
           </a>
