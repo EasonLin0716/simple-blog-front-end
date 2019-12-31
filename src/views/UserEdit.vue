@@ -1,6 +1,6 @@
 <template>
   <div id="user-edit">
-    <form @submit.stop.prevent="handlePutUser">
+    <form @submit.stop.prevent="handlePutUser" enctype="multipart/form-data">
       <div id="info">
         <div>
           <input name="name" id="name" type="text" :value="name" required />
@@ -16,6 +16,14 @@
         </div>
         <div>
           <img :src="avatar" alt="avatar" id="avatar" />
+          <input
+            id="image"
+            type="file"
+            name="image"
+            accept="image/*"
+            class="form-control-file"
+            @change="handleFileChange"
+          />
         </div>
       </div>
       <div id="follow">
@@ -60,12 +68,19 @@ export default {
       if (data.status === 'success') {
         this.currentUser.name = this.name
         this.currentUser.introduction = this.introduction
+        this.currentUser.avatar = this.avatar
         Toast.fire({
           type: 'success',
           title: '個人資訊修改成功！'
         })
         this.$router.push(`/users/${this.currentUser.id}`)
       }
+    },
+    handleFileChange(e) {
+      const files = e.target.files
+      console.log('files', files)
+      const imageURL = window.URL.createObjectURL(files[0])
+      this.avatar = imageURL
     }
   },
   created() {
