@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { faBell } from '@fortawesome/free-regular-svg-icons'
 import { faBookmark } from '@fortawesome/free-regular-svg-icons'
+import { faBookmark as faBookmarked } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faComment } from '@fortawesome/free-solid-svg-icons'
@@ -20,6 +21,7 @@ library.add(
   faSearch,
   faBell,
   faBookmark,
+  faBookmarked,
   faFacebook,
   faTwitter,
   faComment,
