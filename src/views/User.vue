@@ -7,16 +7,23 @@
       @after-handle-unfollow="afterHandleUnfollow"
     />
     <UserNavTab :userId="user.id" />
-    <UserPosts :posts="posts" :user="user" />
+    <UserPosts
+      :posts="posts"
+      :user="user"
+      @after-handle-bookmark="afterHandleBookmark"
+      @after-handle-unbookmark="afterHandleUnbookmark"
+    />
   </div>
 </template>
 
 <script>
 import userAPI from '../apis/user'
+import replyAPI from '../apis/replies'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 import UserPosts from '../components/UserPosts'
 import { Toast } from './../utils/helpers'
+import { mapState } from 'vuex'
 export default {
   name: 'User',
   components: {
@@ -64,6 +71,11 @@ export default {
           followings: user.Followings
         }
         this.posts = posts
+        const bookmarkedId = this.currentUser.bookmarkedPostId
+        for (let i = 0; i < this.posts.length; i++) {
+          this.posts[i].isBookmarked =
+            bookmarkedId.indexOf(this.posts[i].id) > -1
+        }
       } catch (error) {
         // console.error(error)
       }
@@ -89,6 +101,40 @@ export default {
         })
         this.isLoading = false
       }
+    },
+    async afterHandleBookmark(postId) {
+      this.isLoading = true
+      const { data } = await replyAPI.addBookmark(postId)
+      if (data.status === 'success') {
+        Toast.fire({
+          type: 'success',
+          title: '加入書籤成功！'
+        })
+        // TODO: 加入書籤時圖示更動
+        this.posts.map(d => {
+          if (d.id === +postId) {
+            d.isBookmarked = !d.isBookmarked
+          }
+        })
+        this.isLoading = false
+      }
+    },
+    async afterHandleUnbookmark(postId) {
+      this.isLoading = true
+      const { data } = await replyAPI.deleteBookmark(postId)
+      if (data.status === 'success') {
+        Toast.fire({
+          type: 'success',
+          title: '刪除書籤成功！'
+        })
+        // TODO: 刪除書籤時圖示更動
+        this.posts.map(d => {
+          if (d.id === +postId) {
+            d.isBookmarked = !d.isBookmarked
+          }
+        })
+        this.isLoading = false
+      }
     }
   },
   created() {
@@ -101,7 +147,9 @@ export default {
     this.fetchUser(userId)
     next()
   },
-  computed: {}
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
+  }
 }
 </script>
 

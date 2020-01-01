@@ -34,7 +34,20 @@
                 <img :src="clap" alt="clap" />
               </template>
               <!-- bookmark -->
-              <font-awesome-icon :icon="['far', 'bookmark']" id="bookmark" />
+              <font-awesome-icon
+                v-show="!post.isBookmarked"
+                :data-postId="post.id"
+                :icon="['far', 'bookmark']"
+                id="bookmark"
+                @click="handleBookmark"
+              />
+              <div v-show="post.isBookmarked" :data-postId="post.id">
+                <font-awesome-icon
+                  :icon="['fas', 'bookmark']"
+                  id="bookmark"
+                  @click="handleUnbookmark"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -44,13 +57,28 @@
 </template>
 
 <script>
-// import userAPI from './../apis/user'
+import { mapState } from 'vuex'
 export default {
-  name: 'UserInfo',
+  name: 'UserPosts',
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
+  },
   data() {
     return {
       clap: require('../../static/images/clap.svg'),
       clapHands: require('../../static/images/clap-hands.svg')
+    }
+  },
+  methods: {
+    handleBookmark(e) {
+      const { postId } = e.target.dataset
+      this.$emit('after-handle-bookmark', postId)
+    },
+    handleUnbookmark(e) {
+      const postId =
+        e.target.parentNode.parentNode.dataset.postid ||
+        e.target.parentNode.dataset.postid
+      this.$emit('after-handle-unbookmark', postId)
     }
   },
   props: {
@@ -66,6 +94,10 @@ export default {
 }
 </script>
 <style scoped>
+svg {
+  cursor: pointer;
+}
+
 #info {
   padding: 25px;
 }

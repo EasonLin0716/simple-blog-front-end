@@ -9,9 +9,25 @@
         <font-awesome-icon :icon="['far', 'bell']" id="bell" />
         <template v-if="isAuthenticated">
           <button id="upgrade">Upgrade</button>
-          <button id="logout" @click="logout">Logout</button>
-          <a :href="'/#/users/' + currentUser.id">
+          <a href="#" role="button" data-toggle="dropdown">
             <img :src="currentUser.avatar" id="profile" alt="profile" />
+            <div class="dropdown-menu">
+              <router-link to="/posts/create" class="dropdown-item"
+                >New Story</router-link
+              >
+              <router-link
+                :to="'/users/' + currentUser.id"
+                class="dropdown-item"
+                >Stories</router-link
+              >
+              <router-link
+                :to="'/users/' + currentUser.id"
+                class="dropdown-item"
+                >Profile</router-link
+              >
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#" @click="logout">Signout</a>
+            </div>
           </a>
         </template>
         <template v-else>
