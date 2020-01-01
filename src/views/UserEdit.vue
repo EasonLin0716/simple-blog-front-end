@@ -14,8 +14,12 @@
           >
           </textarea>
         </div>
-        <div>
-          <img :src="avatar" alt="avatar" id="avatar" />
+        <label
+          for="image"
+          id="image-container"
+          v-bind:style="{ backgroundImage: 'url(' + avatar + ')' }"
+        >
+          <!-- <img :src="avatar" alt="avatar" id="avatar" /> -->
           <input
             id="image"
             type="file"
@@ -23,8 +27,10 @@
             accept="image/*"
             class="form-control-file"
             @change="handleFileChange"
+            style="display:none"
           />
-        </div>
+          <font-awesome-icon :icon="['fas', 'camera']" id="camera" />
+        </label>
       </div>
       <div id="follow">
         <span>{{ currentUser.followingUserId.length }} Following</span>
@@ -92,12 +98,29 @@ export default {
 </script>
 
 <style scoped>
+label {
+  margin: 0;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 100px;
+  border-radius: 50%;
+}
 a {
   text-decoration: none;
   color: #fff;
 }
 a:hover {
   color: inherit;
+}
+#camera {
+  font-size: 50px;
+  margin: 25px;
+  color: #666;
+  opacity: 0.7;
+}
+
+#camera:hover {
+  color: #000;
 }
 
 textarea,
@@ -108,6 +131,12 @@ input {
 textarea:focus,
 input:focus {
   outline: none;
+}
+
+#image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #user-edit {
@@ -133,6 +162,7 @@ input:focus {
 #avatar {
   width: 100px;
   height: 100px;
+  border: 2px solid #ccc;
   border-radius: 50%;
 }
 
