@@ -40,12 +40,14 @@
                 :icon="['far', 'bookmark']"
                 id="bookmark"
                 @click="handleBookmark"
+                :disabled="isLoading"
               />
               <div v-show="post.isBookmarked" :data-postId="post.id">
                 <font-awesome-icon
                   :icon="['fas', 'bookmark']"
                   id="bookmark"
                   @click="handleUnbookmark"
+                  :disabled="isLoading"
                 />
               </div>
             </div>
@@ -88,6 +90,10 @@ export default {
     },
     user: {
       type: Object,
+      required: true
+    },
+    isLoading: {
+      type: Boolean,
       required: true
     }
   }

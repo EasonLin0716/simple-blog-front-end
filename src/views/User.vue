@@ -10,6 +10,7 @@
     <UserPosts
       :posts="posts"
       :user="user"
+      :isLoading="isLoading"
       @after-handle-bookmark="afterHandleBookmark"
       @after-handle-unbookmark="afterHandleUnbookmark"
     />
@@ -106,15 +107,15 @@ export default {
       this.isLoading = true
       const { data } = await replyAPI.addBookmark(postId)
       if (data.status === 'success') {
-        Toast.fire({
-          type: 'success',
-          title: '加入書籤成功！'
-        })
         // TODO: 加入書籤時圖示更動
         this.posts.map(d => {
           if (d.id === +postId) {
-            d.isBookmarked = !d.isBookmarked
+            return (d.isBookmarked = !d.isBookmarked)
           }
+        })
+        Toast.fire({
+          type: 'success',
+          title: '加入書籤成功！'
         })
         this.isLoading = false
       }
@@ -123,15 +124,15 @@ export default {
       this.isLoading = true
       const { data } = await replyAPI.deleteBookmark(postId)
       if (data.status === 'success') {
-        Toast.fire({
-          type: 'success',
-          title: '刪除書籤成功！'
-        })
         // TODO: 刪除書籤時圖示更動
         this.posts.map(d => {
           if (d.id === +postId) {
-            d.isBookmarked = !d.isBookmarked
+            return (d.isBookmarked = !d.isBookmarked)
           }
+        })
+        Toast.fire({
+          type: 'success',
+          title: '刪除書籤成功！'
         })
         this.isLoading = false
       }
