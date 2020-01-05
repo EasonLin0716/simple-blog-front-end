@@ -15,7 +15,9 @@
           </div>
           <div id="post-info">
             <div id="cover">
-              <img :src="post.cover" alt="cover" />
+              <router-link :to="'/posts/' + post.id" id="post-link">
+                <img :src="post.cover" alt="cover" />
+              </router-link>
             </div>
             <div id="content">
               <h2>{{ post.title }}</h2>
@@ -127,6 +129,10 @@ h6 {
   height: 189px;
   overflow: hidden;
   margin: 20px 0 10px 0;
+}
+
+#post-link img {
+  transform: translateY(-25%);
 }
 
 #icons {
