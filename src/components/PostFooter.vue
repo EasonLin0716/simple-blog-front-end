@@ -1,16 +1,30 @@
 <template>
   <div id="post-footer">
     <div id="icons">
-      <template v-if="post.clappedTimes">
+      <div>
         <div id="claps">
-          <img :src="clapHands" alt="clap" id="clap" />&nbsp;{{
-            post.clappedTimes
-          }}&nbsp;claps
+          <button v-if="post.clappedTimes" :disabled="isLoading">
+            <img
+              v-on:click="handleClap"
+              :src="clapHands"
+              alt="clap"
+              id="clap"
+              :data-postid="post.id"
+            />&nbsp;{{ post.clappedTimes }}&nbsp;claps&nbsp;
+            <template v-if="clapCount"> +{{ clapCount }} </template>
+          </button>
+          <button v-else :disabled="isLoading">
+            <img
+              v-on:click="handleClap"
+              :src="clap"
+              alt="clap"
+              id="clap"
+              :data-postid="post.id"
+            />
+            <template v-if="clapCount"> +{{ clapCount }} </template>
+          </button>
         </div>
-      </template>
-      <template v-else>
-        <img :src="clap" alt="clap" id="clap" />
-      </template>
+      </div>
       <div id="links">
         <font-awesome-icon :icon="['fab', 'twitter']" id="twitter" />
         <font-awesome-icon :icon="['fab', 'facebook']" id="facebook" />
@@ -51,6 +65,7 @@ export default {
       ellipsis: require('../../static/images/ellipsis-h-solid.svg')
     }
   },
+
   props: {
     post: {
       type: Object,
@@ -59,6 +74,19 @@ export default {
     author: {
       type: Object,
       required: true
+    },
+    clapCount: {
+      type: Number,
+      required: true
+    },
+    isLoading: {
+      type: Boolean,
+      required: true
+    }
+  },
+  methods: {
+    handleClap() {
+      this.$emit('after-handle-clap')
     }
   }
 }

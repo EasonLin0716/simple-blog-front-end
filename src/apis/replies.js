@@ -14,6 +14,12 @@ export default {
     return apiHelper.get(`/users/${userId}/responses`)
   },
 
+  clap(postId, clapInfo) {
+    return apiHelper.post(`/posts/${postId}/clap`, clapInfo, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
+
   addBookmark(postId) {
     return apiHelper.post(`/posts/${postId}/bookmark`, null, {
       headers: { Authorization: `Bearer ${getToken()}` }

@@ -8,7 +8,13 @@
     <article>
       {{ post.content }}
     </article>
-    <PostFooter :author="author" :post="post" />
+    <PostFooter
+      :author="author"
+      :post="post"
+      :clapCount="clapCount"
+      :isLoading="isLoading"
+      @after-handle-clap="afterHandleClap"
+    />
   </div>
 </template>
 
@@ -16,11 +22,16 @@
 import postsAPI from '../apis/posts'
 import PostUserInfo from '../components/PostUserInfo'
 import PostFooter from '../components/PostFooter'
+import repliesAPI from '../apis/replies'
+import { Toast } from './../utils/helpers'
 export default {
   name: 'Post',
   components: { PostUserInfo, PostFooter },
   data() {
     return {
+      clapCount: 0,
+      clapTimer: null,
+      isLoading: false,
       post: {
         id: 0,
         title: '',
@@ -73,6 +84,29 @@ export default {
       } catch (error) {
         // console.error(error)
       }
+    },
+    afterHandleClap() {
+      if (this.clapTimer) {
+        clearTimeout(this.clapTimer)
+      }
+      this.clapCount += 1
+      this.post.clappedTimes += 1
+      this.clapTimer = setTimeout(async () => {
+        this.isLoading = true
+        const clapInfo = {
+          clapCount: this.clapCount
+        }
+        const { data } = await repliesAPI.clap(this.$route.params.id, clapInfo)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '鼓掌成功!!'
+          })
+        }
+        this.clapCount = 0
+        this.$forceUpdate()
+        this.isLoading = false
+      }, 2000)
     }
   },
   created() {
