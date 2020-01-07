@@ -4,7 +4,25 @@
       <img :src="author.avatar" alt="avatar" id="avatar" />
       <div id="info">
         <h6>
-          {{ author.name }} <span class="badge badge-success">Follow</span>
+          {{ author.name }}
+          <router-link
+            to="/users/edit"
+            v-if="currentUserId === author.id"
+            class="badge badge-success"
+            >Edit Profile</router-link
+          >
+          <span
+            @click="handleFollow"
+            v-else-if="!isFollowing"
+            class="badge badge-success"
+            >Follow</span
+          >
+          <span
+            @click="handleUnfollow"
+            v-else-if="isFollowing"
+            class="badge badge-info"
+            >Following</span
+          >
         </h6>
         <span> {{ post.monthDay }}&bull;{{ post.readTime }} </span>
       </div>
@@ -45,6 +63,13 @@ export default {
     isBookmarked: {
       type: Boolean,
       required: true
+    },
+    isFollowing: {
+      type: Boolean,
+      required: true
+    },
+    currentUserId: {
+      type: Number
     }
   },
   methods: {
@@ -53,6 +78,12 @@ export default {
     },
     handleUnbookmark() {
       this.$emit('after-handle-unbookmark', this.$route.params.id)
+    },
+    handleFollow() {
+      this.$emit('after-handle-follow', this.$route.params.id)
+    },
+    handleUnfollow() {
+      this.$emit('after-handle-unfollow', this.$route.params.id)
     }
   }
 }
@@ -92,5 +123,10 @@ h6 {
 }
 #bookmark {
   font-size: 22px;
+}
+
+h6 span,
+#col-right svg {
+  cursor: pointer;
 }
 </style>

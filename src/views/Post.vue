@@ -5,8 +5,12 @@
       :author="author"
       :post="post"
       :isBookmarked="isBookmarked"
+      :isFollowing="isFollowing"
+      :currentUserId="currentUserId"
       @after-handle-bookmark="afterHandleBookmark"
       @after-handle-unbookmark="afterHandleUnbookmark"
+      @after-handle-follow="afterHandleFollow"
+      @after-handle-unfollow="afterHandleUnfollow"
     />
     <div id="cover">
       <img :src="post.cover" alt="cover" />
@@ -20,9 +24,13 @@
       :clapCount="clapCount"
       :isLoading="isLoading"
       :isBookmarked="isBookmarked"
+      :isFollowing="isFollowing"
+      :currentUserId="currentUserId"
       @after-handle-clap="afterHandleClap"
       @after-handle-bookmark="afterHandleBookmark"
       @after-handle-unbookmark="afterHandleUnbookmark"
+      @after-handle-follow="afterHandleFollow"
+      @after-handle-unfollow="afterHandleUnfollow"
     />
   </div>
 </template>
@@ -32,6 +40,7 @@ import postsAPI from '../apis/posts'
 import PostUserInfo from '../components/PostUserInfo'
 import PostFooter from '../components/PostFooter'
 import repliesAPI from '../apis/replies'
+import usersAPI from '../apis/user'
 import { mapState } from 'vuex'
 import { Toast } from './../utils/helpers'
 export default {
@@ -70,6 +79,18 @@ export default {
         return this.currentUser.bookmarkedPostId.includes(this.post.id)
       }
       return false
+    },
+    isFollowing: function() {
+      if (this.isAuthenticated) {
+        return this.currentUser.followingUserId.includes(this.author.id)
+      }
+      return false
+    },
+    currentUserId: function() {
+      if (this.isAuthenticated) {
+        return this.currentUser.id
+      }
+      return 0
     }
   },
   methods: {
@@ -93,6 +114,7 @@ export default {
         }
         this.author = {
           ...this.author,
+          id: author.id,
           name: author.name,
           avatar: author.avatar,
           introduction: author.introduction,
@@ -155,6 +177,27 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    async afterHandleFollow(postId) {
+      const { data } = await usersAPI.follow(postId)
+      if (data.status === 'success') {
+        Toast.fire({
+          type: 'success',
+          title: '追蹤成功!!'
+        })
+      }
+      this.currentUser.followingUserId.push(this.author.id)
+    },
+    async afterHandleUnfollow(postId) {
+      const { data } = await usersAPI.unfollow(postId)
+      if (data.status === 'success') {
+        Toast.fire({
+          type: 'success',
+          title: '退追成功!!'
+        })
+      }
+      const ind = this.currentUser.followingUserId.indexOf(this.author.id)
+      this.currentUser.followingUserId.splice(ind, 1)
     }
   },
   created() {

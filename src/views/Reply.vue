@@ -53,6 +53,7 @@
 <script>
 import repliesAPI from '../apis/replies'
 import { mapState } from 'vuex'
+import { Toast } from './../utils/helpers'
 
 export default {
   name: 'Replies',
@@ -98,7 +99,7 @@ export default {
           // TODO: 提示使用者不能輸入空白留言
           return
         }
-        await repliesAPI.postReply({
+        const { data } = await repliesAPI.postReply({
           content: this.replyTextarea,
           postId: this.postId,
           id: this.currentUser.id
@@ -113,9 +114,14 @@ export default {
           avatar: this.currentUser.avatar
         })
         this.replyTextarea = ''
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '回復文章成功!!'
+          })
+        }
       } catch (error) {
-        // TODO: 顯示錯誤資訊
-        // console.log(error)
+        console.log(error)
       }
     }
   },

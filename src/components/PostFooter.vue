@@ -59,12 +59,32 @@
         </div>
       </div>
       <div id="follow">
-        <span class="badge badge-success">Follow</span>
+        <router-link
+          to="/users/edit"
+          v-if="currentUserId === author.id"
+          class="badge badge-success"
+          >Edit Profile</router-link
+        >
+        <span
+          @click="handleFollow"
+          v-else-if="!isFollowing"
+          class="badge badge-success"
+          >Follow</span
+        >
+        <span
+          @click="handleUnfollow"
+          v-else-if="isFollowing"
+          class="badge badge-info"
+          >Following</span
+        >
       </div>
     </div>
-    <button class="btn btn-block btn-success py-4">
+    <router-link
+      :to="'/posts/' + post.id + '/replies'"
+      class="btn btn-block btn-success py-4"
+    >
       Write the first response
-    </button>
+    </router-link>
   </div>
 </template>
 
@@ -99,6 +119,13 @@ export default {
     isBookmarked: {
       type: Boolean,
       required: true
+    },
+    isFollowing: {
+      type: Boolean,
+      required: true
+    },
+    currentUserId: {
+      type: Number
     }
   },
   methods: {
@@ -110,6 +137,12 @@ export default {
     },
     handleUnbookmark() {
       this.$emit('after-handle-unbookmark', this.$route.params.id)
+    },
+    handleFollow() {
+      this.$emit('after-handle-follow', this.$route.params.id)
+    },
+    handleUnfollow() {
+      this.$emit('after-handle-unfollow', this.$route.params.id)
     }
   }
 }
@@ -164,5 +197,9 @@ export default {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+}
+
+#follow span {
+  cursor: pointer;
 }
 </style>
