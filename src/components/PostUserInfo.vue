@@ -12,7 +12,20 @@
     <div id="col-right">
       <font-awesome-icon :icon="['fab', 'twitter']" id="twitter" />
       <font-awesome-icon :icon="['fab', 'facebook']" id="facebook" />
-      <font-awesome-icon :icon="['far', 'bookmark']" id="bookmark" />
+      <template v-if="!isBookmarked">
+        <font-awesome-icon
+          @click="handleBookmark"
+          :icon="['far', 'bookmark']"
+          id="bookmark"
+        />
+      </template>
+      <template v-else>
+        <font-awesome-icon
+          @click="handleUnbookmark"
+          :icon="['fas', 'bookmark']"
+          id="bookmark"
+        />
+      </template>
     </div>
   </div>
 </template>
@@ -28,6 +41,18 @@ export default {
     post: {
       type: Object,
       required: true
+    },
+    isBookmarked: {
+      type: Boolean,
+      required: true
+    }
+  },
+  methods: {
+    handleBookmark() {
+      this.$emit('after-handle-bookmark', this.$route.params.id)
+    },
+    handleUnbookmark() {
+      this.$emit('after-handle-unbookmark', this.$route.params.id)
     }
   }
 }

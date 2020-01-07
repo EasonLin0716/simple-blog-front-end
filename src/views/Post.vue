@@ -1,7 +1,13 @@
 <template>
   <div id="post">
     <h1>{{ post.title }}</h1>
-    <PostUserInfo :author="author" :post="post" />
+    <PostUserInfo
+      :author="author"
+      :post="post"
+      :isBookmarked="isBookmarked"
+      @after-handle-bookmark="afterHandleBookmark"
+      @after-handle-unbookmark="afterHandleUnbookmark"
+    />
     <div id="cover">
       <img :src="post.cover" alt="cover" />
     </div>
@@ -13,7 +19,10 @@
       :post="post"
       :clapCount="clapCount"
       :isLoading="isLoading"
+      :isBookmarked="isBookmarked"
       @after-handle-clap="afterHandleClap"
+      @after-handle-bookmark="afterHandleBookmark"
+      @after-handle-unbookmark="afterHandleUnbookmark"
     />
   </div>
 </template>
@@ -23,6 +32,7 @@ import postsAPI from '../apis/posts'
 import PostUserInfo from '../components/PostUserInfo'
 import PostFooter from '../components/PostFooter'
 import repliesAPI from '../apis/replies'
+import { mapState } from 'vuex'
 import { Toast } from './../utils/helpers'
 export default {
   name: 'Post',
@@ -51,6 +61,15 @@ export default {
         Followers: [],
         Followings: []
       }
+    }
+  },
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated']),
+    isBookmarked: function() {
+      if (this.isAuthenticated) {
+        return this.currentUser.bookmarkedPostId.includes(this.post.id)
+      }
+      return false
     }
   },
   methods: {
@@ -107,6 +126,35 @@ export default {
         this.$forceUpdate()
         this.isLoading = false
       }, 2000)
+    },
+    async afterHandleBookmark(postId) {
+      try {
+        const { data } = await repliesAPI.addBookmark(postId)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '加入書籤成功!!'
+          })
+        }
+        this.currentUser.bookmarkedPostId.push(this.post.id)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async afterHandleUnbookmark(postId) {
+      try {
+        const { data } = await repliesAPI.deleteBookmark(postId)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '刪除書籤成功!!'
+          })
+        }
+        const ind = this.currentUser.bookmarkedPostId.indexOf(postId)
+        this.currentUser.bookmarkedPostId.splice(ind, 1)
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
   created() {
