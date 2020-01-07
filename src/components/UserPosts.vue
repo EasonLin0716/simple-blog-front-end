@@ -25,16 +25,42 @@
             </div>
             <div id="icons">
               <!-- claps -->
-              <template v-if="post.clappedTime">
-                <div id="claps">
-                  <img :src="clapHands" alt="clap" />&nbsp;{{
-                    post.clappedTime
-                  }}
-                </div>
-              </template>
-              <template v-else>
-                <img :src="clap" alt="clap" />
-              </template>
+              <div>
+                <template v-if="post.clappedTime && post.isClapped">
+                  <div id="claps">
+                    <img
+                      @click="handleClap"
+                      :src="clapHands"
+                      alt="clap"
+                      id="clap"
+                      :data-postId="post.id"
+                    />&nbsp;{{ post.clappedTime }}
+                    <template v-if="post.clapping"
+                      >+{{ post.clapping }}</template
+                    >
+                  </div>
+                </template>
+                <template v-else-if="post.clappedTime">
+                  <img
+                    @click="handleClap"
+                    :src="clap"
+                    alt="clap"
+                    id="clap"
+                    :data-postId="post.id"
+                  />&nbsp;{{ post.clappedTime }}
+                  <template v-if="post.clapping">+{{ post.clapping }}</template>
+                </template>
+                <template v-else>
+                  <img
+                    @click="handleClap"
+                    :src="clap"
+                    alt="clap"
+                    id="clap"
+                    :data-postId="post.id"
+                  />
+                  <template v-if="post.clapping">+{{ post.clapping }}</template>
+                </template>
+              </div>
               <!-- bookmark -->
               <font-awesome-icon
                 v-show="!post.isBookmarked"
@@ -83,6 +109,10 @@ export default {
         e.target.parentNode.parentNode.dataset.postid ||
         e.target.parentNode.dataset.postid
       this.$emit('after-handle-unbookmark', postId)
+    },
+    handleClap(e) {
+      const { postid } = e.target.dataset
+      this.$emit('after-handle-clap', postid)
     }
   },
   props: {
@@ -96,6 +126,10 @@ export default {
     },
     isLoading: {
       type: Boolean,
+      required: true
+    },
+    clapCount: {
+      type: Number,
       required: true
     }
   }
@@ -161,5 +195,9 @@ h6 {
 #user-info span {
   color: rgb(120, 120, 120);
   font-size: 14px;
+}
+
+#clap {
+  cursor: pointer;
 }
 </style>

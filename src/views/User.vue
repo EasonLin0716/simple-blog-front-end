@@ -11,8 +11,10 @@
       :posts="posts"
       :user="user"
       :isLoading="isLoading"
+      :clapCount="clapCount"
       @after-handle-bookmark="afterHandleBookmark"
       @after-handle-unbookmark="afterHandleUnbookmark"
+      @after-handle-clap="afterHandleClap"
     />
   </div>
 </template>
@@ -46,7 +48,9 @@ export default {
         followings: []
       },
       posts: [],
-      isLoading: false
+      isLoading: false,
+      clapCount: 0,
+      clapTimer: null
     }
   },
   methods: {
@@ -72,10 +76,16 @@ export default {
           followings: user.Followings
         }
         this.posts = posts
-        const bookmarkedId = this.currentUser.bookmarkedPostId
-        for (let i = 0; i < this.posts.length; i++) {
-          this.posts[i].isBookmarked =
-            bookmarkedId.indexOf(this.posts[i].id) > -1
+        if (this.isAuthenticated) {
+          const bookmarkedId = this.currentUser.bookmarkedPostId
+          for (let i = 0; i < this.posts.length; i++) {
+            this.posts[i].isBookmarked =
+              bookmarkedId.indexOf(this.posts[i].id) > -1
+          }
+          const clappedId = this.currentUser.clappedPostId
+          for (let i = 0; i < this.posts.length; i++) {
+            this.posts[i].isClapped = clappedId.indexOf(this.posts[i].id) > -1
+          }
         }
       } catch (error) {
         // console.error(error)
@@ -136,6 +146,34 @@ export default {
         })
         this.isLoading = false
       }
+    },
+    async afterHandleClap(postId) {
+      if (this.clapTimer) {
+        clearTimeout(this.clapTimer)
+      }
+      const postIdArray = this.posts.map(d => d.id)
+      const ind = postIdArray.indexOf(Number(postId))
+      this.clapCount += 1
+      this.posts[ind].clappedTime += 1
+      this.posts[ind].clapping += 1
+      this.clapTimer = setTimeout(async () => {
+        this.isLoading = true
+        const clapInfo = {
+          clapCount: this.clapCount
+        }
+        const { data } = await replyAPI.clap(postId, clapInfo)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '鼓掌成功!!'
+          })
+          this.posts[ind].isClapped = true
+        }
+        this.clapCount = 0
+        this.posts[ind].clapping = 0
+        this.$forceUpdate()
+        this.isLoading = false
+      }, 2000)
     }
   },
   created() {
