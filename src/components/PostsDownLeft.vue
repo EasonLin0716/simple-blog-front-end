@@ -14,7 +14,22 @@
             <span>{{ post.monthDay }}&bull;{{ post.readTime }}</span>
           </div>
           <div id="icons">
-            <font-awesome-icon :icon="['far', 'bookmark']" id="bookmark" />
+            <font-awesome-icon
+              v-if="!post.isBookmarked"
+              :disabled="isLoading"
+              @click="handleBookmark"
+              :data-postid="post.id"
+              :icon="['far', 'bookmark']"
+              id="bookmark"
+            />
+            <font-awesome-icon
+              v-else
+              :disabled="isLoading"
+              @click="handleUnbookmark"
+              :data-postid="post.id"
+              :icon="['fas', 'bookmark']"
+              id="bookmark"
+            />
             <img :src="ellipsis" alt="ellipsis" id="ellipsis" />
           </div>
         </div>
@@ -38,8 +53,24 @@ export default {
   },
   props: {
     posts: {
-      type: Object,
+      type: Array,
       required: true
+    },
+    isLoading: {
+      type: Boolean,
+      required: true
+    }
+  },
+  methods: {
+    handleBookmark(e) {
+      const postId = e.target.dataset.postid
+      this.$emit('after-handle-bookmark', postId)
+    },
+    handleUnbookmark(e) {
+      const postId = e.target.parentNode.dataset
+        ? e.target.parentNode.dataset.postid
+        : e.target.dataset.postId
+      this.$emit('after-handle-unbookmark', postId)
     }
   }
 }
@@ -84,6 +115,7 @@ a {
 #post {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 40px;
 }
 
 img {

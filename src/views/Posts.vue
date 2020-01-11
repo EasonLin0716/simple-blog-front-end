@@ -3,8 +3,18 @@
     <PostsTop :posts="posts" />
     <hr />
     <div class="row" id="contents">
-      <PostsDownLeft :posts="posts" />
-      <PostsDownRight :newPosts="newPosts" :popularPosts="popularPosts" />
+      <PostsDownLeft
+        :posts="posts"
+        :isLoading="isLoading"
+        @after-handle-bookmark="afterHandleBookmark"
+        @after-handle-unbookmark="afterHandleUnbookmark"
+      />
+      <PostsDownRight
+        :newPosts="newPosts"
+        :popularPosts="popularPosts"
+        :isAuthenticated="isAuthenticated"
+        :readingPosts="readingPosts"
+      />
     </div>
   </div>
 </template>
@@ -12,13 +22,33 @@
 <script>
 /* eslint-disable */
 import postAPI from './../apis/posts'
+import replyAPI from './../apis/replies'
 import PostsTop from './../components/PostsTop'
 import PostsDownLeft from './../components/PostsDownLeft'
 import PostsDownRight from './../components/PostsDownRight'
+import { mapState } from 'vuex'
+import { Toast } from './../utils/helpers'
 export default {
   name: 'Posts',
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated']),
+    readingPosts: function() {
+      if (this.isAuthenticated) {
+        const readingPosts = []
+        this.posts.map(d => {
+          if (d.bookmarkId.indexOf(this.currentUser.id) !== -1) {
+            readingPosts.push(d)
+          }
+        })
+        return readingPosts.slice(0, 4)
+      } else {
+        return []
+      }
+    }
+  },
   data() {
     return {
+      isLoading: false,
       posts: [
         {
           id: 1,
@@ -28,7 +58,8 @@ export default {
           authorId: 0,
           author: '',
           monthDay: '',
-          readTime: ''
+          readTime: '',
+          bookmarkId: []
         },
         {
           id: 2,
@@ -38,7 +69,8 @@ export default {
           authorId: 0,
           author: '',
           monthDay: '',
-          readTime: ''
+          readTime: '',
+          bookmarkId: []
         },
         {
           id: 3,
@@ -48,7 +80,8 @@ export default {
           authorId: 0,
           author: '',
           monthDay: '',
-          readTime: ''
+          readTime: '',
+          bookmarkId: []
         },
         {
           id: 4,
@@ -58,7 +91,8 @@ export default {
           authorId: 0,
           author: '',
           monthDay: '',
-          readTime: ''
+          readTime: '',
+          bookmarkId: []
         },
         {
           id: 5,
@@ -68,7 +102,8 @@ export default {
           authorId: 0,
           author: '',
           monthDay: '',
-          readTime: ''
+          readTime: '',
+          bookmarkId: []
         }
       ],
       newPosts: [],
@@ -86,8 +121,47 @@ export default {
         const response = await postAPI.getPosts()
         const { data } = response
         this.posts = data.posts
+        if (this.isAuthenticated) {
+          this.posts.map(d => {
+            d.isBookmarked = this.currentUser.bookmarkedPostId.includes(d.id)
+          })
+        }
         this.newPosts = data.newPosts
         this.popularPosts = data.popularPosts
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async afterHandleBookmark(postId) {
+      try {
+        this.isLoading = true
+        const { data } = await replyAPI.addBookmark(postId)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '加入書籤成功'
+          })
+        }
+        const idx = this.posts.map(d => d.id).indexOf(+postId)
+        this.posts[idx].isBookmarked = true
+        this.isLoading = false
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async afterHandleUnbookmark(postId) {
+      try {
+        this.isLoading = true
+        const { data } = await replyAPI.deleteBookmark(postId)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '移除書籤成功'
+          })
+        }
+        const idx = this.posts.map(d => d.id).indexOf(+postId)
+        this.posts[idx].isBookmarked = false
+        this.isLoading = false
       } catch (error) {
         console.error(error)
       }

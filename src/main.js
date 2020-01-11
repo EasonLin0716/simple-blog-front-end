@@ -17,6 +17,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import store from './store'
 
+import '@/assets/global.css'
+
 library.add(
   faSearch,
   faBell,
