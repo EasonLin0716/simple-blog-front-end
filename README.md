@@ -4,7 +4,7 @@
 
 若想看現階段的成品，可參考[github page](https://easonlin0716.github.io/simple-blog-frontend/#/posts)
 
-後端伺服器布署於 Heroku，採用 Node.js Express / MySQL 進行開發。伺服器端專案請見(此)[https://github.com/EasonLin0716/simple-blog-backend]
+後端伺服器布署於 Heroku，採用 Node.js Express / MySQL 進行開發。伺服器端專案請見[此](https://github.com/EasonLin0716/simple-blog-backend)
 
 ## 功能
 
