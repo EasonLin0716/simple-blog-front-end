@@ -1,21 +1,24 @@
 <template>
   <div id="posts">
-    <PostsTop :posts="posts" />
-    <hr />
-    <div class="row" id="contents">
-      <PostsDownLeft
-        :posts="posts"
-        :isLoading="isLoading"
-        @after-handle-bookmark="afterHandleBookmark"
-        @after-handle-unbookmark="afterHandleUnbookmark"
-      />
-      <PostsDownRight
-        :newPosts="newPosts"
-        :popularPosts="popularPosts"
-        :isAuthenticated="isAuthenticated"
-        :readingPosts="readingPosts"
-      />
-    </div>
+    <Spinner v-if="isRendering" />
+    <template v-else>
+      <PostsTop :posts="posts" />
+      <hr />
+      <div class="row" id="contents">
+        <PostsDownLeft
+          :posts="posts"
+          :isLoading="isLoading"
+          @after-handle-bookmark="afterHandleBookmark"
+          @after-handle-unbookmark="afterHandleUnbookmark"
+        />
+        <PostsDownRight
+          :newPosts="newPosts"
+          :popularPosts="popularPosts"
+          :isAuthenticated="isAuthenticated"
+          :readingPosts="readingPosts"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -23,6 +26,7 @@
 /* eslint-disable */
 import postAPI from './../apis/posts'
 import replyAPI from './../apis/replies'
+import Spinner from './../components/Spinner'
 import PostsTop from './../components/PostsTop'
 import PostsDownLeft from './../components/PostsDownLeft'
 import PostsDownRight from './../components/PostsDownRight'
@@ -49,6 +53,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      isRendering: true,
       posts: [
         {
           id: 1,
@@ -110,7 +115,7 @@ export default {
       popularPosts: []
     }
   },
-  components: { PostsTop, PostsDownLeft, PostsDownRight },
+  components: { PostsTop, PostsDownLeft, PostsDownRight, Spinner },
   created() {
     this.fetchPosts()
   },
@@ -128,7 +133,9 @@ export default {
         }
         this.newPosts = data.newPosts
         this.popularPosts = data.popularPosts
+        this.isRendering = false
       } catch (error) {
+        this.isRendering = false
         console.error(error)
       }
     },
