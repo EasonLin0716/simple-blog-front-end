@@ -141,7 +141,10 @@ export default {
         this.isRendering = false
       } catch (error) {
         this.isRendering = false
-        console.error(error)
+        Toast.fire({
+          type: 'error',
+          title: '無法取得文章，請稍後再試！'
+        })
       }
     },
     async afterHandleBookmark(postId) {
@@ -158,7 +161,10 @@ export default {
         this.posts[idx].isBookmarked = true
         this.isLoading = false
       } catch (error) {
-        console.error(error)
+        Toast.fire({
+          type: 'error',
+          title: '無法加入書籤，請稍後再試'
+        })
       }
     },
     async afterHandleUnbookmark(postId) {
@@ -175,7 +181,10 @@ export default {
         this.posts[idx].isBookmarked = false
         this.isLoading = false
       } catch (error) {
-        console.error(error)
+        Toast.fire({
+          type: 'error',
+          title: '無法移除書籤，請稍後再試'
+        })
       }
     }
   }

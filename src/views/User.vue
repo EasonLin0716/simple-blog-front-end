@@ -88,63 +88,94 @@ export default {
           }
         }
       } catch (error) {
-        // console.error(error)
+        Toast.fire({
+          type: 'error',
+          title: '無法取得使用者資料，請稍後再試！'
+        })
       }
     },
     async afterHandleFollow(userId) {
-      this.isLoading = true
-      const { data } = await userAPI.follow(userId)
-      if (data.status === 'success') {
+      try {
+        this.isLoading = true
+        const { data } = await userAPI.follow(userId)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '追蹤成功！'
+          })
+          this.isLoading = false
+        }
+      } catch (error) {
         Toast.fire({
-          type: 'success',
-          title: '追蹤成功！'
+          type: 'error',
+          title: '無法追蹤，請稍後再試！'
         })
-        this.isLoading = false
       }
     },
     async afterHandleUnfollow(userId) {
-      this.isLoading = true
-      const { data } = await userAPI.unfollow(userId)
-      if (data.status === 'success') {
+      try {
+        this.isLoading = true
+        const { data } = await userAPI.unfollow(userId)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '退追成功！'
+          })
+          this.isLoading = false
+        }
+      } catch (error) {
         Toast.fire({
-          type: 'success',
-          title: '退追成功！'
+          type: 'error',
+          title: '無法退追，請稍後再試！'
         })
-        this.isLoading = false
       }
     },
     async afterHandleBookmark(postId) {
-      this.isLoading = true
-      const { data } = await replyAPI.addBookmark(postId)
-      if (data.status === 'success') {
-        // TODO: 加入書籤時圖示更動
-        this.posts.map(d => {
-          if (d.id === +postId) {
-            return (d.isBookmarked = !d.isBookmarked)
-          }
-        })
-        Toast.fire({
-          type: 'success',
-          title: '加入書籤成功！'
-        })
+      try {
+        this.isLoading = true
+        const { data } = await replyAPI.addBookmark(postId)
+        if (data.status === 'success') {
+          this.posts.map(d => {
+            if (d.id === +postId) {
+              return (d.isBookmarked = !d.isBookmarked)
+            }
+          })
+          Toast.fire({
+            type: 'success',
+            title: '加入書籤成功！'
+          })
+          this.isLoading = false
+        }
+      } catch (error) {
         this.isLoading = false
+        Toast.fire({
+          type: 'error',
+          title: '無法加入書籤，請稍後再試！'
+        })
       }
     },
     async afterHandleUnbookmark(postId) {
-      this.isLoading = true
-      const { data } = await replyAPI.deleteBookmark(postId)
-      if (data.status === 'success') {
-        // TODO: 刪除書籤時圖示更動
-        this.posts.map(d => {
-          if (d.id === +postId) {
-            return (d.isBookmarked = !d.isBookmarked)
-          }
-        })
+      try {
+        this.isLoading = true
+        const { data } = await replyAPI.deleteBookmark(postId)
+        if (data.status === 'success') {
+          // TODO: 刪除書籤時圖示更動
+          this.posts.map(d => {
+            if (d.id === +postId) {
+              return (d.isBookmarked = !d.isBookmarked)
+            }
+          })
+          Toast.fire({
+            type: 'success',
+            title: '刪除書籤成功！'
+          })
+          this.isLoading = false
+        }
+      } catch (error) {
         Toast.fire({
-          type: 'success',
-          title: '刪除書籤成功！'
+          type: 'error',
+          title: '刪除書籤，請稍後再試！'
         })
-        this.isLoading = false
       }
     },
     async afterHandleClap(postId) {
@@ -157,22 +188,29 @@ export default {
       this.posts[ind].clappedTime += 1
       this.posts[ind].clapping += 1
       this.clapTimer = setTimeout(async () => {
-        this.isLoading = true
-        const clapInfo = {
-          clapCount: this.clapCount
-        }
-        const { data } = await replyAPI.clap(postId, clapInfo)
-        if (data.status === 'success') {
+        try {
+          this.isLoading = true
+          const clapInfo = {
+            clapCount: this.clapCount
+          }
+          const { data } = await replyAPI.clap(postId, clapInfo)
+          if (data.status === 'success') {
+            Toast.fire({
+              type: 'success',
+              title: '鼓掌成功!!'
+            })
+            this.posts[ind].isClapped = true
+          }
+          this.clapCount = 0
+          this.posts[ind].clapping = 0
+          this.$forceUpdate()
+          this.isLoading = false
+        } catch (error) {
           Toast.fire({
-            type: 'success',
-            title: '鼓掌成功!!'
+            type: 'error',
+            title: '無法鼓掌，請稍後再試！'
           })
-          this.posts[ind].isClapped = true
         }
-        this.clapCount = 0
-        this.posts[ind].clapping = 0
-        this.$forceUpdate()
-        this.isLoading = false
       }, 2000)
     }
   },

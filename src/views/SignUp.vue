@@ -117,7 +117,10 @@ export default {
         }
       } catch (error) {
         this.isLoading = false
-        console.log(error)
+        Toast.fire({
+          type: 'error',
+          title: '無法註冊，請稍後再試！'
+        })
       }
     }
   }

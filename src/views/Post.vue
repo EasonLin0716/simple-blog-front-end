@@ -123,7 +123,10 @@ export default {
           Followings: author.Followings || []
         }
       } catch (error) {
-        // console.error(error)
+        Toast.fire({
+          type: 'error',
+          title: '無法取得文章，請稍後再試！'
+        })
       }
     },
     afterHandleClap() {
@@ -133,20 +136,30 @@ export default {
       this.clapCount += 1
       this.post.clappedTimes += 1
       this.clapTimer = setTimeout(async () => {
-        this.isLoading = true
-        const clapInfo = {
-          clapCount: this.clapCount
-        }
-        const { data } = await repliesAPI.clap(this.$route.params.id, clapInfo)
-        if (data.status === 'success') {
+        try {
+          this.isLoading = true
+          const clapInfo = {
+            clapCount: this.clapCount
+          }
+          const { data } = await repliesAPI.clap(
+            this.$route.params.id,
+            clapInfo
+          )
+          if (data.status === 'success') {
+            Toast.fire({
+              type: 'success',
+              title: '鼓掌成功!!'
+            })
+          }
+          this.clapCount = 0
+          this.$forceUpdate()
+          this.isLoading = false
+        } catch (error) {
           Toast.fire({
-            type: 'success',
-            title: '鼓掌成功!!'
+            type: 'error',
+            title: '鼓掌失敗！請稍後再試'
           })
         }
-        this.clapCount = 0
-        this.$forceUpdate()
-        this.isLoading = false
       }, 2000)
     },
     async afterHandleBookmark(postId) {
@@ -160,7 +173,10 @@ export default {
         }
         this.currentUser.bookmarkedPostId.push(this.post.id)
       } catch (error) {
-        console.log(error)
+        Toast.fire({
+          type: 'error',
+          title: '無法加入書籤，請稍後再試！'
+        })
       }
     },
     async afterHandleUnbookmark(postId) {
@@ -175,29 +191,46 @@ export default {
         const ind = this.currentUser.bookmarkedPostId.indexOf(postId)
         this.currentUser.bookmarkedPostId.splice(ind, 1)
       } catch (error) {
-        console.log(error)
+        Toast.fire({
+          type: 'error',
+          title: '無法加入書籤，請稍後再試！'
+        })
       }
     },
     async afterHandleFollow(postId) {
-      const { data } = await usersAPI.follow(postId)
-      if (data.status === 'success') {
+      try {
+        const { data } = await usersAPI.follow(postId)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '追蹤成功!!'
+          })
+        }
+        this.currentUser.followingUserId.push(this.author.id)
+      } catch (error) {
         Toast.fire({
-          type: 'success',
-          title: '追蹤成功!!'
+          type: 'error',
+          title: '無法追蹤，請稍後再試！'
         })
       }
-      this.currentUser.followingUserId.push(this.author.id)
     },
     async afterHandleUnfollow(postId) {
-      const { data } = await usersAPI.unfollow(postId)
-      if (data.status === 'success') {
+      try {
+        const { data } = await usersAPI.unfollow(postId)
+        if (data.status === 'success') {
+          Toast.fire({
+            type: 'success',
+            title: '退追成功!!'
+          })
+        }
+        const ind = this.currentUser.followingUserId.indexOf(this.author.id)
+        this.currentUser.followingUserId.splice(ind, 1)
+      } catch (error) {
         Toast.fire({
-          type: 'success',
-          title: '退追成功!!'
+          type: 'error',
+          title: '無法退追，請稍後再試！'
         })
       }
-      const ind = this.currentUser.followingUserId.indexOf(this.author.id)
-      this.currentUser.followingUserId.splice(ind, 1)
     }
   },
   created() {

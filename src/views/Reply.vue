@@ -121,7 +121,10 @@ export default {
           })
         }
       } catch (error) {
-        console.log(error)
+        Toast.fire({
+          type: 'error',
+          title: '無法回復文章，請稍後再試！'
+        })
       }
     }
   },

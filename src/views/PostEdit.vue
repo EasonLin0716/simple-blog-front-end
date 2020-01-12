@@ -61,7 +61,10 @@ export default {
           this.$router.push(`/posts/${postId}`)
         }
       } catch (error) {
-        // TODO: 錯誤提示
+        Toast.fire({
+          type: 'error',
+          title: '修改文章失敗，請稍後再試！'
+        })
       }
     }
   },

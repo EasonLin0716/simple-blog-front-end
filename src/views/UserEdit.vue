@@ -68,18 +68,25 @@ export default {
   },
   methods: {
     async handlePutUser(e) {
-      const form = e.target
-      const formData = new FormData(form)
-      const { data } = await usersAPI.putUser({ formData })
-      if (data.status === 'success') {
-        this.currentUser.name = this.name
-        this.currentUser.introduction = this.introduction
-        this.currentUser.avatar = this.avatar
+      try {
+        const form = e.target
+        const formData = new FormData(form)
+        const { data } = await usersAPI.putUser({ formData })
+        if (data.status === 'success') {
+          this.currentUser.name = this.name
+          this.currentUser.introduction = this.introduction
+          this.currentUser.avatar = this.avatar
+          Toast.fire({
+            type: 'success',
+            title: '個人資訊修改成功！'
+          })
+          this.$router.push(`/users/${this.currentUser.id}`)
+        }
+      } catch (error) {
         Toast.fire({
           type: 'success',
-          title: '個人資訊修改成功！'
+          title: '無法取得個人資訊，請稍後再試！'
         })
-        this.$router.push(`/users/${this.currentUser.id}`)
       }
     },
     handleFileChange(e) {
