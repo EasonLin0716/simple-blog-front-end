@@ -35,9 +35,9 @@
                       id="clap"
                       :data-postId="post.id"
                     />&nbsp;{{ post.clappedTime }}
-                    <template v-if="post.clapping"
-                      >+{{ post.clapping }}</template
-                    >
+                    <template v-if="post.clapping">
+                      +{{ post.clapping }}
+                    </template>
                   </div>
                 </template>
                 <template v-else-if="post.clappedTime">
