@@ -1,12 +1,8 @@
 <template>
-  <div class="container py-5">
-    <form class="w-100" @submit.stop.prevent="handleSubmit">
-      <div class="text-center mb-4">
-        <h1 class="h3 mb-3 font-weight-normal">
-          Sign Up
-        </h1>
-      </div>
-
+  <div id="signup">
+    <img src="https://fakeimg.pl/214x550/" alt="pic" />
+    <form class="w-100 px-2" @submit.stop.prevent="handleSubmit">
+      <h1>Sign Up</h1>
       <div class="form-label-group mb-2">
         <label for="name">Name</label>
         <input
@@ -62,7 +58,7 @@
 
       <button
         :disabled="isLoading"
-        class="btn btn-lg btn-primary btn-block mb-3"
+        class="btn btn-lg btn-dark btn-block mb-3"
         type="submit"
       >
         Submit
@@ -77,9 +73,10 @@
       </div>
 
       <p class="mt-5 mb-3 text-muted text-center">
-        © 2017-2018
+        &copy; 2019-2020 Created without any commercial purposes by Eason Lin
       </p>
     </form>
+    <img src="https://fakeimg.pl/214x550/" alt="pic" />
   </div>
 </template>
 
@@ -126,3 +123,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+h1 {
+  text-align: center;
+}
+#signup {
+  width: 1028px;
+  padding: 64px;
+  margin: 0px auto;
+  border: 1px solid #ccc;
+  display: flex;
+}
+</style>

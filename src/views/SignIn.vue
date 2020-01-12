@@ -1,9 +1,8 @@
 <template>
-  <div class="container py-5">
-    <form class="w-100" @submit.prevent.stop="handleSubmit">
-      <div class="text-center mb-4">
-        <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
-      </div>
+  <div id="signin">
+    <img src="https://fakeimg.pl/214x550/" alt="pic" />
+    <form class="w-100 px-2" @submit.prevent.stop="handleSubmit">
+      <h1>Sign in</h1>
       <div class="form-label-group mb-2">
         <label for="email">email</label>
         <input
@@ -31,18 +30,21 @@
       </div>
       <button
         :disabled="isProcessing"
-        class="btn btn-lg btn-primary btn-block mb-3"
+        class="btn btn-lg btn-dark btn-block mb-3"
         type="submit"
       >
-        Submit
+        Continue
       </button>
       <div class="text-center mb-3">
         <p>
           <router-link to="/signup">Sign Up</router-link>
         </p>
       </div>
-      <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+      <p class="mt-5 mb-3 text-muted text-center">
+        &copy; 2019-2020 Created without any commercial purposes by Eason Lin
+      </p>
     </form>
+    <img src="https://fakeimg.pl/214x550/" alt="pic" />
   </div>
 </template>
 
@@ -90,3 +92,15 @@ export default {
   }
 }
 </script>
+<style scoped>
+h1 {
+  text-align: center;
+}
+#signin {
+  width: 1028px;
+  padding: 64px;
+  margin: 0px auto;
+  border: 1px solid #ccc;
+  display: flex;
+}
+</style>
