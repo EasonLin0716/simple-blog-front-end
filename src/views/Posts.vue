@@ -1,6 +1,6 @@
 <template>
   <div id="posts">
-    <Spinner v-if="isRendering" />
+    <PacmanLoader v-if="isRendering" />
     <template v-else>
       <PostsTop :posts="posts" />
       <hr />
@@ -26,7 +26,7 @@
 /* eslint-disable */
 import postAPI from './../apis/posts'
 import replyAPI from './../apis/replies'
-import Spinner from './../components/Spinner'
+import PacmanLoader from './../components/PacmanLoader'
 import PostsTop from './../components/PostsTop'
 import PostsDownLeft from './../components/PostsDownLeft'
 import PostsDownRight from './../components/PostsDownRight'
@@ -115,7 +115,12 @@ export default {
       popularPosts: []
     }
   },
-  components: { PostsTop, PostsDownLeft, PostsDownRight, Spinner },
+  components: {
+    PostsTop,
+    PostsDownLeft,
+    PostsDownRight,
+    PacmanLoader
+  },
   created() {
     this.fetchPosts()
   },
