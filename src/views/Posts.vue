@@ -183,11 +183,6 @@ export default {
 </script>
 
 <style scoped>
-a {
-  text-decoration: none;
-  color: #000;
-}
-
 #posts {
   margin: 0 auto;
   max-width: 1032px;

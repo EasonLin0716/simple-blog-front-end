@@ -77,11 +77,6 @@ export default {
 </script>
 
 <style scoped>
-a {
-  text-decoration: none;
-  color: #000;
-}
-
 #ellipsis,
 #bookmark {
   width: 20px;

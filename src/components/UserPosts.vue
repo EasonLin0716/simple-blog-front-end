@@ -150,11 +150,6 @@ svg {
   border-radius: 50%;
 }
 
-h6 {
-  margin: 0;
-  padding: 0;
-}
-
 #latest {
   margin-top: 30px;
 }

@@ -1,5 +1,8 @@
 <template>
-  <h1>
-    404 Page Not Found
-  </h1>
+  <div id="not-found">
+    <h1>
+      Oops...
+    </h1>
+    <p>This page can not be found</p>
+  </div>
 </template>

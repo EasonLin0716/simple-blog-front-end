@@ -35,36 +35,42 @@
         </div>
       </div>
     </div>
-    <div v-if="isAuthenticated" id="reading-list">
-      <div id="reading-list-title">
-        <h3>Reading list</h3>
-        <img src="https://fakeimg.pl/135x118/" alt="img" />
-      </div>
-      <div id="reading-list-posts">
-        <div v-for="post in readingPosts" :key="post.id" id="reading-list-post">
-          <div id="reading-list-posts-icon">
-            <font-awesome-icon :icon="['fas', 'bookmark']" id="bookmark" />
-          </div>
-          <div>
-            <h6>{{ post.title }}</h6>
-            <span class="d-block">{{ post.author }}</span>
-            <span>{{ post.monthDay }}</span
-            >&bull;<span>{{ post.readTime }}</span>
+    <div class="sticky-down">
+      <div v-if="isAuthenticated" id="reading-list">
+        <div id="reading-list-title">
+          <h3>Reading list</h3>
+          <img src="https://fakeimg.pl/135x118/" alt="img" />
+        </div>
+        <div id="reading-list-posts">
+          <div
+            v-for="post in readingPosts"
+            :key="post.id"
+            id="reading-list-post"
+          >
+            <div id="reading-list-posts-icon">
+              <font-awesome-icon :icon="['fas', 'bookmark']" id="bookmark" />
+            </div>
+            <div>
+              <h6>{{ post.title }}</h6>
+              <span class="d-block">{{ post.author }}</span>
+              <span>{{ post.monthDay }}</span
+              >&bull;<span>{{ post.readTime }}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="tool-bar">
-      <ul>
-        <li>Help</li>
-        <li>Status</li>
-        <li>Writers</li>
-        <li>Blog</li>
-        <li>Careers</li>
-        <li>Privacy</li>
-        <li>Terms</li>
-        <li>About</li>
-      </ul>
+      <div id="tool-bar">
+        <ul>
+          <li>Help</li>
+          <li>Status</li>
+          <li>Writers</li>
+          <li>Blog</li>
+          <li>Careers</li>
+          <li>Privacy</li>
+          <li>Terms</li>
+          <li>About</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -94,12 +100,13 @@ export default {
 </script>
 
 <style scoped>
-img {
-  border-radius: 50%;
+.sticky-down {
+  position: sticky;
+  top: 0;
 }
 
-h6 {
-  margin: 0;
+img {
+  border-radius: 50%;
 }
 
 span {
@@ -170,10 +177,6 @@ span {
   margin-right: 10px;
   margin-top: -4px;
 }
-
-/* #reading-list {
-  position: sticky;
-} */
 
 #reading-list-posts {
   padding: 24px;

@@ -97,10 +97,6 @@ export default {
   font-size: 14px;
 }
 
-h6 {
-  margin: 0;
-}
-
 #responses {
   margin-top: 30px;
 }

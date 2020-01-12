@@ -105,11 +105,6 @@ export default {
   margin-left: 10px;
 }
 
-h6 {
-  margin: 0;
-  padding: 0;
-}
-
 #avatar {
   width: 48px;
   height: 48px;
