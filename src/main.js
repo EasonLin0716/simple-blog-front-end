@@ -17,8 +17,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import store from './store'
 
-import '@/assets/global.css'
-
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'

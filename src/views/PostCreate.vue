@@ -66,7 +66,6 @@ export default {
   },
   methods: {
     applyOptions(ev) {
-      console.log(ev)
       try {
         this.options = JSON.parse(ev.target.value)
         this.optionsValid = true

@@ -18,13 +18,46 @@ export default {
 </script>
 
 <style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #666;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+}
+
 p {
   font-size: 16px;
 }
+
 .icon {
   width: 25px;
   height: 25px;
   display: inline-block;
+}
+
+#bookmark {
+  cursor: pointer;
 }
 
 form {

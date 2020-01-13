@@ -9,14 +9,14 @@
         placeholder="Title"
         id="title"
       />
-      <textarea
+      <medium-editor
         name="content"
         id="content"
-        class="form-control"
-        v-model="content"
-        rows="20"
-        placeholder="Tell your story..."
-      ></textarea>
+        :text="content"
+        :options="options"
+        custom-tag="h4"
+        v-on:edit="applyTextEdit"
+      />
       <button type="submit" class="btn btn-success">Edit</button>
     </form>
   </div>
@@ -24,6 +24,7 @@
 
 <script>
 import postsAPI from '../apis/posts'
+import editor from 'vue2-medium-editor'
 import { mapState } from 'vuex'
 import { Toast } from './../utils/helpers'
 export default {
@@ -31,21 +32,74 @@ export default {
   data() {
     return {
       title: '',
-      content: ''
+      content: '',
+      authorId: 0,
+      options: {
+        toolbar: {
+          /* These are the default options for the toolbar,
+           if nothing is passed this is what is used */
+          allowMultiParagraphSelection: true,
+          buttons: [
+            'bold',
+            'italic',
+            'underline',
+            // 'anchor',
+            'h2',
+            'h3'
+            // 'quote'
+          ],
+          diffLeft: 0,
+          diffTop: -10,
+          firstButtonClass: 'medium-editor-button-first',
+          lastButtonClass: 'medium-editor-button-last',
+          relativeContainer: null,
+          standardizeSelectionStart: false,
+          static: false,
+          /* options which only apply when static is true */
+          align: 'center',
+          sticky: false,
+          updateOnEmptySelection: false
+        }
+      }
     }
   },
+  components: {
+    'medium-editor': editor
+  },
   methods: {
+    applyOptions(ev) {
+      try {
+        this.options = JSON.parse(ev.target.value)
+        this.optionsValid = true
+      } catch (e) {
+        this.optionsValid = false
+      }
+    },
+    applyTextEdit(ev) {
+      if (ev.event.target) {
+        this.content = ev.event.target.innerHTML
+      }
+    },
     async fetchPost(postId) {
       const { data } = await postsAPI.getPost(postId)
       this.title = data.post.title
       this.content = data.post.content
+      this.authorId = data.author.id
+      if (this.authorId !== this.currentUser.id) {
+        Toast.fire({
+          type: 'error',
+          title: '很抱歉，您沒有編輯權限'
+        })
+        this.$router.push(`/posts/${postId}`)
+      }
     },
     async handleEditPost(e) {
       try {
-        const form = e.target
-        const formData = new FormData(form)
         const { id: postId } = this.$route.params
-        const { data } = await postsAPI.putPost(formData, postId)
+        const { data } = await postsAPI.putPost(
+          { title: this.title, content: this.content, userId: this.authorId },
+          postId
+        )
         if (data.status === 'success') {
           Toast.fire({
             type: 'success',
@@ -73,9 +127,6 @@ export default {
   },
   created() {
     const { id: postId } = this.$route.params
-    if (postId !== this.currentUser.id) {
-      this.$router.push(`/posts/${postId}`)
-    }
     this.fetchPost(postId)
   },
   beforeRouteUpdate(to, from, next) {
@@ -91,6 +142,11 @@ export default {
 #post-create {
   max-width: 700px;
   margin: 0 auto;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 
 #title {
