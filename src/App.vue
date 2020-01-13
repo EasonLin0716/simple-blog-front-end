@@ -18,6 +18,9 @@ export default {
 </script>
 
 <style>
+p {
+  font-size: 16px;
+}
 .icon {
   width: 25px;
   height: 25px;

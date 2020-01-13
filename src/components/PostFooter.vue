@@ -82,6 +82,7 @@
     <router-link
       :to="'/posts/' + post.id + '/replies'"
       class="btn btn-block btn-success py-4"
+      id="response-button"
     >
       Write the first response
     </router-link>
@@ -201,5 +202,9 @@ export default {
 
 #follow span {
   cursor: pointer;
+}
+
+#response-button {
+  margin-bottom: 60px;
 }
 </style>

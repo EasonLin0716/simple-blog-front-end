@@ -1,8 +1,11 @@
 <template>
   <div id="user-responses">
-    <UserInfo :user="user" />
-    <UserNavTab :userId="user.id" />
-    <UserResponsesPosts :user="user" :replies="replies" />
+    <div id="box">
+      <UserInfo :user="user" />
+      <UserNavTab :userId="user.id" />
+      <UserResponsesPosts :user="user" :replies="replies" />
+    </div>
+    <PageFooter />
   </div>
 </template>
 
@@ -10,13 +13,15 @@
 import repliesAPI from '../apis/replies'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
+import PageFooter from '../components/PageFooter'
 import UserResponsesPosts from '../components/UserResponsesPosts'
 export default {
   name: 'UserResponses',
   components: {
     UserInfo,
     UserNavTab,
-    UserResponsesPosts
+    UserResponsesPosts,
+    PageFooter
   },
   data() {
     return {
@@ -76,7 +81,7 @@ export default {
 </script>
 
 <style scoped>
-#user-responses {
+#box {
   width: 728px;
   padding: 0 24px;
   margin: 0 auto;

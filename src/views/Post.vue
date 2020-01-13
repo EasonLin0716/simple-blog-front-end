@@ -1,37 +1,40 @@
 <template>
   <div id="post">
-    <h1>{{ post.title }}</h1>
-    <PostUserInfo
-      :author="author"
-      :post="post"
-      :isBookmarked="isBookmarked"
-      :isFollowing="isFollowing"
-      :currentUserId="currentUserId"
-      @after-handle-bookmark="afterHandleBookmark"
-      @after-handle-unbookmark="afterHandleUnbookmark"
-      @after-handle-follow="afterHandleFollow"
-      @after-handle-unfollow="afterHandleUnfollow"
-    />
-    <div id="cover">
-      <img :src="post.cover" alt="cover" />
+    <div id="box">
+      <h1>{{ post.title }}</h1>
+      <PostUserInfo
+        :author="author"
+        :post="post"
+        :isBookmarked="isBookmarked"
+        :isFollowing="isFollowing"
+        :currentUserId="currentUserId"
+        @after-handle-bookmark="afterHandleBookmark"
+        @after-handle-unbookmark="afterHandleUnbookmark"
+        @after-handle-follow="afterHandleFollow"
+        @after-handle-unfollow="afterHandleUnfollow"
+      />
+      <div id="cover">
+        <img :src="post.cover" alt="cover" />
+      </div>
+      <article id="post-content" v-html="post.content">
+        <!-- {{ post.content }} -->
+      </article>
+      <PostFooter
+        :author="author"
+        :post="post"
+        :clapCount="clapCount"
+        :isLoading="isLoading"
+        :isBookmarked="isBookmarked"
+        :isFollowing="isFollowing"
+        :currentUserId="currentUserId"
+        @after-handle-clap="afterHandleClap"
+        @after-handle-bookmark="afterHandleBookmark"
+        @after-handle-unbookmark="afterHandleUnbookmark"
+        @after-handle-follow="afterHandleFollow"
+        @after-handle-unfollow="afterHandleUnfollow"
+      />
     </div>
-    <article id="post-content" v-html="post.content">
-      <!-- {{ post.content }} -->
-    </article>
-    <PostFooter
-      :author="author"
-      :post="post"
-      :clapCount="clapCount"
-      :isLoading="isLoading"
-      :isBookmarked="isBookmarked"
-      :isFollowing="isFollowing"
-      :currentUserId="currentUserId"
-      @after-handle-clap="afterHandleClap"
-      @after-handle-bookmark="afterHandleBookmark"
-      @after-handle-unbookmark="afterHandleUnbookmark"
-      @after-handle-follow="afterHandleFollow"
-      @after-handle-unfollow="afterHandleUnfollow"
-    />
+    <PageFooter />
   </div>
 </template>
 
@@ -39,13 +42,14 @@
 import postsAPI from '../apis/posts'
 import PostUserInfo from '../components/PostUserInfo'
 import PostFooter from '../components/PostFooter'
+import PageFooter from '../components/PageFooter'
 import repliesAPI from '../apis/replies'
 import usersAPI from '../apis/user'
 import { mapState } from 'vuex'
 import { Toast } from './../utils/helpers'
 export default {
   name: 'Post',
-  components: { PostUserInfo, PostFooter },
+  components: { PostUserInfo, PostFooter, PageFooter },
   data() {
     return {
       clapCount: 0,
@@ -247,7 +251,7 @@ export default {
 </script>
 
 <style scoped>
-#post {
+#box {
   width: 728px;
   padding: 0 24px;
   margin: 0 auto;

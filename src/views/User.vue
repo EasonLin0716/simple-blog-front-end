@@ -1,21 +1,24 @@
 <template>
   <div id="profile">
-    <UserInfo
-      :user="user"
-      :isLoading="isLoading"
-      @after-handle-follow="afterHandleFollow"
-      @after-handle-unfollow="afterHandleUnfollow"
-    />
-    <UserNavTab :userId="user.id" />
-    <UserPosts
-      :posts="posts"
-      :user="user"
-      :isLoading="isLoading"
-      :clapCount="clapCount"
-      @after-handle-bookmark="afterHandleBookmark"
-      @after-handle-unbookmark="afterHandleUnbookmark"
-      @after-handle-clap="afterHandleClap"
-    />
+    <div id="box">
+      <UserInfo
+        :user="user"
+        :isLoading="isLoading"
+        @after-handle-follow="afterHandleFollow"
+        @after-handle-unfollow="afterHandleUnfollow"
+      />
+      <UserNavTab :userId="user.id" />
+      <UserPosts
+        :posts="posts"
+        :user="user"
+        :isLoading="isLoading"
+        :clapCount="clapCount"
+        @after-handle-bookmark="afterHandleBookmark"
+        @after-handle-unbookmark="afterHandleUnbookmark"
+        @after-handle-clap="afterHandleClap"
+      />
+    </div>
+    <PageFooter />
   </div>
 </template>
 
@@ -25,6 +28,7 @@ import replyAPI from '../apis/replies'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 import UserPosts from '../components/UserPosts'
+import PageFooter from '../components/PageFooter'
 import { Toast } from './../utils/helpers'
 import { mapState } from 'vuex'
 export default {
@@ -32,7 +36,8 @@ export default {
   components: {
     UserInfo,
     UserNavTab,
-    UserPosts
+    UserPosts,
+    PageFooter
   },
   data() {
     return {
@@ -231,7 +236,7 @@ export default {
 </script>
 
 <style scoped>
-#profile {
+#box {
   width: 728px;
   padding: 0 24px;
   margin: 0 auto;

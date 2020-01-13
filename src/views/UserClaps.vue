@@ -1,8 +1,11 @@
 <template>
   <div id="user-claps">
-    <UserInfo :user="user" />
-    <UserNavTab :userId="user.id" />
-    <UserClapsPosts :posts="posts" :user="user" />
+    <div id="box">
+      <UserInfo :user="user" />
+      <UserNavTab :userId="user.id" />
+      <UserClapsPosts :posts="posts" :user="user" />
+    </div>
+    <PageFooter />
   </div>
 </template>
 
@@ -10,13 +13,15 @@
 import userAPI from '../apis/user'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
+import PageFooter from '../components/PageFooter'
 import UserClapsPosts from '../components/UserClapsPosts'
 export default {
   name: 'UserClaps',
   components: {
     UserInfo,
     UserNavTab,
-    UserClapsPosts
+    UserClapsPosts,
+    PageFooter
   },
   data() {
     return {
@@ -76,7 +81,7 @@ export default {
 </script>
 
 <style scoped>
-#user-claps {
+#box {
   width: 728px;
   padding: 0 24px;
   margin: 0 auto;
