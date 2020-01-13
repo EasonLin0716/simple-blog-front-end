@@ -15,7 +15,7 @@
     <div id="cover">
       <img :src="post.cover" alt="cover" />
     </div>
-    <article id="post-content">
+    <article id="post-content" v-html="post.content">
       <!-- {{ post.content }} -->
     </article>
     <PostFooter
@@ -122,8 +122,6 @@ export default {
           Followers: author.Followers || [],
           Followings: author.Followings || []
         }
-        const postContent = document.getElementById('post-content')
-        postContent.innerHTML = this.post.content
       } catch (error) {
         Toast.fire({
           type: 'error',

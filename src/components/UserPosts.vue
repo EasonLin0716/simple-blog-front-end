@@ -21,7 +21,9 @@
             </div>
             <div id="content">
               <h2>{{ post.title }}</h2>
-              {{ post.content }}
+              <article v-html="post.content">
+                <!-- {{ post.content }} -->
+              </article>
             </div>
             <div id="icons">
               <!-- claps -->
