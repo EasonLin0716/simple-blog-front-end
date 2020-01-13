@@ -1,15 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://yabwe.github.io/medium-editor/screen.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.22.1/css/medium-editor.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.22.1/css/themes/flat.css"
+    />
     <title>simple-blog-frontend</title>
+    <style>
+      body {
+      }
+
+      .medium-editor-element {
+        outline: none;
+      }
+
+      a,
+      a:hover,
+      section.splash h1 span,
+      .medium-editor-toolbar li button,
+      .color-1,
+      .color-2 {
+        color: #4fc08d;
+      }
+
+      body,
+      pre,
+      .medium-editor-button-active b,
+      code {
+        color: #2c3e50;
+      }
+
+      .medium-editor-button-active.medium-editor-button-active.medium-editor-button-active {
+        background-color: #4fc08d;
+      }
+
+      pre,
+      code {
+        background: #f8f8f8;
+        width: 80vw;
+      }
+
+      pre#cdn,
+      code.data,
+      pre#usage {
+        max-width: 900px;
+      }
+
+      code.data {
+        margin-top: 50px;
+      }
+
+      .medium-toolbar-arrow-over:before {
+        border-color: transparent transparent #2c3e50 transparent;
+      }
+
+      .medium-editor-toolbar li button {
+        border-right: 1px solid #2c3e50;
+      }
+
+      section.installation,
+      .medium-editor-toolbar,
+      .medium-editor-toolbar-anchor-preview,
+      .github-fork-ribbon {
+        background: #2c3e50;
+      }
+
+      .medium-toolbar-arrow-under:after {
+        border-color: #2c3e50 transparent transparent transparent;
+      }
+
+      #toolbar-placeholder {
+        display: none;
+      }
+
+      .medium-editor-toolbar {
+        transitin: none;
+      }
+    </style>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but simple-blog-frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but simple-blog-frontend doesn't work properly without
+        JavaScript enabled. Please enable it to continue.</strong
+      >
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->

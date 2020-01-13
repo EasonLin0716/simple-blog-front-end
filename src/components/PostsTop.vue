@@ -6,7 +6,6 @@
           <router-link :to="'/posts/' + posts[0].id">
             <img :src="posts[0].cover" alt="cover" />
             <h2>{{ posts[0].title }}</h2>
-            <p>{{ posts[0].content.substring(0, 50) }}...</p>
           </router-link>
           <router-link :to="'/users/' + posts[0].authorId">
             <span class="text-secondary d-block">{{ posts[0].author }}</span>
@@ -69,7 +68,6 @@
           <router-link :to="'/posts/' + posts[4].id">
             <img :src="posts[4].cover" alt="cover" />
             <h2>{{ posts[4].title }}</h2>
-            <p>{{ posts[4].content.substring(0, 50) }}...</p>
           </router-link>
           <router-link :to="'/users/' + posts[3].authorId">
             <span class="text-secondary d-block">{{ posts[4].author }}</span>

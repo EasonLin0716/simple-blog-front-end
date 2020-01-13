@@ -4,7 +4,6 @@
       <div id="p-left">
         <router-link :to="'/posts/' + post.id">
           <h4>{{ post.title }}</h4>
-          <p>{{ post.content.substring(0, 40) }}...</p>
         </router-link>
         <div id="bottom">
           <div>
