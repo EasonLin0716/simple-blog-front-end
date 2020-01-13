@@ -193,6 +193,6 @@ section.installation,
 }
 
 .medium-editor-toolbar {
-  transitin: none;
+  transition: none;
 }
 </style>
