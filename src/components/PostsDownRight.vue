@@ -11,8 +11,10 @@
             <img :src="post.authorAvatar" alt="authorAvatar" />
           </div>
           <div id="info">
-            <h6>{{ post.title }}</h6>
-            <span class="d-block">{{ post.author }}</span>
+            <router-link :to="'/posts/' + post.id">
+              <h6>{{ post.title }}</h6>
+              <span class="d-block">{{ post.author }}</span>
+            </router-link>
             <span>{{ post.monthDay }}</span
             >&bull;<span>{{ post.readTime }}</span>
           </div>
@@ -27,8 +29,10 @@
         <div id="info" v-for="(post, index) in popularPosts" :key="post.id">
           <span id="idx">{{ '0' + (index + 1) }}</span>
           <div>
-            <h6>{{ post.title }}</h6>
-            <span class="d-block">{{ post.author }}</span>
+            <router-link :to="'/posts/' + post.id">
+              <h6>{{ post.title }}</h6>
+              <span class="d-block">{{ post.author }}</span>
+            </router-link>
             <span>{{ post.monthDay }}</span
             >&bull;<span>{{ post.readTime }}</span>
           </div>
@@ -51,8 +55,10 @@
               <font-awesome-icon :icon="['fas', 'bookmark']" id="bookmark" />
             </div>
             <div>
-              <h6>{{ post.title }}</h6>
-              <span class="d-block">{{ post.author }}</span>
+              <router-link :to="'/posts/' + post.id">
+                <h6>{{ post.title }}</h6>
+                <span class="d-block">{{ post.author }}</span>
+              </router-link>
               <span>{{ post.monthDay }}</span
               >&bull;<span>{{ post.readTime }}</span>
             </div>
