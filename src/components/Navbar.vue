@@ -17,9 +17,7 @@
               <router-link to="/posts/create" class="dropdown-item"
                 >New Story</router-link
               >
-              <router-link
-                :to="'/users/' + currentUser.id"
-                class="dropdown-item"
+              <router-link to="/users/stories/public" class="dropdown-item"
                 >Stories</router-link
               >
               <router-link
