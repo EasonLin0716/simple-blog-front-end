@@ -15,6 +15,7 @@ import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 import PageFooter from '../components/PageFooter'
 import UserClapsPosts from '../components/UserClapsPosts'
+import { Toast } from './../utils/helpers'
 export default {
   name: 'UserClaps',
   components: {
@@ -63,7 +64,10 @@ export default {
         }
         this.posts = posts
       } catch (error) {
-        // console.error(error)
+        Toast.fire({
+          icon: 'error',
+          title: '無法取得鼓掌資訊，請稍後再試！'
+        })
       }
     }
   },

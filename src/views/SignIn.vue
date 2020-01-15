@@ -66,7 +66,7 @@ export default {
         this.isProcessing = true
         if (!this.email || !this.password) {
           Toast.fire({
-            type: 'warning',
+            icon: 'warning',
             title: '請填入 email 和 password'
           })
           return
@@ -79,12 +79,16 @@ export default {
         localStorage.setItem('token', data.token)
         // 將資料傳入 Vuex
         this.$store.commit('setCurrentUser', data.user)
+        Toast.fire({
+          icon: 'success',
+          title: '登入成功！'
+        })
         this.$router.push('/posts')
       } catch (error) {
         this.password = ''
         this.isProcessing = false
         Toast.fire({
-          type: 'warning',
+          icon: 'warning',
           title: '請確認您輸入的帳號密碼錯誤'
         })
       }

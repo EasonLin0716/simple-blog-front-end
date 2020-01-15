@@ -29,7 +29,7 @@ export default {
         this.posts = data.posts
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法取得文章，請稍後再試！'
         })
       }
@@ -39,7 +39,7 @@ export default {
         const { data } = await postsAPI.deletePost(postId)
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '文章刪除成功！'
           })
         }
@@ -47,7 +47,7 @@ export default {
         this.posts.splice(idx, 1)
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法刪除文章，請稍後再試！'
         })
       }

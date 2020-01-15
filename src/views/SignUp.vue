@@ -102,7 +102,7 @@ export default {
         const { data } = await authsAPI.signUp({ formData })
         if (data.status === 'error') {
           Toast.fire({
-            type: 'error',
+            icon: 'error',
             title: '發生錯誤，請重新輸入！'
           })
           this.isLoading = false
@@ -110,7 +110,7 @@ export default {
 
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '註冊成功，請輸入帳密登入！'
           })
           this.$router.push('/signin')
@@ -118,7 +118,7 @@ export default {
       } catch (error) {
         this.isLoading = false
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法註冊，請稍後再試！'
         })
       }

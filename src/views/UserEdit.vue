@@ -77,14 +77,14 @@ export default {
           this.currentUser.introduction = this.introduction
           this.currentUser.avatar = this.avatar
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '個人資訊修改成功！'
           })
           this.$router.push(`/users/${this.currentUser.id}`)
         }
       } catch (error) {
         Toast.fire({
-          type: 'success',
+          icon: 'success',
           title: '無法取得個人資訊，請稍後再試！'
         })
       }

@@ -87,13 +87,13 @@ export default {
       this.authorId = data.author.id
       if (this.authorId !== this.currentUser.id) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '很抱歉，您沒有編輯權限'
         })
         this.$router.push(`/posts/${postId}`)
       }
     },
-    async handleEditPost(e) {
+    async handleEditPost() {
       try {
         const { id: postId } = this.$route.params
         const { data } = await postsAPI.putPost(
@@ -102,21 +102,21 @@ export default {
         )
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '修改文章大成功！'
           })
           this.$router.push(`/posts/${postId}`)
         }
         if (data.status === 'error') {
           Toast.fire({
-            type: 'error',
+            icon: 'error',
             title: '發生錯誤，請稍後再試！'
           })
           this.$router.push(`/posts/${postId}`)
         }
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '修改文章失敗，請稍後再試！'
         })
       }

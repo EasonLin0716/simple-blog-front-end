@@ -15,6 +15,7 @@ import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 import PageFooter from '../components/PageFooter'
 import UserResponsesPosts from '../components/UserResponsesPosts'
+import { Toast } from './../utils/helpers'
 export default {
   name: 'UserResponses',
   components: {
@@ -63,7 +64,10 @@ export default {
         }
         this.replies = replies
       } catch (error) {
-        console.error(error)
+        Toast.fire({
+          icon: 'success',
+          title: '無法取得回覆過的文章，請稍後再試！'
+        })
       }
     }
   },

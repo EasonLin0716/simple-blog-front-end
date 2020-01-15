@@ -142,7 +142,7 @@ export default {
       } catch (error) {
         this.isRendering = false
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法取得文章，請稍後再試！'
         })
       }
@@ -153,7 +153,7 @@ export default {
         const { data } = await replyAPI.addBookmark(postId)
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '加入書籤成功'
           })
         }
@@ -162,7 +162,7 @@ export default {
         this.isLoading = false
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法加入書籤，請稍後再試'
         })
       }
@@ -173,7 +173,7 @@ export default {
         const { data } = await replyAPI.deleteBookmark(postId)
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '移除書籤成功'
           })
         }
@@ -182,7 +182,7 @@ export default {
         this.isLoading = false
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法移除書籤，請稍後再試'
         })
       }

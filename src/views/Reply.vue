@@ -90,7 +90,10 @@ export default {
           avatar: d.User.avatar
         }))
       } catch (error) {
-        // console.error(error)
+        Toast.fire({
+          icon: 'error',
+          title: '無法取得回覆，請稍後再試！'
+        })
       }
     },
     async handlePostReply() {
@@ -116,13 +119,13 @@ export default {
         this.replyTextarea = ''
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '回復文章成功!!'
           })
         }
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法回復文章，請稍後再試！'
         })
       }

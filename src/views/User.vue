@@ -94,7 +94,7 @@ export default {
         }
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法取得使用者資料，請稍後再試！'
         })
       }
@@ -105,14 +105,14 @@ export default {
         const { data } = await userAPI.follow(userId)
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '追蹤成功！'
           })
           this.isLoading = false
         }
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法追蹤，請稍後再試！'
         })
       }
@@ -123,14 +123,14 @@ export default {
         const { data } = await userAPI.unfollow(userId)
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '退追成功！'
           })
           this.isLoading = false
         }
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法退追，請稍後再試！'
         })
       }
@@ -146,7 +146,7 @@ export default {
             }
           })
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '加入書籤成功！'
           })
           this.isLoading = false
@@ -154,7 +154,7 @@ export default {
       } catch (error) {
         this.isLoading = false
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法加入書籤，請稍後再試！'
         })
       }
@@ -171,14 +171,14 @@ export default {
             }
           })
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '刪除書籤成功！'
           })
           this.isLoading = false
         }
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '刪除書籤，請稍後再試！'
         })
       }
@@ -201,7 +201,7 @@ export default {
           const { data } = await replyAPI.clap(postId, clapInfo)
           if (data.status === 'success') {
             Toast.fire({
-              type: 'success',
+              icon: 'success',
               title: '鼓掌成功!!'
             })
             this.posts[ind].isClapped = true
@@ -212,7 +212,7 @@ export default {
           this.isLoading = false
         } catch (error) {
           Toast.fire({
-            type: 'error',
+            icon: 'error',
             title: '無法鼓掌，請稍後再試！'
           })
         }

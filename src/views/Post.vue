@@ -128,7 +128,7 @@ export default {
         }
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法取得文章，請稍後再試！'
         })
       }
@@ -151,7 +151,7 @@ export default {
           )
           if (data.status === 'success') {
             Toast.fire({
-              type: 'success',
+              icon: 'success',
               title: '鼓掌成功!!'
             })
           }
@@ -160,7 +160,7 @@ export default {
           this.isLoading = false
         } catch (error) {
           Toast.fire({
-            type: 'error',
+            icon: 'error',
             title: '鼓掌失敗！請稍後再試'
           })
         }
@@ -171,14 +171,14 @@ export default {
         const { data } = await repliesAPI.addBookmark(postId)
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '加入書籤成功!!'
           })
         }
         this.currentUser.bookmarkedPostId.push(this.post.id)
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法加入書籤，請稍後再試！'
         })
       }
@@ -188,7 +188,7 @@ export default {
         const { data } = await repliesAPI.deleteBookmark(postId)
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '刪除書籤成功!!'
           })
         }
@@ -196,7 +196,7 @@ export default {
         this.currentUser.bookmarkedPostId.splice(ind, 1)
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法加入書籤，請稍後再試！'
         })
       }
@@ -206,14 +206,14 @@ export default {
         const { data } = await usersAPI.follow(postId)
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '追蹤成功!!'
           })
         }
         this.currentUser.followingUserId.push(this.author.id)
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法追蹤，請稍後再試！'
         })
       }
@@ -223,7 +223,7 @@ export default {
         const { data } = await usersAPI.unfollow(postId)
         if (data.status === 'success') {
           Toast.fire({
-            type: 'success',
+            icon: 'success',
             title: '退追成功!!'
           })
         }
@@ -231,7 +231,7 @@ export default {
         this.currentUser.followingUserId.splice(ind, 1)
       } catch (error) {
         Toast.fire({
-          type: 'error',
+          icon: 'error',
           title: '無法退追，請稍後再試！'
         })
       }

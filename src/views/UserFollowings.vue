@@ -15,6 +15,7 @@ import userAPI from '../apis/user'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 import UserFollowingList from '../components/UserFollowingList'
+import { Toast } from './../utils/helpers'
 export default {
   name: 'UserFollowings',
   components: {
@@ -62,7 +63,10 @@ export default {
         }
         this.posts = posts
       } catch (error) {
-        // console.error(error)
+        Toast.fire({
+          icon: 'success',
+          title: '無法取得追蹤者，請稍後再試！'
+        })
       }
     }
   },
