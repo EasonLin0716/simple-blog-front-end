@@ -32,6 +32,7 @@ import PostsDownLeft from './../components/PostsDownLeft'
 import PostsDownRight from './../components/PostsDownRight'
 import { mapState } from 'vuex'
 import { Toast } from './../utils/helpers'
+import Swal from 'sweetalert2'
 export default {
   name: 'Posts',
   computed: {
@@ -122,6 +123,12 @@ export default {
     PacmanLoader
   },
   created() {
+    if (!this.isAuthenticated) {
+      Toast.fire({
+        icon: 'info',
+        title: '感謝您的使用！敬請登入來使用目前完成的所有功能！'
+      })
+    }
     this.fetchPosts()
   },
   methods: {
