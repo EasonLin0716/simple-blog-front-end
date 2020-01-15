@@ -50,6 +50,16 @@ const routes = [
     component: () => import('../views/Reply.vue')
   },
   {
+    path: '/users/stories/public',
+    name: 'user-stories',
+    component: () => import('../views/UserStories')
+  },
+  {
+    path: '/users/stories/drafts',
+    name: 'user-drafts',
+    component: () => import('../views/UserDrafts')
+  },
+  {
     path: '/users/edit',
     name: 'user-edit',
     component: () => import('../views/UserEdit.vue')

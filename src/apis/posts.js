@@ -15,5 +15,10 @@ export default {
     return apiHelper.put(`posts/${postId}`, formData, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
+  },
+  deletePost(postId) {
+    return apiHelper.delete(`/posts/${postId}`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
   }
 }

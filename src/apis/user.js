@@ -10,6 +10,11 @@ export default {
   get({ userId }) {
     return apiHelper.get(`/users/${userId}`)
   },
+  gerUserStories() {
+    return apiHelper.get(`/users/stories`, {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    })
+  },
   getClaps({ userId }) {
     return apiHelper.get(`/users/${userId}/claps`)
   },
