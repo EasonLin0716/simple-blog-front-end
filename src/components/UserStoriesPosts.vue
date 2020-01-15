@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
   name: 'UserStoriesPosts',
   props: {
@@ -40,9 +41,21 @@ export default {
     }
   },
   methods: {
-    handleDeletePost(e) {
-      const postId = e.target.dataset.postid
-      this.$emit('after-handle-delete-post', postId)
+    async handleDeletePost(e) {
+      const result = await Swal.fire({
+        title: '您確定嗎？',
+        text: '刪除的文章是回不來的喔！',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: '取消',
+        confirmButtonText: '刪除'
+      })
+      if (result.value) {
+        const postId = e.target.dataset.postid
+        this.$emit('after-handle-delete-post', postId)
+      }
     }
   }
 }
