@@ -37,7 +37,8 @@ a:hover {
   color: #666;
 }
 
-ul {
+ul,
+input {
   margin: 0;
   padding: 0;
 }
