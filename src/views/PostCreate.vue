@@ -7,7 +7,9 @@
         v-model="title"
         placeholder="Title"
         id="title"
+        class="mb-2"
       />
+      <img v-if="image" :src="image" alt="image" width="640" height="480" />
       <h6 class="d-none">prevent medium editor from deleting input dom</h6>
       <medium-editor
         name="content"
@@ -17,7 +19,18 @@
         custom-tag="h4"
         v-on:edit="applyTextEdit"
       />
-      <button type="submit" class="btn btn-success">Publish</button>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-success">Publish</button>
+        <label for="image" class="btn btn-primary">Upload cover</label>
+        <input
+          id="image"
+          type="file"
+          name="image"
+          accept="image/*"
+          class="form-control-file d-none"
+          @change="handleFileChange"
+        />
+      </div>
     </form>
   </div>
 </template>
@@ -35,6 +48,7 @@ export default {
     return {
       title: '',
       content: '',
+      image: '',
       options: {
         toolbar: {
           allowMultiParagraphSelection: true,
@@ -68,6 +82,12 @@ export default {
     }
   },
   methods: {
+    handleFileChange(e) {
+      const files = e.target.files
+      if (!files.length) return
+      const imageURL = window.URL.createObjectURL(files[0])
+      this.image = imageURL
+    },
     applyOptions(ev) {
       try {
         this.options = JSON.parse(ev.target.value)
@@ -82,18 +102,16 @@ export default {
         console.log(this.content)
       }
     },
-    async handleCreatePost() {
+    async handleCreatePost(e) {
       try {
-        const { data } = await postsAPI.createPost({
-          title: this.title,
-          content: this.content,
-          // TODO: 上傳圖片、req.user.id
-          cover: 'https://fakeimg.pl/640x480/',
-          UserId: this.currentUser.id
-        })
-        // TODO: 偵錯功能
-
-        this.$router.push(`/posts/${data.PostId}`)
+        const formData = new FormData(e.target)
+        formData.append('content', this.content)
+        formData.append('UserId', this.currentUser.id)
+        const { data } = await postsAPI.createPost(formData)
+        if (data.status === 'success') {
+          this.$router.push(`/posts/${data.PostId}`)
+        }
+        // TODO: 需等待圖片上傳完畢才push
       } catch (error) {
         // TODO: 錯誤提示
       }
