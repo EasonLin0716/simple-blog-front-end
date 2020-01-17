@@ -14,7 +14,7 @@
         @after-handle-unfollow="afterHandleUnfollow"
       />
       <div id="cover">
-        <img :src="post.cover" alt="cover" />
+        <img :src="post.cover" alt="cover" width="620" height="370" />
       </div>
       <article id="post-content" v-html="post.content">
         <!-- {{ post.content }} -->

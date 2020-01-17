@@ -20,7 +20,9 @@
         v-on:edit="applyTextEdit"
       />
       <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-success">Publish</button>
+        <button :disabled="isPosting" type="submit" class="btn btn-success">
+          {{ !isPosting ? 'Publish' : 'Publising...' }}
+        </button>
         <label for="image" class="btn btn-primary">Upload cover</label>
         <input
           id="image"
@@ -39,6 +41,7 @@
 import postsAPI from '../apis/posts'
 import editor from 'vue2-medium-editor'
 import { mapState } from 'vuex'
+import { Toast } from '../utils/helpers'
 export default {
   name: 'PostCreate',
   components: {
@@ -49,6 +52,7 @@ export default {
       title: '',
       content: '',
       image: '',
+      isPosting: false,
       options: {
         toolbar: {
           allowMultiParagraphSelection: true,
@@ -99,21 +103,29 @@ export default {
     applyTextEdit(ev) {
       if (ev.event.target) {
         this.content = ev.event.target.innerHTML
-        console.log(this.content)
       }
     },
     async handleCreatePost(e) {
       try {
+        this.isPosting = true
         const formData = new FormData(e.target)
         formData.append('content', this.content)
         formData.append('UserId', this.currentUser.id)
         const { data } = await postsAPI.createPost(formData)
         if (data.status === 'success') {
+          Toast.fire({
+            icon: 'success',
+            title: '文章發布成功！'
+          })
+          this.isPosting = false
           this.$router.push(`/posts/${data.PostId}`)
         }
-        // TODO: 需等待圖片上傳完畢才push
       } catch (error) {
-        // TODO: 錯誤提示
+        this.isPosting = false
+        Toast.fire({
+          icon: 'error',
+          title: '發生錯誤，請稍後再試！'
+        })
       }
     }
   },
