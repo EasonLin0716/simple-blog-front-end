@@ -9,6 +9,7 @@
         placeholder="Title"
         id="title"
       />
+      <h6 class="d-none">prevent medium editor from deleting input dom</h6>
       <medium-editor
         name="content"
         id="content"
@@ -36,17 +37,15 @@ export default {
       authorId: 0,
       options: {
         toolbar: {
-          /* These are the default options for the toolbar,
-           if nothing is passed this is what is used */
           allowMultiParagraphSelection: true,
           buttons: [
             'bold',
             'italic',
             'underline',
-            // 'anchor',
+            'anchor',
             'h2',
-            'h3'
-            // 'quote'
+            'h3',
+            'quote'
           ],
           diffLeft: 0,
           diffTop: -10,
@@ -55,7 +54,6 @@ export default {
           relativeContainer: null,
           standardizeSelectionStart: false,
           static: false,
-          /* options which only apply when static is true */
           align: 'center',
           sticky: false,
           updateOnEmptySelection: false

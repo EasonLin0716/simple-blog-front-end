@@ -42,10 +42,11 @@ export default {
             'bold',
             'italic',
             'underline',
-            // 'anchor',
+            'anchor',
+            'h1',
             'h2',
-            'h3'
-            // 'quote'
+            'h3',
+            'quote'
           ],
           diffLeft: 0,
           diffTop: -10,
@@ -78,6 +79,7 @@ export default {
     applyTextEdit(ev) {
       if (ev.event.target) {
         this.content = ev.event.target.innerHTML
+        console.log(this.content)
       }
     },
     async handleCreatePost() {
