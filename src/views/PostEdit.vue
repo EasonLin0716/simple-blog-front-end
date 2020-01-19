@@ -9,6 +9,7 @@
         placeholder="Title"
         id="title"
       />
+      <img v-if="image" :src="image" alt="image" width="640" height="480" />
       <h6 class="d-none">prevent medium editor from deleting input dom</h6>
       <medium-editor
         name="content"
@@ -18,7 +19,20 @@
         custom-tag="h4"
         v-on:edit="applyTextEdit"
       />
-      <button type="submit" class="btn btn-success">Edit</button>
+      <div class="d-flex justify-content-between">
+        <button :disabled="isPosting" type="submit" class="btn btn-success">
+          {{ !isPosting ? 'Edit' : 'Editing...' }}
+        </button>
+        <label for="image" class="btn btn-primary">Upload cover</label>
+        <input
+          id="image"
+          type="file"
+          name="image"
+          accept="image/*"
+          class="form-control-file d-none"
+          @change="handleFileChange"
+        />
+      </div>
     </form>
   </div>
 </template>
@@ -34,6 +48,8 @@ export default {
     return {
       title: '',
       content: '',
+      image: '',
+      isPosting: false,
       authorId: 0,
       options: {
         toolbar: {
@@ -65,6 +81,12 @@ export default {
     'medium-editor': editor
   },
   methods: {
+    handleFileChange(e) {
+      const files = e.target.files
+      if (!files.length) return
+      const imageURL = window.URL.createObjectURL(files[0])
+      this.image = imageURL
+    },
     applyOptions(ev) {
       try {
         this.options = JSON.parse(ev.target.value)
@@ -83,6 +105,7 @@ export default {
       this.title = data.post.title
       this.content = data.post.content
       this.authorId = data.author.id
+      this.image = data.post.cover
       if (this.authorId !== this.currentUser.id) {
         Toast.fire({
           icon: 'error',
@@ -91,14 +114,17 @@ export default {
         this.$router.push(`/posts/${postId}`)
       }
     },
-    async handleEditPost() {
+    async handleEditPost(e) {
       try {
+        this.isPosting = true
         const { id: postId } = this.$route.params
-        const { data } = await postsAPI.putPost(
-          { title: this.title, content: this.content, userId: this.authorId },
-          postId
-        )
+        const formData = new FormData(e.target)
+        formData.append('content', this.content)
+        formData.append('userId', this.authorId)
+
+        const { data } = await postsAPI.putPost(formData, postId)
         if (data.status === 'success') {
+          this.isPosting = false
           Toast.fire({
             icon: 'success',
             title: '修改文章大成功！'
@@ -106,6 +132,7 @@ export default {
           this.$router.push(`/posts/${postId}`)
         }
         if (data.status === 'error') {
+          this.isPosting = false
           Toast.fire({
             icon: 'error',
             title: '發生錯誤，請稍後再試！'
@@ -113,6 +140,7 @@ export default {
           this.$router.push(`/posts/${postId}`)
         }
       } catch (error) {
+        this.isPosting = false
         Toast.fire({
           icon: 'error',
           title: '修改文章失敗，請稍後再試！'
