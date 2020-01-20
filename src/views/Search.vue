@@ -9,33 +9,40 @@
       <li>Publications</li>
       <li>Tags</li>
     </ul>
-    <h6>STORIES</h6>
-    <div v-for="post in posts" :key="post" id="posts">
-      <div id="author">
-        <div id="avatar">
-          <img :src="post.authorAvatar" alt="authorAvatar" />
+    <template v-if="posts.length">
+      <h6>STORIES</h6>
+      <div v-for="post in posts" :key="post" id="posts">
+        <div id="author">
+          <div id="avatar">
+            <img :src="post.authorAvatar" alt="authorAvatar" />
+          </div>
+          <div id="info">
+            <router-link :to="'/users/' + post.authorId">
+              <span>{{ post.author }}</span>
+            </router-link>
+            <br />
+            <span
+              >{{ post.monthDay }}&nbsp;&bull;&nbsp;{{ post.readTime }}</span
+            >
+          </div>
         </div>
-        <div id="info">
-          <router-link :to="'/users/' + post.authorId">
-            <span>{{ post.author }}</span>
-          </router-link>
-          <br />
-          <span>{{ post.monthDay }}&nbsp;&bull;&nbsp;{{ post.readTime }}</span>
-        </div>
+        <router-link :to="'/posts/' + post.id">
+          <div id="post">
+            <h2>{{ post.title }}</h2>
+            <div id="cover">
+              <img :src="post.cover" alt="cover" />
+            </div>
+            <p>{{ post.content }}</p>
+            <div id="read-more">
+              <span>Read more...</span>
+            </div>
+          </div>
+        </router-link>
       </div>
-      <router-link :to="'/posts/' + post.id">
-        <div id="post">
-          <h2>{{ post.title }}</h2>
-          <div id="cover">
-            <img :src="post.cover" alt="cover" />
-          </div>
-          <p>{{ post.content }}</p>
-          <div id="read-more">
-            <span>Read more...</span>
-          </div>
-        </div>
-      </router-link>
-    </div>
+    </template>
+    <template v-else>
+      <h6>We couldn’t find any posts.</h6>
+    </template>
   </div>
 </template>
 
