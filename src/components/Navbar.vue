@@ -3,7 +3,7 @@
     <nav class="d-flex justify-content-between align-items-center container">
       <div class="col-left pl-4">
         <router-link to="/posts">
-          <img src="https://fakeimg.pl/112x22/" alt="logo" />
+          <img src="../assets/Simple.jpg" width="112" height="22" alt="logo" />
         </router-link>
       </div>
       <div class="col-right d-flex justify-content-between align-items-center">
