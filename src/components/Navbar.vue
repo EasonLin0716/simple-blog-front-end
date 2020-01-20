@@ -43,8 +43,16 @@
           </a>
         </template>
         <template v-else>
-          <router-link :to="'/signin'" id="sign-in">Signin</router-link>
-          <img src="https://fakeimg.pl/32x32/" id="profile" alt="profile" />
+          <router-link :to="'/signin'" id="sign-in" class="mr-2"
+            >Signin</router-link
+          >
+          <img
+            src="../assets/Profile.png"
+            width="32"
+            height="32"
+            id="profile"
+            alt="profile"
+          />
         </template>
       </div>
     </nav>

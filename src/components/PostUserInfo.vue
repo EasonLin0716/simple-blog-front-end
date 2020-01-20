@@ -1,10 +1,14 @@
 <template>
   <div id="post-user-info">
     <div id="col-left">
-      <img :src="author.avatar" alt="avatar" id="avatar" />
+      <router-link :to="'/users/' + author.id">
+        <img :src="author.avatar" alt="avatar" id="avatar" />
+      </router-link>
       <div id="info">
         <h6>
-          {{ author.name }}
+          <router-link :to="'/users/' + author.id">
+            {{ author.name }}
+          </router-link>
           <router-link
             to="/users/edit"
             v-if="currentUserId === author.id"
