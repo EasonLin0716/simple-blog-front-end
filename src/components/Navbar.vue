@@ -7,7 +7,19 @@
         </router-link>
       </div>
       <div class="col-right d-flex justify-content-between align-items-center">
-        <font-awesome-icon icon="search" id="search" />
+        <font-awesome-icon
+          icon="search"
+          id="search"
+          @click="searchBox = !searchBox"
+        />
+        <input
+          v-if="searchBox"
+          v-on:keyup.enter="search"
+          type="text"
+          id="searchBox"
+          v-model="searchText"
+          placeholder="search..."
+        />
         <font-awesome-icon :icon="['far', 'bell']" id="bell" />
         <template v-if="isAuthenticated">
           <button id="upgrade">Upgrade</button>
@@ -41,12 +53,30 @@
 
 <script>
 import { mapState } from 'vuex'
+import { Toast } from './../utils/helpers'
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      searchBox: false,
+      searchText: ''
+    }
+  },
   computed: {
     ...mapState(['currentUser', 'isAuthenticated'])
   },
   methods: {
+    search() {
+      this.searchText = this.searchText.trim()
+      if (this.searchText === '') {
+        Toast.fire({
+          icon: 'warning',
+          title: '請輸入您要搜尋的文字！'
+        })
+      } else {
+        this.$router.push(`/search?q=${this.searchText}`)
+      }
+    },
     logout() {
       this.$store.commit('revokeAuthentication')
     }
@@ -62,18 +92,16 @@ export default {
   box-shadow: 0 0 5px 0 rgb(200, 200, 200);
 }
 
-.col-right {
-  width: 218px;
-}
-
 #bell {
   margin: 15px 0;
   font-size: 20px;
 }
 
-#search {
-  margin: 0 10px 0 16px;
+#search,
+#bell {
+  margin-right: 16px;
   font-size: 20px;
+  cursor: pointer;
 }
 
 #profile {
@@ -81,11 +109,20 @@ export default {
   height: 32px;
   border-radius: 50%;
 }
+
+#upgrade {
+  margin-right: 10px;
+}
+
 #upgrade,
 #sign-in,
 #logout {
   padding: 4px 12px;
   border: 0.5px solid #ccc;
   border-radius: 5px;
+}
+
+#searchBox {
+  border: none;
 }
 </style>

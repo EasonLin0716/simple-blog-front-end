@@ -20,5 +20,8 @@ export default {
     return apiHelper.delete(`/posts/${postId}`, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
+  },
+  searchPost(searchText) {
+    return apiHelper.get(`/search?q=${searchText}`)
   }
 }
