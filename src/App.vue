@@ -18,6 +18,10 @@ export default {
 </script>
 
 <style>
+* {
+  text-align: left;
+}
+
 h1,
 h2,
 h3,

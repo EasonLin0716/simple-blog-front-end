@@ -12,7 +12,7 @@
             <span>{{ replyTimes }}</span>
           </div>
         </div>
-        <span>{{ author }}</span>
+        <span id="author">{{ author }}</span>
       </div>
     </section>
     <section id="reply-info">
@@ -30,7 +30,7 @@
             rows="3"
             placeholder="Write a response..."
           ></textarea>
-          <button type="submit" class="btn btn-success">Publish</button>
+          <button type="submit" class="btn btn-success mt-2">Publish</button>
         </form>
       </div>
       <div class="card" v-for="reply in replies" :key="reply.id" id="replies">
@@ -147,11 +147,41 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+h6 {
+  padding: 15px 0;
+}
+
+p {
+  display: inline;
+  margin: 0;
+}
+
 #post-info {
   width: 728px;
   margin: 0 auto;
   padding: 0 24px;
+
+  #post {
+    padding: 20px;
+    margin-bottom: 40px;
+
+    #title {
+      display: flex;
+      justify-content: space-between;
+
+      #clap {
+        width: 16px;
+        height: 16px;
+        margin: 0 10px;
+      }
+
+      #comment {
+        font-size: 14px;
+        margin: 0 10px;
+      }
+    }
+  }
 }
 
 #reply-info {
@@ -159,69 +189,44 @@ export default {
   flex-direction: column;
   align-items: center;
   background: rgb(250, 250, 250);
-}
+  padding-top: 0;
 
-#replies,
-#responses,
-#reply-place {
-  width: 680px;
-  margin: 0 auto;
-}
+  #info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 
-#post {
-  padding: 20px;
-  margin-bottom: 40px;
-}
+    img {
+      margin-right: 10px;
+    }
 
-#title {
-  display: flex;
-  justify-content: space-between;
-}
+    #replier {
+      font-size: 18px;
+      color: rgb(0, 200, 45);
+    }
 
-#title p {
-  display: inline;
-  margin: 0;
-}
+    #month-day {
+      font-size: 12px;
+      color: #aaa;
+    }
+  }
 
-#clap {
-  width: 16px;
-  height: 16px;
-  margin: 0 10px;
-}
+  #avatar {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+  }
 
-#comment {
-  font-size: 14px;
-  margin: 0 10px;
-}
+  #replies {
+    width: 680px;
+    padding: 20px;
+    margin: 10px auto;
+  }
 
-#avatar {
-  height: 36px;
-  width: 36px;
-  border-radius: 50%;
-}
-
-#replies {
-  padding: 20px;
-  margin: 10px auto;
-}
-
-#info {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-#info img {
-  margin-right: 10px;
-}
-
-#replier {
-  font-size: 18px;
-  color: rgb(0, 200, 45);
-}
-
-#month-day {
-  font-size: 12px;
-  color: #aaa;
+  #responses,
+  #reply-place {
+    width: 680px;
+    margin: 0 auto;
+  }
 }
 </style>
