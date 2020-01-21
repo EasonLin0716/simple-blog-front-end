@@ -1,7 +1,7 @@
 <template>
   <div id="posts-top">
     <div class="row" id="top-posts">
-      <div class="col-4 col-left">
+      <div class="col-md-4 col-sm-6 m-md-0 m-2 col-left">
         <div id="col-left-box">
           <router-link :to="'/posts/' + posts[0].id">
             <img :src="posts[0].cover" alt="cover" />
@@ -13,7 +13,7 @@
           <span>{{ posts[0].monthDay }}&bull;{{ posts[0].readTime }}</span>
         </div>
       </div>
-      <div class="col-4 col-mid">
+      <div class="col-md-4 col-sm-5 m-md-0 m-2 col-mid">
         <div id="col-mid-box">
           <div id="img-box">
             <router-link :to="'/posts/' + posts[1].id">
@@ -63,7 +63,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4 col-right">
+      <div class="col-md-4 d-none d-md-block col-right">
         <div id="col-right-box">
           <router-link :to="'/posts/' + posts[4].id">
             <img :src="posts[4].cover" alt="cover" />

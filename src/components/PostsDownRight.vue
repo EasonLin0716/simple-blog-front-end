@@ -1,5 +1,5 @@
 <template>
-  <div class="col-4" id="posts-down-right">
+  <div class="col-md-4 m-md-0 m-2" id="posts-down-right">
     <div id="new-from-network">
       <div id="new-from-network-title">
         <h3>New from your network</h3>
@@ -111,7 +111,7 @@ export default {
   top: 0;
 }
 
-img {
+#img-box img {
   border-radius: 50%;
   height: 100%;
   width: 100%;

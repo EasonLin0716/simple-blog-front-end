@@ -1,5 +1,5 @@
 <template>
-  <div class="col-8" id="posts-down-left">
+  <div class="col-md-8 m-md-0 m-2" id="posts-down-left">
     <div v-for="post in posts" :key="post.id" id="post">
       <div id="p-left">
         <router-link :to="'/posts/' + post.id">
