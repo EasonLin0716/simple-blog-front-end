@@ -10,7 +10,9 @@
             <router-link :to="'/users/' + post.authorId">
               <span class="d-block">{{ post.author }}</span>
             </router-link>
-            <span>{{ post.monthDay }}&bull;{{ post.readTime }}</span>
+            <span
+              >{{ post.monthDay }}&nbsp;&bull;&nbsp;{{ post.readTime }}</span
+            >
           </div>
           <div id="icons">
             <font-awesome-icon

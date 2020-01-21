@@ -10,7 +10,11 @@
           <router-link :to="'/users/' + posts[0].authorId">
             <span class="text-secondary d-block">{{ posts[0].author }}</span>
           </router-link>
-          <span>{{ posts[0].monthDay }}&bull;{{ posts[0].readTime }}</span>
+          <span
+            >{{ posts[0].monthDay }}&nbsp;&bull;&nbsp;{{
+              posts[0].readTime
+            }}</span
+          >
         </div>
       </div>
       <div class="col-md-4 col-sm-5 m-md-0 m-2 col-mid">
@@ -27,7 +31,11 @@
             <router-link :to="'/users/' + posts[1].authorId">
               <span class="text-secondary d-block">{{ posts[1].author }}</span>
             </router-link>
-            <span>{{ posts[1].monthDay }}&bull;{{ posts[1].readTime }}</span>
+            <span
+              >{{ posts[1].monthDay }}&nbsp;&bull;&nbsp;{{
+                posts[1].readTime
+              }}</span
+            >
           </div>
         </div>
         <div id="col-mid-box">
@@ -43,7 +51,11 @@
             <router-link :to="'/users/' + posts[2].authorId">
               <span class="text-secondary d-block">{{ posts[2].author }}</span>
             </router-link>
-            <span>{{ posts[2].monthDay }}&bull;{{ posts[2].readTime }}</span>
+            <span
+              >{{ posts[2].monthDay }}&nbsp;&bull;&nbsp;{{
+                posts[2].readTime
+              }}</span
+            >
           </div>
         </div>
         <div id="col-mid-box">
@@ -59,7 +71,11 @@
             <router-link :to="'/users/' + posts[3].authorId">
               <span class="text-secondary d-block">{{ posts[3].author }}</span>
             </router-link>
-            <span>{{ posts[3].monthDay }}&bull;{{ posts[3].readTime }}</span>
+            <span
+              >{{ posts[3].monthDay }}&nbsp;&bull;&nbsp;{{
+                posts[3].readTime
+              }}</span
+            >
           </div>
         </div>
       </div>
@@ -72,7 +88,11 @@
           <router-link :to="'/users/' + posts[3].authorId">
             <span class="text-secondary d-block">{{ posts[4].author }}</span>
           </router-link>
-          <span>{{ posts[4].monthDay }}&bull;{{ posts[4].readTime }}</span>
+          <span
+            >{{ posts[4].monthDay }}&nbsp;&bull;&nbsp;{{
+              posts[4].readTime
+            }}</span
+          >
         </div>
       </div>
     </div>

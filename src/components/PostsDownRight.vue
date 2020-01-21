@@ -16,7 +16,7 @@
               <span class="d-block">{{ post.author }}</span>
             </router-link>
             <span>{{ post.monthDay }}</span
-            >&bull;<span>{{ post.readTime }}</span>
+            >&nbsp;&bull;&nbsp;<span>{{ post.readTime }}</span>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
               <span class="d-block">{{ post.author }}</span>
             </router-link>
             <span>{{ post.monthDay }}</span
-            >&bull;<span>{{ post.readTime }}</span>
+            >&nbsp;&bull;&nbsp;<span>{{ post.readTime }}</span>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@
                 <span class="d-block">{{ post.author }}</span>
               </router-link>
               <span>{{ post.monthDay }}</span
-              >&bull;<span>{{ post.readTime }}</span>
+              >&nbsp;&bull;&nbsp;<span>{{ post.readTime }}</span>
             </div>
           </div>
         </div>
