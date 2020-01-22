@@ -25,6 +25,11 @@ const routes = [
     component: SignUp
   },
   {
+    path: '/payment',
+    name: 'payment',
+    component: () => import('../views/Payment.vue')
+  },
+  {
     path: '/posts',
     name: 'posts',
     component: Posts
