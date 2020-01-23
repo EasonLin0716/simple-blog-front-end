@@ -156,6 +156,13 @@ export default {
     },
     async afterHandleBookmark(postId) {
       try {
+        if (!this.isAuthenticated) {
+          Toast.fire({
+            icon: 'info',
+            title: '請登入來使用此功能！'
+          })
+          return
+        }
         this.isLoading = true
         const { data } = await replyAPI.addBookmark(postId)
         if (data.status === 'success') {

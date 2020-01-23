@@ -134,6 +134,13 @@ export default {
       }
     },
     afterHandleClap() {
+      if (!this.isAuthenticated) {
+        Toast.fire({
+          icon: 'info',
+          title: '請登入來使用此功能！'
+        })
+        return
+      }
       if (this.clapTimer) {
         clearTimeout(this.clapTimer)
       }
@@ -168,6 +175,13 @@ export default {
     },
     async afterHandleBookmark(postId) {
       try {
+        if (!this.isAuthenticated) {
+          Toast.fire({
+            icon: 'info',
+            title: '請登入來使用此功能！'
+          })
+          return
+        }
         const { data } = await repliesAPI.addBookmark(postId)
         if (data.status === 'success') {
           Toast.fire({
@@ -203,6 +217,13 @@ export default {
     },
     async afterHandleFollow(postId) {
       try {
+        if (!this.isAuthenticated) {
+          Toast.fire({
+            icon: 'info',
+            title: '請登入來使用此功能！'
+          })
+          return
+        }
         const { data } = await usersAPI.follow(postId)
         if (data.status === 'success') {
           Toast.fire({

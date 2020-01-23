@@ -35,8 +35,8 @@
       >
         Continue
       </button>
-      <div class="text-center mb-3">
-        <p>
+      <div class="mb-3">
+        <p class="text-center">
           <router-link to="/signup">Sign Up</router-link>
         </p>
       </div>
@@ -83,7 +83,7 @@ export default {
           icon: 'success',
           title: '登入成功！'
         })
-        this.$router.push('/posts')
+        this.$router.go('-1')
       } catch (error) {
         this.password = ''
         this.isProcessing = false

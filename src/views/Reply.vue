@@ -98,6 +98,13 @@ export default {
     },
     async handlePostReply() {
       try {
+        if (!this.isAuthenticated) {
+          Toast.fire({
+            icon: 'info',
+            title: '請登入來使用此功能！'
+          })
+          return
+        }
         if (!this.replyTextarea) {
           // TODO: 提示使用者不能輸入空白留言
           return
