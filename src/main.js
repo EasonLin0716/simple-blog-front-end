@@ -12,6 +12,9 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faComment } from '@fortawesome/free-solid-svg-icons'
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faCreditCard } from '@fortawesome/free-regular-svg-icons'
+import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
+import { faPaypal } from '@fortawesome/free-brands-svg-icons'
 
 // ---icons registering end---
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -32,7 +35,10 @@ library.add(
   faTwitter,
   faComment,
   faCamera,
-  faChevronDown
+  faChevronDown,
+  faCreditCard,
+  faQuestionCircle,
+  faPaypal
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

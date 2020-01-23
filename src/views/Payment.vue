@@ -16,19 +16,37 @@
       </label>
     </div>
     <h6>PAYMENT</h6>
+    <form action="/">
+      <CreditCardForm />
+    </form>
   </div>
 </template>
 
 <script>
+import CreditCardForm from '../components/CreditCardForm'
 export default {
-  name: "Payment"
-};
+  name: 'Payment',
+  components: { CreditCardForm }
+}
 </script>
 
 <style lang="scss" scoped>
 h4,
 h5 {
   text-align: center;
+}
+
+h5 {
+  font-size: 18px;
+  color: #aaa;
+  font-weight: 400;
+}
+
+h6 {
+  font-size: 14px;
+  color: #aaa;
+  font-weight: 400;
+  margin: 15px 0;
 }
 
 #payment {
@@ -42,7 +60,7 @@ h5 {
   display: block;
   position: relative;
   padding-left: 28px;
-  margin-top: 20px;
+  margin: 20px 0;
   cursor: pointer;
   font-size: 16px;
   font-weight: 400;
@@ -70,7 +88,7 @@ h5 {
     border: 0.5px solid #ccc;
   }
   .checkmark:after {
-    content: "";
+    content: '';
     position: absolute;
     display: none;
   }
