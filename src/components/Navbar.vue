@@ -22,7 +22,9 @@
         />
         <font-awesome-icon :icon="['far', 'bell']" id="bell" />
         <template v-if="isAuthenticated">
-          <button id="upgrade">Upgrade</button>
+          <router-link to="/payment">
+            <button id="upgrade">Upgrade</button>
+          </router-link>
           <a href="#" role="button" data-toggle="dropdown">
             <img :src="currentUser.avatar" id="profile" alt="profile" />
             <div class="dropdown-menu">
