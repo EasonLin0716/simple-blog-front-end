@@ -37,7 +37,6 @@ export default {
         const { data, statusText } = await userAPI.get({
           userId
         })
-        console.log(data)
         if (statusText !== 'OK') {
           throw new Error(statusText)
         }

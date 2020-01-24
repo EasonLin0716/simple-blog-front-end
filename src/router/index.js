@@ -118,9 +118,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = store.state.isAuthenticated
-
-  console.log('isAuthenticated: ', +isAuthenticated)
-
   if (isAuthenticated) {
     store.dispatch('fetchCurrentUser')
   }

@@ -91,7 +91,6 @@ export default {
     },
     handleFileChange(e) {
       const files = e.target.files
-      console.log('files', files)
       const imageURL = window.URL.createObjectURL(files[0])
       this.avatar = imageURL
     }

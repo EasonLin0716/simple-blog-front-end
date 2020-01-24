@@ -103,7 +103,6 @@ export default {
     applyTextEdit(ev) {
       if (ev.event.target) {
         this.content = ev.event.target.innerHTML
-        console.log(this.content)
       }
     },
     async handleCreatePost(e) {
