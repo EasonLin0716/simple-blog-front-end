@@ -86,7 +86,7 @@ export default {
 
 <style scoped>
 #box {
-  width: 728px;
+  max-width: 728px;
   padding: 0 24px;
   margin: 0 auto;
 }

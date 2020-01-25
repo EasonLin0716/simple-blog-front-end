@@ -161,4 +161,17 @@ textarea {
   margin-bottom: 20px;
   border: none;
 }
+
+@media screen and (max-width: 720px) {
+  #post-create {
+    margin: 0 30px;
+  }
+  #title {
+    width: 100%;
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
 </style>

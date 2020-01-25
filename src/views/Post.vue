@@ -273,7 +273,7 @@ export default {
 
 <style scoped>
 #box {
-  width: 728px;
+  max-width: 728px;
   padding: 0 24px;
   margin: 0 auto;
 }
@@ -285,5 +285,12 @@ export default {
 
 article {
   margin: 20px 0 40px 0;
+}
+
+@media screen and (max-width: 720px) {
+  #cover img {
+    width: 100%;
+    height: auto;
+  }
 }
 </style>

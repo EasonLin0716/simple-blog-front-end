@@ -60,4 +60,10 @@ li {
   margin-right: 20px;
   padding-bottom: 8px;
 }
+
+@media screen and (max-width: 720px) {
+  #title div a:first-child {
+    display: none;
+  }
+}
 </style>

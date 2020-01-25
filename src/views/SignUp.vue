@@ -1,6 +1,6 @@
 <template>
   <div id="signup">
-    <img src="https://fakeimg.pl/214x550/" alt="pic" />
+    <img src="https://fakeimg.pl/214x550/" alt="pic" class="pic" />
     <form class="w-100 px-2" @submit.stop.prevent="handleSubmit">
       <h1>Sign Up</h1>
       <div class="form-label-group mb-2">
@@ -76,7 +76,7 @@
         &copy; 2019-2020 Created without any commercial purposes by Eason Lin
       </p>
     </form>
-    <img src="https://fakeimg.pl/214x550/" alt="pic" />
+    <img src="https://fakeimg.pl/214x550/" alt="pic" class="pic" />
   </div>
 </template>
 
@@ -132,10 +132,16 @@ h1 {
   text-align: center;
 }
 #signup {
-  width: 1028px;
+  max-width: 1028px;
   padding: 64px;
   margin: 0px auto;
   border: 1px solid #ccc;
   display: flex;
+}
+
+@media screen and (max-width: 992px) {
+  .pic {
+    display: none;
+  }
 }
 </style>

@@ -82,4 +82,10 @@ p {
 #site-info {
   padding-top: 28px;
 }
+
+@media screen and (max-width: 720px) {
+  #site-info {
+    margin: 0 15px;
+  }
+}
 </style>

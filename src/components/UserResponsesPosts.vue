@@ -80,7 +80,7 @@ export default {
 
 <style scoped>
 #user-responses-posts {
-  width: 680px;
+  max-width: 680px;
   margin: 0 auto;
 }
 
