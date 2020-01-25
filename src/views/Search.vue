@@ -144,4 +144,15 @@ h6 {
   color: #666;
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 720px) {
+  #search {
+    margin: 0 30px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
 </style>
