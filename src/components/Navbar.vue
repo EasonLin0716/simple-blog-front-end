@@ -3,7 +3,14 @@
     <nav class="d-flex justify-content-between align-items-center container">
       <div class="col-left pl-4">
         <router-link to="/posts">
-          <img src="../assets/Simple.jpg" width="112" height="22" alt="logo" />
+          <img src="../assets/S.png" alt="logo" id="logo-md" />
+          <img
+            src="../assets/Simple.jpg"
+            id="logo"
+            width="112"
+            height="22"
+            alt="logo"
+          />
         </router-link>
       </div>
       <div class="col-right d-flex justify-content-between align-items-center">
@@ -94,6 +101,10 @@ export default {
 }
 </script>
 <style scoped>
+#logo-md {
+  display: none;
+}
+
 #navbar {
   display: flex;
   justify-content: center;
@@ -134,5 +145,14 @@ export default {
 
 #searchBox {
   border: none;
+}
+
+@media screen and (max-width: 720px) {
+  #logo {
+    display: none;
+  }
+  #logo-md {
+    display: block;
+  }
 }
 </style>
