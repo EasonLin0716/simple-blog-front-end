@@ -49,6 +49,7 @@ export default {
   name: 'PostsDownLeft',
   data() {
     return {
+      isLoading: false,
       ellipsis: require('../../static/images/ellipsis-h-solid.svg')
     }
   },
@@ -56,22 +57,22 @@ export default {
     posts: {
       type: Array,
       required: true
-    },
-    isLoading: {
-      type: Boolean,
-      required: true
     }
   },
   methods: {
     handleBookmark(e) {
+      this.isLoading = true
       const postId = e.target.dataset.postid
       this.$emit('after-handle-bookmark', postId)
+      this.isLoading = false
     },
     handleUnbookmark(e) {
+      this.isLoading = true
       const postId = e.target.parentNode.dataset
         ? e.target.parentNode.dataset.postid
         : e.target.dataset.postId
       this.$emit('after-handle-unbookmark', postId)
+      this.isLoading = false
     }
   }
 }

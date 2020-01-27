@@ -7,7 +7,6 @@
       <div class="row" id="contents">
         <PostsDownLeft
           :posts="posts"
-          :isLoading="isLoading"
           @after-handle-bookmark="afterHandleBookmark"
           @after-handle-unbookmark="afterHandleUnbookmark"
         />
@@ -154,52 +153,22 @@ export default {
         })
       }
     },
-    async afterHandleBookmark(postId) {
-      try {
-        if (!this.isAuthenticated) {
-          Toast.fire({
-            icon: 'info',
-            title: '請登入來使用此功能！'
-          })
-          return
-        }
-        this.isLoading = true
-        const { data } = await replyAPI.addBookmark(postId)
-        if (data.status === 'success') {
-          Toast.fire({
-            icon: 'success',
-            title: '加入書籤成功'
-          })
-        }
-        const idx = this.posts.map(d => d.id).indexOf(+postId)
-        this.posts[idx].isBookmarked = true
-        this.isLoading = false
-      } catch (error) {
+    afterHandleBookmark(postId) {
+      if (!this.isAuthenticated) {
         Toast.fire({
-          icon: 'error',
-          title: '無法加入書籤，請稍後再試'
+          icon: 'info',
+          title: '請登入來使用此功能！'
         })
+        return
       }
+      this.$store.dispatch('addBookmark', postId)
+      const idx = this.posts.map(d => d.id).indexOf(+postId)
+      this.posts[idx].isBookmarked = true
     },
-    async afterHandleUnbookmark(postId) {
-      try {
-        this.isLoading = true
-        const { data } = await replyAPI.deleteBookmark(postId)
-        if (data.status === 'success') {
-          Toast.fire({
-            icon: 'success',
-            title: '移除書籤成功'
-          })
-        }
-        const idx = this.posts.map(d => d.id).indexOf(+postId)
-        this.posts[idx].isBookmarked = false
-        this.isLoading = false
-      } catch (error) {
-        Toast.fire({
-          icon: 'error',
-          title: '無法移除書籤，請稍後再試'
-        })
-      }
+    afterHandleUnbookmark(postId) {
+      this.$store.dispatch('deleteBookmark', postId)
+      const idx = this.posts.map(d => d.id).indexOf(+postId)
+      this.posts[idx].isBookmarked = false
     }
   }
 }

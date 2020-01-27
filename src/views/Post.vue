@@ -173,47 +173,22 @@ export default {
         }
       }, 2000)
     },
-    async afterHandleBookmark(postId) {
-      try {
-        if (!this.isAuthenticated) {
-          Toast.fire({
-            icon: 'info',
-            title: '請登入來使用此功能！'
-          })
-          return
-        }
-        const { data } = await repliesAPI.addBookmark(postId)
-        if (data.status === 'success') {
-          Toast.fire({
-            icon: 'success',
-            title: '加入書籤成功!!'
-          })
-        }
-        this.currentUser.bookmarkedPostId.push(this.post.id)
-      } catch (error) {
+    afterHandleBookmark(postId) {
+      if (!this.isAuthenticated) {
         Toast.fire({
-          icon: 'error',
-          title: '無法加入書籤，請稍後再試！'
+          icon: 'info',
+          title: '請登入來使用此功能！'
         })
+        return
       }
+      this.$store.dispatch('addBookmark', postId)
+      const idx = this.posts.map(d => d.id).indexOf(+postId)
+      this.posts[idx].isBookmarked = true
     },
-    async afterHandleUnbookmark(postId) {
-      try {
-        const { data } = await repliesAPI.deleteBookmark(postId)
-        if (data.status === 'success') {
-          Toast.fire({
-            icon: 'success',
-            title: '刪除書籤成功!!'
-          })
-        }
-        const ind = this.currentUser.bookmarkedPostId.indexOf(postId)
-        this.currentUser.bookmarkedPostId.splice(ind, 1)
-      } catch (error) {
-        Toast.fire({
-          icon: 'error',
-          title: '無法加入書籤，請稍後再試！'
-        })
-      }
+    afterHandleUnbookmark(postId) {
+      this.$store.dispatch('deleteBookmark', postId)
+      const idx = this.posts.map(d => d.id).indexOf(+postId)
+      this.posts[idx].isBookmarked = false
     },
     async afterHandleFollow(postId) {
       try {

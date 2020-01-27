@@ -98,19 +98,24 @@ export default {
   data() {
     return {
       clap: require('../../static/images/clap.svg'),
-      clapHands: require('../../static/images/clap-hands.svg')
+      clapHands: require('../../static/images/clap-hands.svg'),
+      isLoading: false
     }
   },
   methods: {
     handleBookmark(e) {
+      this.isLoading = true
       const { postId } = e.target.dataset
       this.$emit('after-handle-bookmark', postId)
+      this.isLoading = false
     },
     handleUnbookmark(e) {
+      this.isLoading = true
       const postId =
         e.target.parentNode.parentNode.dataset.postid ||
         e.target.parentNode.dataset.postid
       this.$emit('after-handle-unbookmark', postId)
+      this.isLoading = false
     },
     handleClap(e) {
       const { postid } = e.target.dataset
@@ -124,10 +129,6 @@ export default {
     },
     user: {
       type: Object,
-      required: true
-    },
-    isLoading: {
-      type: Boolean,
       required: true
     },
     clapCount: {

@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import usersAPI from '../apis/user'
+import repliesAPI from '../apis/replies'
 import VuexPersist from 'vuex-persist'
+import { Toast } from './../utils/helpers'
 
 Vue.use(Vuex)
 
@@ -41,10 +43,54 @@ export default new Vuex.Store({
       state.currentUser = {}
       state.isAuthenticated = false
       localStorage.removeItem('token')
+    },
+    pushBookmarkedPostId(state, postId) {
+      state.currentUser.bookmarkedPostId.push(+postId)
+    },
+    removeBookmarkedPostId(state, postId) {
+      const idx = state.currentUser.bookmarkedPostId.indexOf(+postId)
+      state.currentUser.bookmarkedPostId.splice(idx, 1)
     }
   },
   actions: {
     // 設定其他的非同步函式，例如發送 API 請求等等
+    async addBookmark({ commit }, postId) {
+      try {
+        const { data, statusText } = await repliesAPI.addBookmark(postId)
+        if (statusText !== 'OK') {
+          throw new Error(statusText)
+        }
+        if (data.status === 'success') {
+          Toast.fire({
+            icon: 'success',
+            title: '加入書籤成功'
+          })
+        }
+        commit('pushBookmarkedPostId', postId)
+      } catch (error) {
+        Toast.fire({
+          icon: 'error',
+          title: '無法加入書籤，請稍後再試'
+        })
+      }
+    },
+    async deleteBookmark({ commit }, postId) {
+      try {
+        const { data } = await repliesAPI.deleteBookmark(postId)
+        if (data.status === 'success') {
+          Toast.fire({
+            icon: 'success',
+            title: '移除書籤成功'
+          })
+        }
+        commit('removeBookmarkedPostId', postId)
+      } catch (error) {
+        Toast.fire({
+          icon: 'error',
+          title: '無法移除書籤，請稍後再試'
+        })
+      }
+    },
     async fetchCurrentUser({ commit }) {
       try {
         const { data, statusText } = await usersAPI.getCurrentUser()
