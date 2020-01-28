@@ -105,7 +105,10 @@ export default {
   methods: {
     handleBookmark(e) {
       this.isLoading = true
-      const { postId } = e.target.dataset
+      const { postId } =
+        e.target.tagName === 'path'
+          ? e.target.parentNode.dataset
+          : e.target.dataset
       this.$emit('after-handle-bookmark', postId)
       this.isLoading = false
     },
