@@ -3,7 +3,6 @@
     <div id="box">
       <UserInfo
         :user="user"
-        :isLoading="isLoading"
         @after-handle-follow="afterHandleFollow"
         @after-handle-unfollow="afterHandleUnfollow"
       />
@@ -98,48 +97,25 @@ export default {
         })
       }
     },
-    async afterHandleFollow(userId) {
-      try {
-        if (!this.isAuthenticated) {
-          Toast.fire({
-            icon: 'info',
-            title: '請登入來使用此功能！'
-          })
-          return
-        }
-        this.isLoading = true
-        const { data } = await userAPI.follow(userId)
-        if (data.status === 'success') {
-          Toast.fire({
-            icon: 'success',
-            title: '追蹤成功！'
-          })
-          this.isLoading = false
-        }
-      } catch (error) {
+    afterHandleFollow(userId) {
+      if (!this.isAuthenticated) {
         Toast.fire({
-          icon: 'error',
-          title: '無法追蹤，請稍後再試！'
+          icon: 'info',
+          title: '請登入來使用此功能！'
         })
+        return
       }
+      this.$store.dispatch('follow', userId)
     },
-    async afterHandleUnfollow(userId) {
-      try {
-        this.isLoading = true
-        const { data } = await userAPI.unfollow(userId)
-        if (data.status === 'success') {
-          Toast.fire({
-            icon: 'success',
-            title: '退追成功！'
-          })
-          this.isLoading = false
-        }
-      } catch (error) {
+    afterHandleUnfollow(userId) {
+      if (!this.isAuthenticated) {
         Toast.fire({
-          icon: 'error',
-          title: '無法退追，請稍後再試！'
+          icon: 'info',
+          title: '請登入來使用此功能！'
         })
+        return
       }
+      this.$store.dispatch('unfollow', userId)
     },
     afterHandleBookmark(postId) {
       if (!this.isAuthenticated) {

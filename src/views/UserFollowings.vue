@@ -1,6 +1,10 @@
 <template>
   <div id="user-followings">
-    <UserInfo :user="user" />
+    <UserInfo
+      :user="user"
+      @after-handle-follow="afterHandleFollow"
+      @after-handle-unfollow="afterHandleUnfollow"
+    />
     <UserNavTab :userId="user.id" />
     <UserFollowingList
       :userName="user.name"
@@ -16,6 +20,7 @@ import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 import UserFollowingList from '../components/UserFollowingList'
 import { Toast } from './../utils/helpers'
+import { mapState } from 'vuex'
 export default {
   name: 'UserFollowings',
   components: {
@@ -68,6 +73,26 @@ export default {
           title: '無法取得追蹤者，請稍後再試！'
         })
       }
+    },
+    afterHandleFollow(userId) {
+      if (!this.isAuthenticated) {
+        Toast.fire({
+          icon: 'info',
+          title: '請登入來使用此功能！'
+        })
+        return
+      }
+      this.$store.dispatch('follow', userId)
+    },
+    afterHandleUnfollow(userId) {
+      if (!this.isAuthenticated) {
+        Toast.fire({
+          icon: 'info',
+          title: '請登入來使用此功能！'
+        })
+        return
+      }
+      this.$store.dispatch('unfollow', userId)
     }
   },
   created() {
@@ -79,6 +104,9 @@ export default {
     const { id: userId } = to.params
     this.fetchUserClaps(userId)
     next()
+  },
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
   }
 }
 </script>

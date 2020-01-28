@@ -50,6 +50,15 @@ export default new Vuex.Store({
     removeBookmarkedPostId(state, postId) {
       const idx = state.currentUser.bookmarkedPostId.indexOf(+postId)
       state.currentUser.bookmarkedPostId.splice(idx, 1)
+    },
+    pushFollowingUserId(state, userId) {
+      state.currentUser.followingUserId.push(userId)
+    },
+    deleteFollowingUserId(state, userId) {
+      state.currentUser.followingUserId.splice(
+        state.currentUser.followingUserId.indexOf(userId),
+        1
+      )
     }
   },
   actions: {
@@ -88,6 +97,40 @@ export default new Vuex.Store({
         Toast.fire({
           icon: 'error',
           title: '無法移除書籤，請稍後再試'
+        })
+      }
+    },
+    async follow({ commit }, userId) {
+      try {
+        const { data } = await usersAPI.follow(userId)
+        if (data.status === 'success') {
+          Toast.fire({
+            icon: 'success',
+            title: '追蹤成功！'
+          })
+        }
+        commit('pushFollowingUserId', userId)
+      } catch (error) {
+        Toast.fire({
+          icon: 'error',
+          title: '無法追蹤，請稍後再試！'
+        })
+      }
+    },
+    async unfollow({ commit }, userId) {
+      try {
+        const { data } = await usersAPI.unfollow(userId)
+        if (data.status === 'success') {
+          Toast.fire({
+            icon: 'success',
+            title: '退追成功！'
+          })
+        }
+        commit('deleteFollowingUserId', userId)
+      } catch (error) {
+        Toast.fire({
+          icon: 'error',
+          title: '無法退追，請稍後再試！'
         })
       }
     },

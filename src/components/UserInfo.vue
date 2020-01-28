@@ -55,28 +55,26 @@ export default {
   name: 'UserInfo',
   mixins: [emptyImageFilter],
   data() {
-    return {}
+    return {
+      isLoading: false
+    }
   },
   props: {
     user: {
       type: Object,
       required: true
-    },
-    isLoading: {
-      type: Boolean
     }
   },
   methods: {
     handleFollow(userId) {
-      this.currentUser.followingUserId.push(this.user.id)
+      this.isLoading = true
       this.$emit('after-handle-follow', userId)
+      this.isLoading = false
     },
     handleUnfollow(userId) {
-      this.currentUser.followingUserId.splice(
-        this.currentUser.followingUserId.indexOf(this.user.id),
-        1
-      )
+      this.isLoading = true
       this.$emit('after-handle-unfollow', userId)
+      this.isLoading = false
     }
   },
   computed: {
