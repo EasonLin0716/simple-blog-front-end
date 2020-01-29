@@ -71,9 +71,10 @@ export default {
     },
     handleUnbookmark(e) {
       this.isLoading = true
-      const postId = e.target.parentNode.dataset
-        ? e.target.parentNode.dataset.postid
-        : e.target.dataset.postId
+      const postId =
+        e.target.tagName === 'path'
+          ? e.target.parentNode.dataset.postid
+          : e.target.dataset.postid
       this.$emit('after-handle-unbookmark', postId)
       this.isLoading = false
     }

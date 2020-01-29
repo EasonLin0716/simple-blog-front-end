@@ -101,6 +101,7 @@ export default {
       }
     },
     applyTextEdit(ev) {
+      console.log(ev.event.target.innerHTML)
       if (ev.event.target) {
         this.content = ev.event.target.innerHTML
       }
