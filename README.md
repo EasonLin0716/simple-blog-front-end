@@ -1,14 +1,12 @@
 # simple-blog-frontend
 
-參考 Medium 所撰寫的部落格前後端分離專案。
+使用 Vue.js 作為工具，參考 Medium 所撰寫的部落格前後端分離專案。這是一個基於練習全端開發、興趣同時也想致敬原網站而做的作品，本身不做任何商業用途。
 
 ![Cover1](https://github.com/EasonLin0716/simple-blog-frontend/blob/master/src/assets/cover1.JPG)
 
 ![Cover2](https://github.com/EasonLin0716/simple-blog-frontend/blob/master/src/assets/cover2.JPG)
 
 ![Cover3](https://github.com/EasonLin0716/simple-blog-frontend/blob/master/src/assets/cover3.JPG)
-
-此專案仍處開發階段，部分功能尚無法使用。
 
 若想看現階段的成品，可參考[github page](https://easonlin0716.github.io/simple-blog-frontend/#/posts)
 
@@ -18,7 +16,7 @@
 
 ## 功能
 
-可使用的帳密：
+可使用的帳密：（也可以在網站上申請一個！）
 
 ```
 user1@example.com
