@@ -188,13 +188,7 @@ export default {
       easing: mojs.easing.out
     })
     const animationTimeline = new mojs.Timeline()
-    animationTimeline.add([
-      triangleBurst,
-      circleBurst,
-      // countAnimation,
-      // countTotalAnimation,
-      scaleButton
-    ])
+    animationTimeline.add([triangleBurst, circleBurst, scaleButton])
     clap.addEventListener('click', () => {
       animationTimeline.replay()
       setTimeout(() => {
