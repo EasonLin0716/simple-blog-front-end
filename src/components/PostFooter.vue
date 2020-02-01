@@ -3,26 +3,24 @@
     <div id="icons">
       <div>
         <div id="claps">
-          <button v-if="post.clappedTimes" :disabled="isLoading">
+          <button v-if="post.clappedTimes" :disabled="isLoading" id="clap">
             <img
               v-on:click="handleClap"
               :src="clapHands"
               alt="clap"
-              id="clap"
               :data-postid="post.id"
-            />&nbsp;{{ post.clappedTimes }}&nbsp;claps&nbsp;
-            <template v-if="clapCount"> +{{ clapCount }} </template>
+            />
           </button>
-          <button v-else :disabled="isLoading">
+          <button v-else :disabled="isLoading" id="clap">
             <img
               v-on:click="handleClap"
               :src="clap"
               alt="clap"
-              id="clap"
               :data-postid="post.id"
             />
-            <template v-if="clapCount"> +{{ clapCount }} </template>
           </button>
+          &nbsp;{{ post.clappedTimes }}&nbsp;claps&nbsp;
+          <template v-if="clapCount"> +{{ clapCount }} </template>
         </div>
       </div>
       <div id="links">
@@ -90,6 +88,8 @@
 </template>
 
 <script>
+import mojs from '@mojs/core'
+
 export default {
   name: 'PostFooter',
   data() {
@@ -145,6 +145,62 @@ export default {
     handleUnfollow() {
       this.$emit('after-handle-unfollow', this.$route.params.id)
     }
+  },
+  mounted() {
+    const clap = document.querySelector('#clap')
+    const tlDuration = 300
+    const triangleBurst = new mojs.Burst({
+      parent: clap,
+      radius: { 50: 95 },
+      count: 5,
+      angle: 30,
+      children: {
+        shape: 'polygon',
+        radius: { 6: 0 },
+        scale: 1,
+        stroke: 'rgba(211,84,0 ,0.5)',
+        strokeWidth: 2,
+        angle: 210,
+        delay: 30,
+        speed: 0.2,
+        easing: mojs.easing.bezier(0.1, 1, 0.3, 1),
+        duration: tlDuration
+      }
+    })
+    const circleBurst = new mojs.Burst({
+      parent: clap,
+      radius: { 50: 75 },
+      angle: 25,
+      duration: tlDuration,
+      children: {
+        shape: 'circle',
+        fill: 'rgba(149,165,166 ,0.5)',
+        delay: 30,
+        speed: 0.2,
+        radius: { 3: 0 },
+        easing: mojs.easing.bezier(0.1, 1, 0.3, 1)
+      }
+    })
+    const scaleButton = new mojs.Html({
+      el: '#clap',
+      duration: tlDuration,
+      scale: { 1: 1.3 },
+      easing: mojs.easing.out
+    })
+    const animationTimeline = new mojs.Timeline()
+    animationTimeline.add([
+      triangleBurst,
+      circleBurst,
+      // countAnimation,
+      // countTotalAnimation,
+      scaleButton
+    ])
+    clap.addEventListener('click', () => {
+      animationTimeline.replay()
+      setTimeout(() => {
+        clap.style.transform = 'scale(1, 1)'
+      }, 400)
+    })
   }
 }
 </script>
@@ -155,7 +211,7 @@ export default {
   margin-top: 15px;
 }
 
-#clap {
+#clap img {
   width: 58px;
   height: 58px;
   border: 1px solid #cccccc;

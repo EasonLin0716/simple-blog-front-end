@@ -22,6 +22,10 @@ export default {
   text-align: left;
 }
 
+button:focus {
+  outline: none;
+}
+
 h1,
 h2,
 h3,
