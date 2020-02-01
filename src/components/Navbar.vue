@@ -14,17 +14,14 @@
         </router-link>
       </div>
       <div class="col-right d-flex justify-content-between align-items-center">
-        <font-awesome-icon
-          icon="search"
-          id="search"
-          @click="searchBox = !searchBox"
-        />
+        <font-awesome-icon icon="search" id="search" @click="toggleSearchBox" />
         <input
-          v-if="searchBox"
           v-on:keyup.enter="search"
           type="text"
           id="searchBox"
           v-model="searchText"
+          style="border: none;width: 1px;"
+          ref="searchBox"
           placeholder="search..."
         />
         <font-awesome-icon :icon="['far', 'bell']" id="bell" />
@@ -75,7 +72,6 @@ export default {
   name: 'Navbar',
   data() {
     return {
-      searchBox: false,
       searchText: ''
     }
   },
@@ -96,6 +92,10 @@ export default {
     },
     logout() {
       this.$store.commit('revokeAuthentication')
+    },
+    toggleSearchBox() {
+      this.$refs.searchBox.style.width =
+        this.$refs.searchBox.style.width === '1px' ? '150px' : '1px'
     }
   }
 }
@@ -144,7 +144,7 @@ export default {
 }
 
 #searchBox {
-  border: none;
+  transition: width 0.2s;
 }
 
 @media screen and (max-width: 720px) {
