@@ -19,7 +19,6 @@
           id="image-container"
           v-bind:style="{ backgroundImage: 'url(' + avatar + ')' }"
         >
-          <!-- <img :src="avatar" alt="avatar" id="avatar" /> -->
           <input
             id="image"
             type="file"
@@ -108,7 +107,8 @@ label {
   margin: 0;
   cursor: pointer;
   background-repeat: no-repeat;
-  background-size: 100px;
+  background-position: center;
+  background-size: 150px;
   border-radius: 50%;
 }
 a {
