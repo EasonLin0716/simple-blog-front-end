@@ -19,8 +19,10 @@
               :data-postid="post.id"
             />
           </button>
-          &nbsp;{{ post.clappedTimes }}&nbsp;claps&nbsp;
-          <span id="clap-count"> +{{ clapCount }} </span>
+          <span v-show="!clapCount">
+            &nbsp;{{ post.clappedTimes }}&nbsp;claps&nbsp;</span
+          >
+          <span id="clap-count"> {{ clapCount }} </span>
         </div>
       </div>
       <div id="links">
@@ -212,14 +214,15 @@ export default {
     ])
     clap.addEventListener('click', () => {
       animationTimeline.replay()
-      // setTimeout(() => {
-      //   clap.style.transform = 'scale(1, 1)'
-      // }, 400)
     })
   }
 }
 </script>
 <style scoped>
+#claps {
+  position: relative;
+}
+
 #icons {
   display: flex;
   justify-content: space-between;
@@ -279,16 +282,17 @@ export default {
   margin-bottom: 60px;
 }
 
-/* #clap-count {
+#clap-count {
   position: absolute;
-  top: 30px;
-  left: 20px;
-  font-size: 0.8rem;
-  color: white;
-  background: green;
+  bottom: 60px;
+  left: 10px;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  background: #000;
   border-radius: 50%;
   height: 40px;
   width: 40px;
   line-height: 40px;
-} */
+}
 </style>
