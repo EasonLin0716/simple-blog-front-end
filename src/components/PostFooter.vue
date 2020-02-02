@@ -20,7 +20,7 @@
             />
           </button>
           &nbsp;{{ post.clappedTimes }}&nbsp;claps&nbsp;
-          <template v-if="clapCount"> +{{ clapCount }} </template>
+          <span id="clap-count"> +{{ clapCount }} </span>
         </div>
       </div>
       <div id="links">
@@ -186,14 +186,35 @@ export default {
       duration: tlDuration,
       scale: { 1: 1.3 },
       easing: mojs.easing.out
+    }).then({
+      duration: tlDuration,
+      scale: { 1.3: 1 },
+      easing: mojs.easing.out
+    })
+    const countAnimation = new mojs.Html({
+      el: '#clap-count',
+      isShowStart: false,
+      isShowEnd: true,
+      y: { 0: -30 },
+      opacity: { 0: 1 },
+      duration: tlDuration
+    }).then({
+      opacity: { 1: 0 },
+      y: -80,
+      delay: tlDuration / 2
     })
     const animationTimeline = new mojs.Timeline()
-    animationTimeline.add([triangleBurst, circleBurst, scaleButton])
+    animationTimeline.add([
+      triangleBurst,
+      circleBurst,
+      countAnimation,
+      scaleButton
+    ])
     clap.addEventListener('click', () => {
       animationTimeline.replay()
-      setTimeout(() => {
-        clap.style.transform = 'scale(1, 1)'
-      }, 400)
+      // setTimeout(() => {
+      //   clap.style.transform = 'scale(1, 1)'
+      // }, 400)
     })
   }
 }
@@ -257,4 +278,17 @@ export default {
 #response-button {
   margin-bottom: 60px;
 }
+
+/* #clap-count {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  font-size: 0.8rem;
+  color: white;
+  background: green;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+} */
 </style>
