@@ -46,6 +46,7 @@ export default {
         const idx = this.posts.map(d => d.id).indexOf(+postId)
         this.posts.splice(idx, 1)
       } catch (error) {
+        console.log(error)
         Toast.fire({
           icon: 'error',
           title: '無法刪除文章，請稍後再試！'
