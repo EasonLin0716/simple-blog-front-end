@@ -27,40 +27,47 @@
             </div>
             <div id="icons">
               <!-- claps -->
-              <div>
+              <div id="claps">
                 <template v-if="post.clappedTime && post.isClapped">
-                  <div id="claps">
+                  <button v-if="post.clappedTime && post.isClapped" id="clap">
                     <img
                       @click="handleClap"
                       :src="clapHands"
                       alt="clap"
-                      id="clap"
                       :data-postId="post.id"
-                    />&nbsp;{{ post.clappedTime }}
-                    <template v-if="post.clapping">
-                      +{{ post.clapping }}
-                    </template>
-                  </div>
+                    />
+                  </button>
+                  <span>&nbsp;{{ post.clappedTime }}</span>
+                  <span v-show="post.clapping" id="clap-count">
+                    {{ post.clapping }}
+                  </span>
                 </template>
                 <template v-else-if="post.clappedTime">
-                  <img
-                    @click="handleClap"
-                    :src="clap"
-                    alt="clap"
-                    id="clap"
-                    :data-postId="post.id"
-                  />&nbsp;{{ post.clappedTime }}
-                  <template v-if="post.clapping">+{{ post.clapping }}</template>
+                  <button id="clap">
+                    <img
+                      @click="handleClap"
+                      :src="clap"
+                      alt="clap"
+                      :data-postId="post.id"
+                    />
+                  </button>
+                  &nbsp;{{ post.clappedTime }}
+                  <span v-show="post.clapping" id="clap-count">{{
+                    post.clapping
+                  }}</span>
                 </template>
                 <template v-else>
-                  <img
-                    @click="handleClap"
-                    :src="clap"
-                    alt="clap"
-                    id="clap"
-                    :data-postId="post.id"
-                  />
-                  <template v-if="post.clapping">+{{ post.clapping }}</template>
+                  <button id="clap">
+                    <img
+                      @click="handleClap"
+                      :src="clap"
+                      alt="clap"
+                      :data-postId="post.id"
+                    />
+                  </button>
+                  <span v-show="post.clapping" id="clap-count">{{
+                    post.clapping
+                  }}</span>
                 </template>
               </div>
               <!-- bookmark -->
@@ -90,6 +97,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import mojs from '@mojs/core'
 export default {
   name: 'UserPosts',
   computed: {
@@ -138,6 +146,78 @@ export default {
       type: Number,
       required: true
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      const claps = this.$el.querySelectorAll('#clap')
+      claps.forEach(clap => {
+        const tlDuration = 300
+        const triangleBurst = new mojs.Burst({
+          parent: clap,
+          radius: { 25: 50 },
+          count: 5,
+          angle: 30,
+          children: {
+            shape: 'polygon',
+            radius: { 6: 0 },
+            scale: 1,
+            stroke: 'rgba(211,84,0 ,0.5)',
+            strokeWidth: 2,
+            angle: 210,
+            delay: 30,
+            speed: 0.2,
+            easing: mojs.easing.bezier(0.1, 1, 0.3, 1),
+            duration: tlDuration
+          }
+        })
+        const circleBurst = new mojs.Burst({
+          parent: clap,
+          radius: { 25: 50 },
+          angle: 25,
+          duration: tlDuration,
+          children: {
+            shape: 'circle',
+            fill: 'rgba(149,165,166 ,0.5)',
+            delay: 30,
+            speed: 0.2,
+            radius: { 3: 0 },
+            easing: mojs.easing.bezier(0.1, 1, 0.3, 1)
+          }
+        })
+        const scaleButton = new mojs.Html({
+          el: '#clap',
+          duration: tlDuration,
+          scale: { 1: 1.3 },
+          easing: mojs.easing.out
+        }).then({
+          duration: tlDuration,
+          scale: { 1.3: 1 },
+          easing: mojs.easing.out
+        })
+        const countAnimation = new mojs.Html({
+          el: '#clap-count',
+          isShowStart: false,
+          isShowEnd: true,
+          y: { 0: -30 },
+          opacity: { 0: 1 },
+          duration: tlDuration
+        }).then({
+          opacity: { 1: 0 },
+          y: -80,
+          delay: tlDuration / 2
+        })
+        const animationTimeline = new mojs.Timeline()
+        animationTimeline.add([
+          triangleBurst,
+          circleBurst,
+          countAnimation,
+          scaleButton
+        ])
+        clap.addEventListener('click', () => {
+          animationTimeline.replay()
+        })
+      })
+    }, 1000)
   }
 }
 </script>
@@ -198,7 +278,25 @@ svg {
   font-size: 14px;
 }
 
+#claps {
+  position: relative;
+}
+
 #clap {
   cursor: pointer;
+}
+
+#clap-count {
+  position: absolute;
+  bottom: 30px;
+  left: -10px;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  background: #000;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
 }
 </style>
