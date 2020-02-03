@@ -1,7 +1,7 @@
 <template>
   <div id="user-posts">
     <h5 id="latest">Latest</h5>
-    <div v-for="post in posts" :key="post.id">
+    <div v-for="(post, index) in posts" :key="post.id">
       <div class="card">
         <div id="info">
           <div id="user-info">
@@ -29,7 +29,10 @@
               <!-- claps -->
               <div id="claps">
                 <template v-if="post.clappedTime && post.isClapped">
-                  <button v-if="post.clappedTime && post.isClapped" id="clap">
+                  <button
+                    v-if="post.clappedTime && post.isClapped"
+                    :class="'clap ind' + index"
+                  >
                     <img
                       @click="handleClap"
                       :src="clapHands"
@@ -38,12 +41,15 @@
                     />
                   </button>
                   <span>&nbsp;{{ post.clappedTime }}</span>
-                  <span v-show="post.clapping" id="clap-count">
+                  <span
+                    v-show="post.clapping"
+                    :class="'clap-count ind' + index"
+                  >
                     {{ post.clapping }}
                   </span>
                 </template>
                 <template v-else-if="post.clappedTime">
-                  <button id="clap">
+                  <button :class="'clap ind' + index">
                     <img
                       @click="handleClap"
                       :src="clap"
@@ -52,12 +58,14 @@
                     />
                   </button>
                   &nbsp;{{ post.clappedTime }}
-                  <span v-show="post.clapping" id="clap-count">{{
-                    post.clapping
-                  }}</span>
+                  <span
+                    v-show="post.clapping"
+                    :class="'clap-count ind' + index"
+                    >{{ post.clapping }}</span
+                  >
                 </template>
                 <template v-else>
-                  <button id="clap">
+                  <button :class="'clap ind' + index">
                     <img
                       @click="handleClap"
                       :src="clap"
@@ -65,9 +73,11 @@
                       :data-postId="post.id"
                     />
                   </button>
-                  <span v-show="post.clapping" id="clap-count">{{
-                    post.clapping
-                  }}</span>
+                  <span
+                    v-show="post.clapping"
+                    :class="'clap-count ind' + index"
+                    >{{ post.clapping }}</span
+                  >
                 </template>
               </div>
               <!-- bookmark -->
@@ -149,8 +159,10 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      const claps = this.$el.querySelectorAll('#clap')
-      claps.forEach(clap => {
+      const claps = this.$el.querySelectorAll('.clap')
+      console.log(claps)
+      for (let i = 0; i < claps.length; i++) {
+        const clap = claps[i]
         const tlDuration = 300
         const triangleBurst = new mojs.Burst({
           parent: clap,
@@ -185,7 +197,7 @@ export default {
           }
         })
         const scaleButton = new mojs.Html({
-          el: '#clap',
+          el: `.clap.ind${i}`,
           duration: tlDuration,
           scale: { 1: 1.3 },
           easing: mojs.easing.out
@@ -195,7 +207,7 @@ export default {
           easing: mojs.easing.out
         })
         const countAnimation = new mojs.Html({
-          el: '#clap-count',
+          el: `.clap-count.ind${i}`,
           isShowStart: false,
           isShowEnd: true,
           y: { 0: -30 },
@@ -216,7 +228,7 @@ export default {
         clap.addEventListener('click', () => {
           animationTimeline.replay()
         })
-      })
+      }
     }, 1000)
   }
 }
@@ -282,11 +294,11 @@ svg {
   position: relative;
 }
 
-#clap {
+.clap {
   cursor: pointer;
 }
 
-#clap-count {
+.clap-count {
   position: absolute;
   bottom: 30px;
   left: -10px;
