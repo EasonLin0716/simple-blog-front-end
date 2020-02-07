@@ -73,24 +73,13 @@ export default {
         title: '感謝您的使用！敬請登入來使用目前完成的所有功能！'
       })
     }
-    const limit = 10
-    const self = this
-    self.fetchPosts(limit)
-    document.addEventListener('scroll', function() {
-      if (
-        Math.floor(
-          window.pageYOffset + document.documentElement.clientHeight
-        ) === document.documentElement.offsetHeight
-      ) {
-        console.log('fetch!!!')
-      }
-    })
+    this.fetchPosts()
   },
   methods: {
     /* eslint-disable */
-    async fetchPosts(limit) {
+    async fetchPosts() {
       try {
-        const response = await postAPI.getPosts(limit)
+        const response = await postAPI.getPosts()
         const { data } = response
         data.posts.forEach(post => {
           this.posts.push(post)
