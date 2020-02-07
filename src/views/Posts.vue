@@ -54,63 +54,8 @@ export default {
     return {
       isLoading: false,
       isRendering: true,
-      posts: [
-        {
-          id: 1,
-          cover: '',
-          title: '',
-          content: '',
-          authorId: 0,
-          author: '',
-          monthDay: '',
-          readTime: '',
-          bookmarkId: []
-        },
-        {
-          id: 2,
-          cover: '',
-          title: '',
-          content: '',
-          authorId: 0,
-          author: '',
-          monthDay: '',
-          readTime: '',
-          bookmarkId: []
-        },
-        {
-          id: 3,
-          cover: '',
-          title: '',
-          content: '',
-          authorId: 0,
-          author: '',
-          monthDay: '',
-          readTime: '',
-          bookmarkId: []
-        },
-        {
-          id: 4,
-          cover: '',
-          title: '',
-          content: '',
-          authorId: 0,
-          author: '',
-          monthDay: '',
-          readTime: '',
-          bookmarkId: []
-        },
-        {
-          id: 5,
-          cover: '',
-          title: '',
-          content: '',
-          authorId: 0,
-          author: '',
-          monthDay: '',
-          readTime: '',
-          bookmarkId: []
-        }
-      ],
+      offset: 0,
+      posts: [],
       newPosts: [],
       popularPosts: []
     }
@@ -128,15 +73,28 @@ export default {
         title: '感謝您的使用！敬請登入來使用目前完成的所有功能！'
       })
     }
-    this.fetchPosts()
+    const limit = 10
+    const self = this
+    self.fetchPosts(limit)
+    document.addEventListener('scroll', function() {
+      if (
+        Math.floor(
+          window.pageYOffset + document.documentElement.clientHeight
+        ) === document.documentElement.offsetHeight
+      ) {
+        console.log('fetch!!!')
+      }
+    })
   },
   methods: {
     /* eslint-disable */
-    async fetchPosts() {
+    async fetchPosts(limit) {
       try {
-        const response = await postAPI.getPosts()
+        const response = await postAPI.getPosts(limit)
         const { data } = response
-        this.posts = data.posts
+        data.posts.forEach(post => {
+          this.posts.push(post)
+        })
         if (this.isAuthenticated) {
           this.posts.map(d => {
             d.isBookmarked = this.currentUser.bookmarkedPostId.includes(d.id)
@@ -147,6 +105,7 @@ export default {
         this.isRendering = false
       } catch (error) {
         this.isRendering = false
+        console.log(error)
         Toast.fire({
           icon: 'error',
           title: '無法取得文章，請稍後再試！'

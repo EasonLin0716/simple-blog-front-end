@@ -2,8 +2,8 @@ import { apiHelper } from './../utils/helpers'
 const getToken = () => localStorage.getItem('token')
 
 export default {
-  getPosts() {
-    return apiHelper.get(`/posts`)
+  getPosts(limit) {
+    return apiHelper.get(`/posts?limit=${limit}`)
   },
   getPost(postId) {
     return apiHelper.get(`/posts/${postId}`)
