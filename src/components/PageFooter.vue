@@ -1,5 +1,5 @@
 <template>
-  <div id="page-footer">
+  <div id="page-footer" class="bg-black mt-4">
     <div class="row footer-content">
       <div class="col-4">
         <h5>Lorem, ipsum dolor.</h5>
@@ -25,7 +25,10 @@
         </p>
       </div>
     </div>
-    <div class="d-flex justify-content-between footer-content" id="site-info">
+    <div
+      class="d-flex justify-content-between footer-content pt-4"
+      id="site-info"
+    >
       <div id="col-left">
         <h4>Simple Blog</h4>
       </div>
@@ -63,11 +66,6 @@ p {
   font-size: 14px;
 }
 
-#page-footer {
-  background: #000;
-  margin-top: 20px;
-}
-
 .footer-content {
   margin: 0 auto;
   padding: 60px 0 40px 0;
@@ -77,10 +75,6 @@ p {
 
 .footer-content * {
   color: #fff;
-}
-
-#site-info {
-  padding-top: 28px;
 }
 
 @media screen and (max-width: 720px) {

@@ -14,7 +14,11 @@
         </router-link>
       </div>
       <div class="col-right d-flex justify-content-between align-items-center">
-        <font-awesome-icon icon="search" id="search" @click="toggleSearchBox" />
+        <font-awesome-icon
+          icon="search"
+          class="icon icon-small"
+          @click="toggleSearchBox"
+        />
         <input
           v-on:keyup.enter="search"
           type="text"
@@ -24,10 +28,10 @@
           ref="searchBox"
           placeholder="search..."
         />
-        <font-awesome-icon :icon="['far', 'bell']" id="bell" />
+        <font-awesome-icon :icon="['far', 'bell']" class="icon" id="bell" />
         <template v-if="isAuthenticated">
           <router-link to="/payment">
-            <button id="upgrade">Upgrade</button>
+            <button class="navbar-button mr-2 ">Upgrade</button>
           </router-link>
           <a href="#" role="button" data-toggle="dropdown">
             <img :src="currentUser.avatar" id="profile" alt="profile" />
@@ -49,7 +53,7 @@
           </a>
         </template>
         <template v-else>
-          <router-link :to="'/signin'" id="sign-in" class="mr-2"
+          <router-link :to="'/signin'" class="mr-2 navbar-button"
             >Signin</router-link
           >
           <img
@@ -113,38 +117,32 @@ export default {
   box-shadow: 0 0 5px 0 rgb(200, 200, 200);
 }
 
-#bell {
-  margin: 15px 0;
-  font-size: 20px;
-}
-
-#search,
-#bell {
-  margin-right: 16px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
 #profile {
   width: 32px;
   height: 32px;
   border-radius: 50%;
 }
 
-#upgrade {
-  margin-right: 10px;
-}
-
-#upgrade,
-#sign-in,
-#logout {
+.navbar-button {
   padding: 4px 12px;
   border: 0.5px solid #ccc;
   border-radius: 5px;
+  transition: background 0.5s;
+}
+
+.navbar-button:hover {
+  background: #000;
+  color: #fff;
 }
 
 #searchBox {
   transition: width 0.2s;
+}
+
+#bell {
+  width: 22px;
+  height: 22px;
+  margin: 0 5px;
 }
 
 @media screen and (max-width: 720px) {

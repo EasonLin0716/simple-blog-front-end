@@ -21,7 +21,7 @@
               @click="handleBookmark"
               :data-postid="post.id"
               :icon="['far', 'bookmark']"
-              id="bookmark"
+              class="icon icon-small"
             />
             <font-awesome-icon
               v-else
@@ -29,9 +29,9 @@
               @click="handleUnbookmark"
               :data-postid="post.id"
               :icon="['fas', 'bookmark']"
-              id="bookmark"
+              class="icon icon-small"
             />
-            <img :src="ellipsis" alt="ellipsis" id="ellipsis" />
+            <img :src="ellipsis" alt="ellipsis" class="icon svg-small ml-1" />
           </div>
         </div>
       </div>
@@ -83,12 +83,6 @@ export default {
 </script>
 
 <style scoped>
-#ellipsis,
-#bookmark {
-  width: 20px;
-  height: 20px;
-}
-
 #p-left {
   width: 100%;
 }

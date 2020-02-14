@@ -28,16 +28,23 @@
             >Following</span
           >
         </h6>
-        <span> {{ post.monthDay }}&bull;{{ post.readTime }} </span>
+        <span> {{ post.monthDay }}&nbsp;&bull;&nbsp;{{ post.readTime }} </span>
       </div>
     </div>
     <div id="col-right">
-      <font-awesome-icon :icon="['fab', 'twitter']" id="twitter" />
-      <font-awesome-icon :icon="['fab', 'facebook']" id="facebook" />
+      <font-awesome-icon
+        :icon="['fab', 'twitter']"
+        class="icon icon-mid mr-1"
+      />
+      <font-awesome-icon
+        :icon="['fab', 'facebook']"
+        class="icon icon-mid mr-1"
+      />
       <template v-if="!isBookmarked">
         <font-awesome-icon
           @click="handleBookmark"
           :icon="['far', 'bookmark']"
+          class="icon"
           id="bookmark"
         />
       </template>
@@ -45,6 +52,7 @@
         <font-awesome-icon
           @click="handleUnbookmark"
           :icon="['fas', 'bookmark']"
+          class="icon"
           id="bookmark"
         />
       </template>
@@ -113,15 +121,6 @@ export default {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-}
-
-#twitter,
-#facebook {
-  font-size: 22px;
-  margin-right: 8px;
-}
-#bookmark {
-  font-size: 22px;
 }
 
 h6 span,

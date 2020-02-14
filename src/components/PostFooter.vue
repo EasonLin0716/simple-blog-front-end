@@ -26,23 +26,23 @@
         </div>
       </div>
       <div id="links">
-        <font-awesome-icon :icon="['fab', 'twitter']" id="twitter" />
-        <font-awesome-icon :icon="['fab', 'facebook']" id="facebook" />
+        <font-awesome-icon :icon="['fab', 'twitter']" class="icon" />
+        <font-awesome-icon :icon="['fab', 'facebook']" class="icon" />
         <template v-if="!isBookmarked">
           <font-awesome-icon
             @click="handleBookmark"
             :icon="['far', 'bookmark']"
-            id="bookmark"
+            class="icon"
           />
         </template>
         <template v-else>
           <font-awesome-icon
             @click="handleUnbookmark"
             :icon="['fas', 'bookmark']"
-            id="bookmark"
+            class="icon"
           />
         </template>
-        <img :src="ellipsis" alt="ellipsis" id="ellipsis" />
+        <img :src="ellipsis" alt="ellipsis" class="icon" />
       </div>
     </div>
     <div id="written-by">
@@ -62,26 +62,26 @@
         <router-link
           to="/users/edit"
           v-if="currentUserId === author.id"
-          class="badge badge-success"
+          class="link badge badge-success"
           >Edit Profile</router-link
         >
         <span
           @click="handleFollow"
           v-else-if="!isFollowing"
-          class="badge badge-success"
+          class="link badge badge-success"
           >Follow</span
         >
         <span
           @click="handleUnfollow"
           v-else-if="isFollowing"
-          class="badge badge-info"
+          class="link badge badge-info"
           >Following</span
         >
       </div>
     </div>
     <router-link
       :to="'/posts/' + post.id + '/replies'"
-      class="btn btn-block btn-success py-4"
+      class="btn btn-block button-white-green py-4"
       id="response-button"
     >
       Write the first response
@@ -218,7 +218,9 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
+$dark-green: rgb(0, 75, 0);
+
 #claps {
   position: relative;
 }
@@ -274,10 +276,6 @@ export default {
   border-radius: 50%;
 }
 
-#follow span {
-  cursor: pointer;
-}
-
 #response-button {
   margin-bottom: 60px;
 }
@@ -294,5 +292,17 @@ export default {
   height: 40px;
   width: 40px;
   line-height: 40px;
+}
+
+.button-white-green {
+  color: $dark-green;
+  border: 1px solid $dark-green;
+  font-weight: bold;
+  transition: background 0.5s;
+}
+
+.button-white-green:hover {
+  background: $dark-green;
+  color: #fff;
 }
 </style>

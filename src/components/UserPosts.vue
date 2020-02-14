@@ -10,7 +10,9 @@
             </div>
             <div>
               <h6>{{ user.name }}</h6>
-              <span> {{ post.monthDay }}&bull;{{ post.readTime }} </span>
+              <span>
+                {{ post.monthDay }}&nbsp;&bull;&nbsp;{{ post.readTime }}
+              </span>
             </div>
           </div>
           <div id="post-info">
@@ -85,14 +87,14 @@
                 v-show="!post.isBookmarked"
                 :data-postId="post.id"
                 :icon="['far', 'bookmark']"
-                id="bookmark"
+                class="icon icon-mid"
                 @click="handleBookmark"
                 :disabled="isLoading"
               />
               <div v-show="post.isBookmarked" :data-postId="post.id">
                 <font-awesome-icon
                   :icon="['fas', 'bookmark']"
-                  id="bookmark"
+                  class="icon icon-mid"
                   @click="handleUnbookmark"
                   :disabled="isLoading"
                 />
@@ -273,10 +275,6 @@ svg {
   height: 25px;
 }
 
-#bookmark {
-  font-size: 25px;
-}
-
 #user-info {
   display: flex;
 }
@@ -292,10 +290,6 @@ svg {
 
 #claps {
   position: relative;
-}
-
-.clap {
-  cursor: pointer;
 }
 
 .clap-count {

@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 * {
   text-align: left;
 }
@@ -59,16 +59,6 @@ p {
   font-size: 16px;
 }
 
-.icon {
-  width: 25px;
-  height: 25px;
-  display: inline-block;
-}
-
-#bookmark {
-  cursor: pointer;
-}
-
 form {
   margin: 0;
   padding: 0;
@@ -85,5 +75,46 @@ input[type='reset'] {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+.bg-black {
+  background-color: #000;
+}
+
+.icon,
+.link {
+  cursor: pointer;
+}
+
+.icon-small {
+  font-size: 20px;
+}
+
+.icon-mid {
+  font-size: 25px;
+}
+
+#bookmark {
+  width: 22px;
+  height: 22px;
+}
+
+.svg-small {
+  width: 20px;
+  height: 20px;
+}
+
+.svg-mid {
+  width: 25px;
+  height: 25px;
+}
+
+.badge-success:hover {
+  background: rgb(0, 75, 0);
+}
+
+.clap {
+  font-size: 25px;
+  cursor: pointer;
 }
 </style>
