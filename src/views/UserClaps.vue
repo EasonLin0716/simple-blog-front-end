@@ -1,6 +1,6 @@
 <template>
   <div id="user-claps">
-    <div id="box">
+    <div class="box-mid">
       <UserInfo :user="user" />
       <UserNavTab :userId="user.id" />
       <UserClapsPosts :posts="posts" :user="user" />
@@ -83,11 +83,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#box {
-  max-width: 728px;
-  padding: 0 24px;
-  margin: 0 auto;
-}
-</style>

@@ -2,7 +2,12 @@
   <div id="post-user-info">
     <div id="col-left">
       <router-link :to="'/users/' + author.id">
-        <img :src="author.avatar" alt="avatar" id="avatar" />
+        <img
+          class="rounded-circle"
+          :src="author.avatar"
+          alt="avatar"
+          id="avatar"
+        />
       </router-link>
       <div id="info">
         <h6>
@@ -52,7 +57,7 @@
         <font-awesome-icon
           @click="handleUnbookmark"
           :icon="['fas', 'bookmark']"
-          class="icon"
+          class="icon svg-mid"
           id="bookmark"
         />
       </template>
@@ -120,7 +125,6 @@ export default {
 #avatar {
   width: 48px;
   height: 48px;
-  border-radius: 50%;
 }
 
 h6 span,

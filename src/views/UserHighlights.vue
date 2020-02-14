@@ -1,5 +1,5 @@
 <template>
-  <div id="user-highlights">
+  <div id="user-highlights" class="box-mid">
     <UserInfo :user="user" />
     <UserNavTab :userId="user.id" />
   </div>
@@ -73,11 +73,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#user-highlights {
-  max-width: 728px;
-  padding: 0 24px;
-  margin: 0 auto;
-}
-</style>

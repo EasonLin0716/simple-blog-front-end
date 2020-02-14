@@ -7,12 +7,12 @@
       <label class="container">
         $50/year (save $10)
         <input type="radio" name="payment" checked="checked" />
-        <span class="checkmark"></span>
+        <span class="checkmark rounded-circle"></span>
       </label>
       <label class="container">
         $5/month
         <input type="radio" name="payment" />
-        <span class="checkmark"></span>
+        <span class="checkmark rounded-circle"></span>
       </label>
     </div>
     <h6>PAYMENT</h6>
@@ -84,7 +84,6 @@ h6 {
     left: 0;
     height: 18px;
     width: 18px;
-    border-radius: 50%;
     border: 0.5px solid #ccc;
   }
   .checkmark:after {
@@ -98,8 +97,8 @@ h6 {
     left: 2.5px;
     width: 12px;
     height: 12px;
-    border-radius: 50%;
     background: #218799;
+    border-radius: 50%;
   }
 }
 </style>

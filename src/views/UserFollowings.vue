@@ -1,5 +1,5 @@
 <template>
-  <div id="user-followings">
+  <div id="user-followings" class="box-mid">
     <UserInfo
       :user="user"
       @after-handle-follow="afterHandleFollow"
@@ -110,11 +110,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#user-followings {
-  max-width: 728px;
-  padding: 0 24px;
-  margin: 0 auto;
-}
-</style>

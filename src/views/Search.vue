@@ -14,7 +14,11 @@
       <div v-for="post in posts" :key="post" id="posts">
         <div id="author">
           <div id="avatar">
-            <img :src="post.authorAvatar" alt="authorAvatar" />
+            <img
+              class="rounded-circle"
+              :src="post.authorAvatar"
+              alt="authorAvatar"
+            />
           </div>
           <div id="info">
             <router-link :to="'/users/' + post.authorId">
@@ -118,7 +122,6 @@ h6 {
 #avatar img {
   width: 36px;
   height: 36px;
-  border-radius: 50%;
 }
 
 #info :first-child span {

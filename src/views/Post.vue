@@ -1,6 +1,6 @@
 <template>
   <div id="post">
-    <div id="box">
+    <div class="box-mid">
       <h1>{{ post.title }}</h1>
       <PostUserInfo
         :author="author"
@@ -247,12 +247,6 @@ export default {
 </script>
 
 <style scoped>
-#box {
-  max-width: 728px;
-  padding: 0 24px;
-  margin: 0 auto;
-}
-
 #cover {
   display: flex;
   justify-content: center;

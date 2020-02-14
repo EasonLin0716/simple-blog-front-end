@@ -9,6 +9,7 @@
               :src="clapHands"
               alt="clap"
               :data-postid="post.id"
+              class="rounded-circle"
             />
           </button>
           <button v-else :disabled="isLoading" id="clap">
@@ -17,12 +18,15 @@
               :src="clap"
               alt="clap"
               :data-postid="post.id"
+              class="rounded-circle"
             />
           </button>
           <span v-show="!clapCount">
             &nbsp;{{ post.clappedTimes }}&nbsp;claps&nbsp;</span
           >
-          <span id="clap-count"> {{ clapCount }} </span>
+          <span id="clap-count" class="size-mid rounded-circle">
+            {{ clapCount }}
+          </span>
         </div>
       </div>
       <div id="links">
@@ -48,7 +52,7 @@
     <div id="written-by">
       <div id="intro">
         <div id="avatar">
-          <img :src="author.avatar" alt="avatar" />
+          <img :src="author.avatar" class="rounded-circle" alt="avatar" />
         </div>
         <div id="info">
           <h6>Written by</h6>
@@ -235,7 +239,6 @@ $dark-green: rgb(0, 75, 0);
   width: 58px;
   height: 58px;
   border: 1px solid #cccccc;
-  border-radius: 50%;
   padding: 12px;
 }
 
@@ -273,7 +276,6 @@ $dark-green: rgb(0, 75, 0);
 #avatar img {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
 }
 
 #response-button {
@@ -288,9 +290,6 @@ $dark-green: rgb(0, 75, 0);
   text-align: center;
   color: #fff;
   background: #000;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
   line-height: 40px;
 }
 

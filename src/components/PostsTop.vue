@@ -2,24 +2,22 @@
   <div id="posts-top">
     <div class="row" id="top-posts">
       <div class="col-md-4 col-sm-6 m-md-0 m-2 col-left">
-        <div id="col-left-box">
-          <router-link :to="'/posts/' + posts[0].id">
-            <img :src="posts[0].cover" alt="cover" />
-            <h2>{{ posts[0].title }}</h2>
-          </router-link>
-          <router-link :to="'/users/' + posts[0].authorId">
-            <span class="text-secondary d-block">{{ posts[0].author }}</span>
-          </router-link>
-          <span
-            >{{ posts[0].monthDay }}&nbsp;&bull;&nbsp;{{
-              posts[0].readTime
-            }}</span
-          >
-        </div>
+        <router-link :to="'/posts/' + posts[0].id">
+          <img :src="posts[0].cover" alt="cover" class="col-left-cover" />
+          <h2>{{ posts[0].title }}</h2>
+        </router-link>
+        <router-link :to="'/users/' + posts[0].authorId">
+          <span class="text-secondary d-block">{{ posts[0].author }}</span>
+        </router-link>
+        <span
+          >{{ posts[0].monthDay }}&nbsp;&bull;&nbsp;{{
+            posts[0].readTime
+          }}</span
+        >
       </div>
-      <div class="col-md-4 col-sm-5 m-md-0 m-2 col-mid">
-        <div id="col-mid-box">
-          <div id="img-box">
+      <div class="col-md-4 col-sm-5 m-md-0 m-2">
+        <div class="col-mid">
+          <div class="img-box">
             <router-link :to="'/posts/' + posts[1].id">
               <img :src="posts[1].cover" alt="cover" />
             </router-link>
@@ -38,8 +36,8 @@
             >
           </div>
         </div>
-        <div id="col-mid-box">
-          <div id="img-box">
+        <div class="col-mid">
+          <div class="img-box">
             <router-link :to="'/posts/' + posts[2].id">
               <img :src="posts[2].cover" alt="cover" />
             </router-link>
@@ -58,8 +56,8 @@
             >
           </div>
         </div>
-        <div id="col-mid-box">
-          <div id="img-box">
+        <div class="col-mid">
+          <div class="img-box">
             <router-link :to="'/posts/' + posts[3].id">
               <img :src="posts[3].cover" alt="cover" />
             </router-link>
@@ -80,20 +78,18 @@
         </div>
       </div>
       <div class="col-md-4 d-none d-md-block col-right">
-        <div id="col-right-box">
-          <router-link :to="'/posts/' + posts[4].id">
-            <img :src="posts[4].cover" alt="cover" />
-            <h2>{{ posts[4].title }}</h2>
-          </router-link>
-          <router-link :to="'/users/' + posts[3].authorId">
-            <span class="text-secondary d-block">{{ posts[4].author }}</span>
-          </router-link>
-          <span
-            >{{ posts[4].monthDay }}&nbsp;&bull;&nbsp;{{
-              posts[4].readTime
-            }}</span
-          >
-        </div>
+        <router-link :to="'/posts/' + posts[4].id">
+          <img :src="posts[4].cover" alt="cover" class="col-right-cover" />
+          <h2>{{ posts[4].title }}</h2>
+        </router-link>
+        <router-link :to="'/users/' + posts[3].authorId">
+          <span class="text-secondary d-block">{{ posts[4].author }}</span>
+        </router-link>
+        <span
+          >{{ posts[4].monthDay }}&nbsp;&bull;&nbsp;{{
+            posts[4].readTime
+          }}</span
+        >
       </div>
     </div>
   </div>
@@ -112,26 +108,21 @@ export default {
 </script>
 
 <style scoped>
-#col-left-box img,
-#col-right-box img {
+.col-left-cover,
+.col-right-cover {
   height: 150px;
   width: 100%;
 }
 
-#col-mid-box {
+.col-mid {
   display: flex;
   margin-bottom: 20px;
 }
 
-#img-box {
+.img-box {
   overflow: hidden;
   height: 100px;
   width: 100px;
   margin-right: 10px;
-}
-
-#img-box img {
-  width: 100px;
-  height: 100px;
 }
 </style>

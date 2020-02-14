@@ -17,6 +17,7 @@
         <label
           for="image"
           id="image-container"
+          class="rounded-circle"
           v-bind:style="{ backgroundImage: 'url(' + avatar + ')' }"
         >
           <input
@@ -109,7 +110,6 @@ label {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 150px;
-  border-radius: 50%;
 }
 a {
   text-decoration: none;
@@ -169,7 +169,6 @@ input:focus {
   width: 100px;
   height: 100px;
   border: 2px solid #ccc;
-  border-radius: 50%;
 }
 
 #follow span,

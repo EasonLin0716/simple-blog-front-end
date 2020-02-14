@@ -1,11 +1,11 @@
 <template>
   <div class="col-md-8 m-md-0 m-2" id="posts-down-left">
     <div v-for="post in posts" :key="post.id" id="post">
-      <div id="p-left">
+      <div class="col-left">
         <router-link :to="'/posts/' + post.id">
           <h4>{{ post.title }}</h4>
         </router-link>
-        <div id="bottom">
+        <div>
           <div>
             <router-link :to="'/users/' + post.authorId">
               <span class="d-block">{{ post.author }}</span>
@@ -14,31 +14,33 @@
               >{{ post.monthDay }}&nbsp;&bull;&nbsp;{{ post.readTime }}</span
             >
           </div>
-          <div id="icons">
-            <font-awesome-icon
-              v-if="!post.isBookmarked"
-              :disabled="isLoading"
-              @click="handleBookmark"
-              :data-postid="post.id"
-              :icon="['far', 'bookmark']"
-              class="icon icon-small"
-            />
-            <font-awesome-icon
-              v-else
-              :disabled="isLoading"
-              @click="handleUnbookmark"
-              :data-postid="post.id"
-              :icon="['fas', 'bookmark']"
-              class="icon icon-small"
-            />
-            <img :src="ellipsis" alt="ellipsis" class="icon svg-small ml-1" />
-          </div>
         </div>
       </div>
-      <div id="p-right">
-        <router-link :to="'/posts/' + post.id">
-          <img :src="post.cover" alt="cover" />
-        </router-link>
+      <div class="col-right">
+        <div class="icons">
+          <font-awesome-icon
+            v-if="!post.isBookmarked"
+            :disabled="isLoading"
+            @click="handleBookmark"
+            :data-postid="post.id"
+            :icon="['far', 'bookmark']"
+            class="icon icon-small"
+          />
+          <font-awesome-icon
+            v-else
+            :disabled="isLoading"
+            @click="handleUnbookmark"
+            :data-postid="post.id"
+            :icon="['fas', 'bookmark']"
+            class="icon icon-small"
+          />
+          <img :src="ellipsis" alt="ellipsis" class="icon svg-small ml-1" />
+        </div>
+        <div>
+          <router-link :to="'/posts/' + post.id">
+            <img :src="post.cover" alt="cover" class="post-cover" />
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -83,38 +85,25 @@ export default {
 </script>
 
 <style scoped>
-#p-left {
-  width: 100%;
-}
-
-#p-right {
-  width: 152px;
-  height: 122px;
-  margin-left: 40px;
-}
-
-#p-right img {
-  height: 100%;
-}
-
-#bottom {
-  display: flex;
-  justify-content: space-between;
-}
-
-#bottom #icons {
-  display: flex;
-  align-items: center;
-}
-
 #post {
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
 }
 
-img {
-  max-width: 100%;
-  max-height: 100%;
+.col-right {
+  display: flex;
+  align-items: flex-end;
+}
+
+.post-cover {
+  width: 116px;
+  height: 122px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
 }
 </style>

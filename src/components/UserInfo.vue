@@ -27,7 +27,7 @@
         <p>{{ user.introduction }}</p>
       </div>
       <div>
-        <img :src="user.avatar" alt="avatar" />
+        <img :src="user.avatar" alt="avatar" class="rounded-circle" />
       </div>
     </div>
     <div id="follow">
@@ -109,7 +109,6 @@ h1 {
 }
 
 img {
-  border-radius: 50%;
   width: 128px;
   height: 128px;
 }

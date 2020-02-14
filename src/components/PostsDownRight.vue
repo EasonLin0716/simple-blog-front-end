@@ -7,8 +7,12 @@
       </div>
       <div id="new-from-network-posts">
         <div v-for="post in newPosts" :key="post.id" id="post-box">
-          <div id="img-box">
-            <img :src="post.authorAvatar" alt="authorAvatar" />
+          <div id="img-box" class="size-mid mr-2">
+            <img
+              class="rounded-circle"
+              :src="post.authorAvatar"
+              alt="authorAvatar"
+            />
           </div>
           <div id="info">
             <router-link :to="'/posts/' + post.id">
@@ -51,7 +55,7 @@
             :key="post.id"
             id="reading-list-post"
           >
-            <div id="reading-list-posts-icon">
+            <div id="reading-list-posts-icon" class="size-small rounded-circle">
               <font-awesome-icon :icon="['fas', 'bookmark']" id="bookmark" />
             </div>
             <div>
@@ -105,14 +109,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$bidge: rgb(251, 249, 224);
+$light-gray: rgb(250, 250, 250);
+$light-blue: rgb(215, 239, 238);
+
 .sticky-down {
   position: sticky;
   top: 0;
 }
 
 #img-box img {
-  border-radius: 50%;
   height: 100%;
   width: 100%;
 }
@@ -126,7 +133,7 @@ span {
   padding: 8px;
   display: flex;
   justify-content: space-between;
-  background: rgb(215, 239, 238);
+  background: $light-blue;
 }
 
 #new-from-network-title h3,
@@ -139,14 +146,8 @@ span {
 }
 
 #new-from-network-posts {
-  background: rgb(250, 250, 250);
+  background: $light-gray;
   padding: 24px;
-}
-
-#new-from-network-posts #img-box {
-  width: 40px;
-  height: 40px;
-  margin-right: 15px;
 }
 
 #new-from-network-posts #img-box img {
@@ -196,11 +197,11 @@ span {
 }
 
 #reading-list {
-  background: rgb(250, 250, 250);
+  background: $light-gray;
 }
 
 #reading-list-title {
-  background: rgb(251, 249, 224);
+  background: $bidge;
 }
 
 #tool-bar {
@@ -220,10 +221,7 @@ span {
 }
 
 #reading-list-posts-icon {
-  width: 32px;
-  height: 32px;
   border: 1px solid #ccc;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;

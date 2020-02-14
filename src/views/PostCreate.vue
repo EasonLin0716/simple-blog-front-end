@@ -137,6 +137,7 @@ export default {
 </script>
 
 <style scoped>
+@import '../assets/css/medium-editor.css';
 #post-create {
   max-width: 700px;
   margin: 0 auto;

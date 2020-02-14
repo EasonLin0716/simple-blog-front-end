@@ -1,17 +1,17 @@
 <template>
   <div id="links">
-    <div id="link">
+    <div class="link">
       <router-link :to="'/users/' + this.userId">Profile</router-link>
     </div>
-    <div id="link">
+    <div class="link">
       <router-link :to="'/users/' + this.userId + '/claps'">Claps</router-link>
     </div>
-    <div id="link">
+    <div class="link">
       <router-link :to="'/users/' + this.userId + '/highlights'"
         >Highlights</router-link
       >
     </div>
-    <div id="link">
+    <div class="link">
       <router-link :to="'/users/' + this.userId + '/responses'"
         >Responses</router-link
       >
@@ -39,7 +39,7 @@ export default {
   border-bottom: 1px solid rgb(200, 200, 200);
 }
 
-#links #link {
+.link {
   margin: 0 20px 10px 0;
 }
 </style>

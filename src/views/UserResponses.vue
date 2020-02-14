@@ -1,5 +1,5 @@
 <template>
-  <div id="user-responses">
+  <div id="user-responses" class="box-mid">
     <div id="box">
       <UserInfo :user="user" />
       <UserNavTab :userId="user.id" />
@@ -83,11 +83,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#box {
-  max-width: 728px;
-  padding: 0 24px;
-  margin: 0 auto;
-}
-</style>

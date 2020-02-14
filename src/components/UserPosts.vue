@@ -6,7 +6,12 @@
         <div id="info">
           <div id="user-info">
             <div>
-              <img :src="user.avatar" alt="" id="avatar" />
+              <img
+                :src="user.avatar"
+                class="rounded-circle size-mid"
+                alt=""
+                id="avatar"
+              />
             </div>
             <div>
               <h6>{{ user.name }}</h6>
@@ -45,6 +50,7 @@
                   <span>&nbsp;{{ post.clappedTime }}</span>
                   <span
                     v-show="post.clapping"
+                    class="rounded-circle size-mid"
                     :class="'clap-count ind' + index"
                   >
                     {{ post.clapping }}
@@ -244,12 +250,6 @@ svg {
   padding: 25px;
 }
 
-#avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
 #latest {
   margin-top: 30px;
 }
@@ -300,9 +300,6 @@ svg {
   text-align: center;
   color: #fff;
   background: #000;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
   line-height: 40px;
 }
 </style>

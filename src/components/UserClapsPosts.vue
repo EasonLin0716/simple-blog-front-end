@@ -6,7 +6,12 @@
         <div id="info">
           <div id="user-info">
             <div>
-              <img :src="user.avatar" alt="" id="avatar" />
+              <img
+                :src="user.avatar"
+                alt=""
+                id="avatar"
+                class="rounded-circle size-mid"
+              />
             </div>
             <div>
               <h6>{{ user.name }}</h6>
@@ -68,12 +73,6 @@ export default {
 <style scoped>
 #info {
   padding: 25px;
-}
-
-#avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
 }
 
 #latest {

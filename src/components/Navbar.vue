@@ -34,7 +34,11 @@
             <button class="navbar-button mr-2 ">Upgrade</button>
           </router-link>
           <a href="#" role="button" data-toggle="dropdown">
-            <img :src="currentUser.avatar" id="profile" alt="profile" />
+            <img
+              :src="currentUser.avatar"
+              class="size-small rounded-circle"
+              alt="profile"
+            />
             <div class="dropdown-menu">
               <router-link to="/posts/create" class="dropdown-item"
                 >New Story</router-link
@@ -115,12 +119,6 @@ export default {
   margin-bottom: 40px;
   height: 65px;
   box-shadow: 0 0 5px 0 rgb(200, 200, 200);
-}
-
-#profile {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
 }
 
 .navbar-button {

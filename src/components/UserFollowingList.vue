@@ -9,7 +9,12 @@
     >
       <div id="avatar-box">
         <router-link :to="'/users/' + following.id">
-          <img :src="following.avatar" alt="avatar" id="avatar" />
+          <img
+            class="rounded-circle"
+            :src="following.avatar"
+            alt="avatar"
+            id="avatar"
+          />
         </router-link>
       </div>
       <div id="user-info">
@@ -70,6 +75,5 @@ a:hover {
 #avatar {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
 }
 </style>

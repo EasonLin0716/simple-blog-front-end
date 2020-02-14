@@ -18,63 +18,12 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-  text-align: left;
-}
+@import './assets/css/reset.css';
 
-button:focus {
-  outline: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-}
-
-a {
-  text-decoration: none;
-  color: #000;
-}
-
-a:hover {
-  text-decoration: none;
-  color: #666;
-}
-
-ul,
-input {
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-}
-
-p {
-  font-size: 16px;
-}
-
-form {
-  margin: 0;
-  padding: 0;
-  display: inline;
-}
-
-button,
-input[type='submit'],
-input[type='reset'] {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+.box-mid {
+  max-width: 728px;
+  padding: 0 24px;
+  margin: 0 auto;
 }
 
 .bg-black {
@@ -95,8 +44,8 @@ input[type='reset'] {
 }
 
 #bookmark {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
 .svg-small {
@@ -111,6 +60,16 @@ input[type='reset'] {
 
 .badge-success:hover {
   background: rgb(0, 75, 0);
+}
+
+.size-small {
+  width: 32px;
+  height: 32px;
+}
+
+.size-mid {
+  width: 40px;
+  height: 40px;
 }
 
 .clap {

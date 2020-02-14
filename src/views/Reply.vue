@@ -1,6 +1,6 @@
 <template>
   <div id="reply">
-    <section id="post-info">
+    <section id="post-info" class="box-mid">
       <h6>Show responses for:</h6>
       <div class="card" id="post">
         <div id="title">
@@ -35,7 +35,12 @@
       </div>
       <div class="card" v-for="reply in replies" :key="reply.id" id="replies">
         <div id="info">
-          <img :src="reply.avatar" alt="avatar" id="avatar" />
+          <img
+            :src="reply.avatar"
+            alt="avatar"
+            id="avatar"
+            class="rounded-circle"
+          />
           <div>
             <span id="replier">{{ reply.replier }}</span>
             <br />
@@ -165,10 +170,6 @@ p {
 }
 
 #post-info {
-  width: 728px;
-  margin: 0 auto;
-  padding: 0 24px;
-
   #post {
     padding: 20px;
     margin-bottom: 40px;
@@ -221,7 +222,6 @@ p {
   #avatar {
     height: 36px;
     width: 36px;
-    border-radius: 50%;
   }
 
   #replies {

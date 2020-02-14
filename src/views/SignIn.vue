@@ -1,8 +1,14 @@
 <template>
   <div id="signin">
-    <img src="https://fakeimg.pl/214x550/" alt="pic" class="pic" />
+    <img
+      src="../assets/signin-left.png"
+      width="214"
+      height="550"
+      alt="pic"
+      class="pic"
+    />
     <form class="w-100 px-2" @submit.prevent.stop="handleSubmit">
-      <h1>Sign in</h1>
+      <h1 class="text-center">Sign in</h1>
       <div class="form-label-group mb-2">
         <label for="email">email</label>
         <input
@@ -44,7 +50,13 @@
         &copy; 2019-2020 Created without any commercial purposes by Eason Lin
       </p>
     </form>
-    <img src="https://fakeimg.pl/214x550/" alt="pic" class="pic" />
+    <img
+      src="../assets/signin-right.png"
+      width="214"
+      height="550"
+      alt="pic"
+      class="pic"
+    />
   </div>
 </template>
 
@@ -97,9 +109,6 @@ export default {
 }
 </script>
 <style scoped>
-h1 {
-  text-align: center;
-}
 #signin {
   max-width: 1028px;
   padding: 64px;
