@@ -77,7 +77,7 @@
 import { mapState } from 'vuex'
 import { Toast } from './../utils/helpers'
 export default {
-  name: 'Navbar',
+  name: 'AppNavbar',
   data() {
     return {
       searchText: ''

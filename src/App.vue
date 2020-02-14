@@ -1,6 +1,6 @@
 <template>
   <div id="simple-blog">
-    <Navbar />
+    <AppNavbar />
     <router-view />
   </div>
 </template>
@@ -8,11 +8,11 @@
 <script>
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Navbar from './components/Navbar'
+import AppNavbar from './components/AppNavbar'
 
 export default {
   components: {
-    Navbar
+    AppNavbar
   }
 }
 </script>

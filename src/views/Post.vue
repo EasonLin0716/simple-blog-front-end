@@ -34,7 +34,7 @@
         @after-handle-unfollow="afterHandleUnfollow"
       />
     </div>
-    <PageFooter />
+    <AppPageFooter />
   </div>
 </template>
 
@@ -42,14 +42,14 @@
 import postsAPI from '../apis/posts'
 import PostUserInfo from '../components/PostUserInfo'
 import PostFooter from '../components/PostFooter'
-import PageFooter from '../components/PageFooter'
+import AppPageFooter from '../components/AppPageFooter'
 import repliesAPI from '../apis/replies'
 import usersAPI from '../apis/user'
 import { mapState } from 'vuex'
 import { Toast } from './../utils/helpers'
 export default {
   name: 'Post',
-  components: { PostUserInfo, PostFooter, PageFooter },
+  components: { PostUserInfo, PostFooter, AppPageFooter },
   data() {
     return {
       clapCount: 0,

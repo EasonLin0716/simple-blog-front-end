@@ -1,6 +1,6 @@
 <template>
   <div id="posts">
-    <PacmanLoader v-if="isRendering" />
+    <AppPacmanLoader v-if="isRendering" />
     <template v-else>
       <PostsTop :posts="posts" />
       <hr />
@@ -25,7 +25,7 @@
 /* eslint-disable */
 import postAPI from './../apis/posts'
 import replyAPI from './../apis/replies'
-import PacmanLoader from './../components/PacmanLoader'
+import AppPacmanLoader from './../components/AppPacmanLoader'
 import PostsTop from './../components/PostsTop'
 import PostsDownLeft from './../components/PostsDownLeft'
 import PostsDownRight from './../components/PostsDownRight'
@@ -64,7 +64,7 @@ export default {
     PostsTop,
     PostsDownLeft,
     PostsDownRight,
-    PacmanLoader
+    AppPacmanLoader
   },
   created() {
     if (!this.isAuthenticated) {

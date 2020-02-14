@@ -87,7 +87,7 @@
 <script>
 // :value="ccFormat(value)"
 export default {
-  name: 'CreditCardForm',
+  name: 'PaymentCreditCardForm',
   data() {
     return {
       ccNumber: '',

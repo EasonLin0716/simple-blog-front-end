@@ -5,7 +5,7 @@
       <UserNavTab :userId="user.id" />
       <UserClapsPosts :posts="posts" :user="user" />
     </div>
-    <PageFooter />
+    <AppPageFooter />
   </div>
 </template>
 
@@ -13,7 +13,7 @@
 import userAPI from '../apis/user'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
-import PageFooter from '../components/PageFooter'
+import AppPageFooter from '../components/AppPageFooter'
 import UserClapsPosts from '../components/UserClapsPosts'
 import { Toast } from './../utils/helpers'
 export default {
@@ -22,7 +22,7 @@ export default {
     UserInfo,
     UserNavTab,
     UserClapsPosts,
-    PageFooter
+    AppPageFooter
   },
   data() {
     return {

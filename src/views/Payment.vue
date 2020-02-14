@@ -17,16 +17,16 @@
     </div>
     <h6>PAYMENT</h6>
     <form action="/">
-      <CreditCardForm />
+      <PaymentCreditCardForm />
     </form>
   </div>
 </template>
 
 <script>
-import CreditCardForm from '../components/CreditCardForm'
+import PaymentCreditCardForm from '../components/PaymentCreditCardForm'
 export default {
   name: 'Payment',
-  components: { CreditCardForm }
+  components: { PaymentCreditCardForm }
 }
 </script>
 

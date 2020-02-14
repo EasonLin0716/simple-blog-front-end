@@ -16,7 +16,7 @@
         @after-handle-clap="afterHandleClap"
       />
     </div>
-    <PageFooter />
+    <AppPageFooter />
   </div>
 </template>
 
@@ -26,7 +26,7 @@ import replyAPI from '../apis/replies'
 import UserInfo from '../components/UserInfo'
 import UserNavTab from '../components/UserNavTab'
 import UserPosts from '../components/UserPosts'
-import PageFooter from '../components/PageFooter'
+import AppPageFooter from '../components/AppPageFooter'
 import { Toast } from './../utils/helpers'
 import { mapState } from 'vuex'
 export default {
@@ -35,7 +35,7 @@ export default {
     UserInfo,
     UserNavTab,
     UserPosts,
-    PageFooter
+    AppPageFooter
   },
   data() {
     return {

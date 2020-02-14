@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: 'PacmanLoader',
+  name: 'AppPacmanLoader',
   props: {
     loading: {
       type: Boolean,
