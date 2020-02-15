@@ -1,5 +1,5 @@
 <template>
-  <div id="user-drafts">
+  <div id="user-drafts" class="user-stories">
     <UserStoriesTopInfo />
   </div>
 </template>
@@ -11,11 +11,3 @@ export default {
   components: { UserStoriesTopInfo }
 }
 </script>
-
-<style scoped>
-#user-drafts {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 64px 64px;
-}
-</style>

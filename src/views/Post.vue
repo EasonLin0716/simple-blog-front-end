@@ -13,7 +13,7 @@
         @after-handle-follow="afterHandleFollow"
         @after-handle-unfollow="afterHandleUnfollow"
       />
-      <div id="cover">
+      <div class="d-flex justify-content-center">
         <img :src="post.cover" alt="cover" width="620" height="370" />
       </div>
       <article id="post-content" v-html="post.content">
@@ -247,11 +247,6 @@ export default {
 </script>
 
 <style scoped>
-#cover {
-  display: flex;
-  justify-content: center;
-}
-
 article {
   margin: 20px 0 40px 0;
 }

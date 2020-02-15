@@ -120,9 +120,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/scss/_variables.scss';
+
 p {
   color: #aaa;
-  font-size: 14px;
+  font-size: $text-small;
   font-weight: 400;
 }
 
@@ -146,8 +148,8 @@ label {
 }
 
 .chosen {
-  border-bottom: 3px solid rgb(33, 135, 153);
-  color: rgb(33, 135, 153);
+  border-bottom: 3px solid $dodger-blue;
+  color: $dodger-blue;
 }
 
 #checkout {

@@ -26,6 +26,20 @@ export default {
   margin: 0 auto;
 }
 
+.user-stories {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 64px 64px;
+}
+
+.user-auths {
+  max-width: 1028px;
+  padding: 64px;
+  margin: 0px auto;
+  border: 1px solid #ccc;
+  display: flex;
+}
+
 .bg-black {
   background-color: #000;
 }
@@ -75,5 +89,11 @@ export default {
 .clap {
   font-size: 25px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 992px) {
+  .auth-pic {
+    display: none;
+  }
 }
 </style>

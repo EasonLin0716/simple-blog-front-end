@@ -73,7 +73,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../assets/scss/_variables.scss';
 h6 {
   margin-top: 10px;
 }
@@ -107,7 +108,7 @@ h6 {
 
 #bar li {
   margin-right: 20px;
-  font-size: 14px;
+  font-size: $text-small;
 }
 
 #author {
@@ -135,7 +136,7 @@ h6 {
 }
 
 #info :last-child {
-  font-size: 14px;
+  font-size: $text-small;
   color: #666;
 }
 

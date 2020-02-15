@@ -223,7 +223,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$dark-green: rgb(0, 75, 0);
+@import '../assets/scss/_variables.scss';
 
 #claps {
   position: relative;

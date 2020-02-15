@@ -241,7 +241,9 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@import '../assets/scss/_variables.scss';
+
 svg {
   cursor: pointer;
 }
@@ -285,7 +287,7 @@ svg {
 
 #user-info span {
   color: rgb(120, 120, 120);
-  font-size: 14px;
+  font-size: $text-small;
 }
 
 #claps {

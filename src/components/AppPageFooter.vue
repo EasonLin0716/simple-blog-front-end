@@ -53,7 +53,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../assets/scss/_variables.scss';
 a:hover {
   text-decoration: underline;
 }
@@ -63,7 +64,7 @@ h5 {
 }
 
 p {
-  font-size: 14px;
+  font-size: $text-small;
 }
 
 .footer-content {

@@ -134,13 +134,13 @@ export default {
 }
 
 #searchBox {
+  padding-left: 5px;
   transition: width 0.2s;
 }
 
 #bell {
   width: 22px;
   height: 22px;
-  margin: 0 5px;
 }
 
 @media screen and (max-width: 720px) {

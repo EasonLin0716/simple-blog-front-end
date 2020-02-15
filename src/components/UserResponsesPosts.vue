@@ -83,7 +83,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../assets/scss/_variables.scss';
+
 #user-responses-posts {
   max-width: 680px;
   margin: 0 auto;
@@ -99,7 +101,7 @@ export default {
 
 #user-info span {
   color: rgb(120, 120, 120);
-  font-size: 14px;
+  font-size: $text-small;
 }
 
 #responses {
@@ -141,7 +143,7 @@ export default {
 }
 
 #post-author {
-  font-size: 14px;
+  font-size: $text-small;
   color: #999;
   font-weight: 400;
 }
@@ -167,6 +169,6 @@ export default {
 
 #user-info span {
   color: rgb(120, 120, 120);
-  font-size: 14px;
+  font-size: $text-small;
 }
 </style>

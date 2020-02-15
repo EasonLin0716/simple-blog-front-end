@@ -160,6 +160,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/scss/_variables.scss';
+
 h6 {
   padding: 15px 0;
 }
@@ -185,7 +187,7 @@ p {
       }
 
       #comment {
-        font-size: 14px;
+        font-size: $text-small;
         margin: 0 10px;
       }
     }

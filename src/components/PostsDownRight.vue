@@ -110,9 +110,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$bidge: rgb(251, 249, 224);
-$light-gray: rgb(250, 250, 250);
-$light-blue: rgb(215, 239, 238);
+@import '../assets/scss/_variables.scss';
 
 .sticky-down {
   position: sticky;
@@ -125,7 +123,7 @@ $light-blue: rgb(215, 239, 238);
 }
 
 span {
-  font-size: 14px;
+  font-size: $text-small;
 }
 
 #new-from-network-title,
@@ -217,7 +215,7 @@ span {
 #tool-bar ul li {
   margin-right: 16px;
   color: #aaa;
-  font-size: 14px;
+  font-size: $text-small;
 }
 
 #reading-list-posts-icon {

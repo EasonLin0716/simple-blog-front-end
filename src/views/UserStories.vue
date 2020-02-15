@@ -1,5 +1,5 @@
 <template>
-  <div id="user-stories">
+  <div id="user-stories" class="user-stories">
     <UserStoriesTopInfo />
     <UserStoriesPosts
       :posts="posts"
@@ -58,11 +58,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#user-stories {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 64px 64px;
-}
-</style>

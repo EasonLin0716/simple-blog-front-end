@@ -1,11 +1,11 @@
 <template>
-  <div id="signin">
+  <div id="signin" class="user-auths">
     <img
       src="../assets/signin-left.png"
       width="214"
       height="550"
       alt="pic"
-      class="pic"
+      class="auth-pic"
     />
     <form class="w-100 px-2" @submit.prevent.stop="handleSubmit">
       <h1 class="text-center">Sign in</h1>
@@ -55,7 +55,7 @@
       width="214"
       height="550"
       alt="pic"
-      class="pic"
+      class="auth-pic"
     />
   </div>
 </template>
@@ -108,18 +108,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-#signin {
-  max-width: 1028px;
-  padding: 64px;
-  margin: 0px auto;
-  border: 1px solid #ccc;
-  display: flex;
-}
-
-@media screen and (max-width: 992px) {
-  .pic {
-    display: none;
-  }
-}
-</style>

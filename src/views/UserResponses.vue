@@ -1,6 +1,6 @@
 <template>
-  <div id="user-responses" class="box-mid">
-    <div id="box">
+  <div id="user-responses">
+    <div class="box-mid">
       <UserInfo :user="user" />
       <UserNavTab :userId="user.id" />
       <UserResponsesPosts :user="user" :replies="replies" />

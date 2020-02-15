@@ -1,8 +1,14 @@
 <template>
-  <div id="signup">
-    <img src="https://fakeimg.pl/214x550/" alt="pic" class="pic" />
+  <div id="signup" class="user-auths">
+    <img
+      src="../assets/signin-left.png"
+      width="214"
+      height="550"
+      alt="pic"
+      class="auth-pic"
+    />
     <form class="w-100 px-2" @submit.stop.prevent="handleSubmit">
-      <h1>Sign Up</h1>
+      <h1 class="text-center">Sign Up</h1>
       <div class="form-label-group mb-2">
         <label for="name">Name</label>
         <input
@@ -64,8 +70,8 @@
         Submit
       </button>
 
-      <div class="text-center mb-3">
-        <p>
+      <div>
+        <p class="text-center mb-3">
           <router-link to="/signin">
             Sign In
           </router-link>
@@ -76,7 +82,13 @@
         &copy; 2019-2020 Created without any commercial purposes by Eason Lin
       </p>
     </form>
-    <img src="https://fakeimg.pl/214x550/" alt="pic" class="pic" />
+    <img
+      src="../assets/signin-right.png"
+      width="214"
+      height="550"
+      alt="pic"
+      class="auth-pic"
+    />
   </div>
 </template>
 
@@ -126,22 +138,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-h1 {
-  text-align: center;
-}
-#signup {
-  max-width: 1028px;
-  padding: 64px;
-  margin: 0px auto;
-  border: 1px solid #ccc;
-  display: flex;
-}
-
-@media screen and (max-width: 992px) {
-  .pic {
-    display: none;
-  }
-}
-</style>

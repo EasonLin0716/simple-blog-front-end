@@ -1,7 +1,7 @@
 <template>
   <div id="payment">
-    <h4>Just a little paperwork.</h4>
-    <h5>We’ll have you reading again shortly.</h5>
+    <h4 class="text-center">Just a little paperwork.</h4>
+    <h5 class="text-center">We’ll have you reading again shortly.</h5>
     <h6>PLAN</h6>
     <div id="buttons">
       <label class="container">
@@ -31,11 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h4,
-h5 {
-  text-align: center;
-}
-
+@import '../assets/scss/_variables.scss';
 h5 {
   font-size: 18px;
   color: #aaa;
@@ -43,7 +39,7 @@ h5 {
 }
 
 h6 {
-  font-size: 14px;
+  font-size: $text-small;
   color: #aaa;
   font-weight: 400;
   margin: 15px 0;
@@ -97,7 +93,7 @@ h6 {
     left: 2.5px;
     width: 12px;
     height: 12px;
-    background: #218799;
+    background: $dodger-blue;
     border-radius: 50%;
   }
 }
