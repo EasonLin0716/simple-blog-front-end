@@ -36,7 +36,7 @@
           />
           <img :src="ellipsis" alt="ellipsis" class="icon svg-small ml-1" />
         </div>
-        <div>
+        <div class="post-cover-box">
           <router-link :to="'/posts/' + post.id">
             <img :src="post.cover" alt="cover" class="post-cover" />
           </router-link>
@@ -96,7 +96,8 @@ export default {
   align-items: flex-end;
 }
 
-.post-cover {
+.post-cover,
+.post-cover-box {
   width: 116px;
   height: 122px;
 }

@@ -136,124 +136,32 @@ export default {
 }
 </script>
 
-<style scoped>
-/* ---Medium editor css--- */
-.medium-editor-element {
-  outline: none;
-}
-
-a,
-a:hover,
-section.splash h1 span,
-.medium-editor-toolbar li button,
-.color-1,
-.color-2 {
-  color: #ffffff;
-}
-
-body,
-pre,
-.medium-editor-button-active b,
-code {
-  color: #2c3e50;
-}
-
-.medium-editor-button-active.medium-editor-button-active.medium-editor-button-active {
-  background-color: #4fc08d;
-}
-
-pre,
-code {
-  background: #f8f8f8;
-  width: 80vw;
-}
-
-pre#cdn,
-code.data,
-pre#usage {
-  max-width: 900px;
-}
-
-code.data {
-  margin-top: 50px;
-}
-
-.medium-toolbar-arrow-over:before {
-  border-color: transparent transparent #2c3e50 transparent;
-}
-
-.medium-editor-toolbar li button {
-  border-right: 1px solid #2c3e50;
-}
-
-section.installation,
-.medium-editor-toolbar,
-.medium-editor-toolbar-anchor-preview,
-.github-fork-ribbon {
-  background: #000;
-}
-
-.medium-toolbar-arrow-under:after {
-  border-color: #2c3e50 transparent transparent transparent;
-}
-
-#toolbar-placeholder {
-  display: none;
-}
-
-h2 {
-  color: #000;
-}
-.medium-editor-placeholder::after {
-  color: #6c757d;
-  font-style: normal;
-}
-
-blockquote {
-  border-left: 3px solid #000;
-  margin-top: 2em;
-  padding-left: 23px;
-  font-size: 21px;
-  font-style: italic;
-}
-/* ---Medium editor css--- */
+<style lang="scss" scoped>
+@import '../assets/css/medium-editor.css';
+@import '../assets/scss/mixins.scss';
 
 #post-create {
-  max-width: 700px;
-  margin: 0 auto;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-textarea {
-  width: 600px;
-  height: 500px;
-}
-
-#title {
-  font-weight: 400;
-  font-size: 48px;
-  border: none;
-}
-
-#content {
-  margin-bottom: 20px;
-  border: none;
+  @include post-editor-container;
+  textarea {
+    @include post-editor;
+  }
+  #title {
+    @include post-editor-title;
+  }
+  #content {
+    @include post-editor-content;
+  }
 }
 
 @media screen and (max-width: 720px) {
   #post-create {
-    margin: 0 30px;
+    @include post-editor-container-rwd;
   }
   #title {
-    width: 100%;
+    @include post-editor-title-rwd;
   }
   img {
-    width: 100%;
-    height: auto;
+    @include post-editor-img-rwd;
   }
 }
 </style>

@@ -1,0 +1,76 @@
+.medium-editor-element {
+  outline: none;
+}
+
+section.splash h1 span,
+.medium-editor-toolbar li button,
+.color-1,
+.color-2 {
+  color: #ffffff;
+}
+
+body,
+pre,
+.medium-editor-button-active b,
+code {
+  color: #2c3e50;
+}
+
+.medium-editor-button-active.medium-editor-button-active.medium-editor-button-active {
+  background-color: #4fc08d;
+}
+
+pre,
+code {
+  background: #f8f8f8;
+  width: 80vw;
+}
+
+pre#cdn,
+code.data,
+pre#usage {
+  max-width: 900px;
+}
+
+code.data {
+  margin-top: 50px;
+}
+
+.medium-toolbar-arrow-over:before {
+  border-color: transparent transparent #2c3e50 transparent;
+}
+
+.medium-editor-toolbar li button {
+  border-right: 1px solid #2c3e50;
+}
+
+section.installation,
+.medium-editor-toolbar,
+.medium-editor-toolbar-anchor-preview,
+.github-fork-ribbon {
+  background: #000;
+}
+
+.medium-toolbar-arrow-under:after {
+  border-color: #2c3e50 transparent transparent transparent;
+}
+
+#toolbar-placeholder {
+  display: none;
+}
+
+h2 {
+  color: #000;
+}
+.medium-editor-placeholder::after {
+  color: #6c757d;
+  font-style: normal;
+}
+
+blockquote {
+  border-left: 3px solid #000;
+  margin-top: 2em;
+  padding-left: 23px;
+  font-size: 21px;
+  font-style: italic;
+}

@@ -1,0 +1,42 @@
+/* post-create and post-edit */
+@mixin post-editor-container {
+  max-width: 700px;
+  margin: 0 auto;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+@mixin post-editor {
+  width: 600px;
+  height: 500px;
+}
+
+@mixin post-editor-title {
+  font-weight: 400;
+  font-size: 48px;
+  border: none;
+}
+
+@mixin post-editor-content {
+  margin-bottom: 20px;
+  border: none;
+}
+
+@mixin post-editor-container-rwd {
+  margin: 0 30px;
+}
+
+@mixin post-editor-title-rwd {
+  width: 100%;
+}
+
+@mixin post-editor-img-rwd {
+  width: 100%;
+  height: auto;
+}
+
+/* new mixins below */
+// ....
