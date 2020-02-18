@@ -38,5 +38,16 @@
   height: auto;
 }
 
+@mixin clap-count-effect($bottom, $left) {
+  position: absolute;
+  bottom: $bottom;
+  left: $left;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  background: #000;
+  line-height: 40px;
+}
+
 /* new mixins below */
 // ....

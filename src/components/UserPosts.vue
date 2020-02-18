@@ -45,6 +45,7 @@
                       :src="clapHands"
                       alt="clap"
                       :data-postId="post.id"
+                      class="icon"
                     />
                   </button>
                   <span>&nbsp;{{ post.clappedTime }}</span>
@@ -63,6 +64,7 @@
                       :src="clap"
                       alt="clap"
                       :data-postId="post.id"
+                      class="icon"
                     />
                   </button>
                   &nbsp;{{ post.clappedTime }}
@@ -79,6 +81,7 @@
                       :src="clap"
                       alt="clap"
                       :data-postId="post.id"
+                      class="icon"
                     />
                   </button>
                   <span
@@ -178,11 +181,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '../assets/scss/_variables.scss';
-
-svg {
-  cursor: pointer;
-}
-
+@import '../assets/scss/mixins.scss';
 #info {
   padding: 25px;
 }
@@ -230,13 +229,6 @@ svg {
 }
 
 .clap-count {
-  position: absolute;
-  bottom: 30px;
-  left: -10px;
-  font-size: 12px;
-  text-align: center;
-  color: #fff;
-  background: #000;
-  line-height: 40px;
+  @include clap-count-effect(30px, -10px);
 }
 </style>

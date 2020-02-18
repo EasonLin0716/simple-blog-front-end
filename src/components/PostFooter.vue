@@ -24,7 +24,7 @@
           <span v-show="!clapCount">
             &nbsp;{{ post.clappedTimes }}&nbsp;claps&nbsp;</span
           >
-          <span id="clap-count" class="size-mid rounded-circle">
+          <span class="size-mid rounded-circle clap-count">
             {{ clapCount }}
           </span>
         </div>
@@ -154,12 +154,13 @@ export default {
   },
   mounted() {
     const clap = document.querySelector('#clap')
-    mojsAnimation.clapEffect(clap, '#clap', '#clap-count')
+    mojsAnimation.clapEffect(clap, '#clap', '.clap-count')
   }
 }
 </script>
 <style lang="scss" scoped>
 @import '../assets/scss/_variables.scss';
+@import '../assets/scss/mixins.scss';
 
 #claps {
   position: relative;
@@ -181,12 +182,11 @@ export default {
 #links {
   display: flex;
   align-items: center;
-}
-
-#links * {
-  margin-left: 10px;
-  width: 25px;
-  height: 25px;
+  * {
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+  }
 }
 
 #written-by {
@@ -197,36 +197,27 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-}
-
-#written-by #intro {
-  display: flex;
+  #intro {
+    display: flex;
+  }
 }
 
 #avatar {
   display: flex;
   align-items: center;
   margin-right: 10px;
-}
-
-#avatar img {
-  width: 80px;
-  height: 80px;
+  img {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 #response-button {
   margin-bottom: 60px;
 }
 
-#clap-count {
-  position: absolute;
-  bottom: 60px;
-  left: 10px;
-  font-size: 12px;
-  text-align: center;
-  color: #fff;
-  background: #000;
-  line-height: 40px;
+.clap-count {
+  @include clap-count-effect(60px, 10px);
 }
 
 .button-white-green {
