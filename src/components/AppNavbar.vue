@@ -33,7 +33,7 @@
           <router-link to="/payment">
             <button class="navbar-button mr-2 ">Upgrade</button>
           </router-link>
-          <a href="#" role="button" data-toggle="dropdown">
+          <button data-toggle="dropdown">
             <img
               :src="currentUser.avatar"
               class="size-small rounded-circle"
@@ -54,7 +54,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#" @click="logout">Signout</a>
             </div>
-          </a>
+          </button>
         </template>
         <template v-else>
           <router-link :to="'/signin'" class="mr-2 navbar-button"
