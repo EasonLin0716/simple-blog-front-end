@@ -12,10 +12,10 @@
     <template v-if="posts.length">
       <h6>STORIES</h6>
       <div v-for="post in posts" :key="post" id="posts">
-        <div id="author">
+        <div id="author" class="d-flex align-items-center">
           <div id="avatar">
             <img
-              class="rounded-circle"
+              class="rounded-circle size-small-mid"
               :src="post.authorAvatar"
               alt="authorAvatar"
             />
@@ -111,18 +111,8 @@ h6 {
   font-size: $text-small;
 }
 
-#author {
-  display: flex;
-  align-items: center;
-}
-
 #avatar {
   margin-right: 10px;
-}
-
-#avatar img {
-  width: 36px;
-  height: 36px;
 }
 
 #info :first-child span {

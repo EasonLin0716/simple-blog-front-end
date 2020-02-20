@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss">
 @import './assets/css/reset.css';
-
+@import './assets/scss/_variables.scss';
 .box-mid {
   max-width: 728px;
   padding: 0 24px;
@@ -73,12 +73,17 @@ export default {
 }
 
 .badge-success:hover {
-  background: rgb(0, 75, 0);
+  background: $dark-green;
 }
 
 .size-small {
   width: 32px;
   height: 32px;
+}
+
+.size-small-mid {
+  width: 36px;
+  height: 36px;
 }
 
 .size-mid {

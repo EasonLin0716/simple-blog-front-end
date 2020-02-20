@@ -3,8 +3,8 @@
     <section id="post-info" class="box-mid">
       <h6>Show responses for:</h6>
       <div class="card" id="post">
-        <div id="title">
-          <p>{{ postTitle }}</p>
+        <div id="title" class="d-flex justify-content-between">
+          <p class="m-0">{{ postTitle }}</p>
           <div>
             <img :src="clapHands" alt="clap" id="clap" />
             <span>{{ clapTimes }}</span>
@@ -38,8 +38,7 @@
           <img
             :src="reply.avatar"
             alt="avatar"
-            id="avatar"
-            class="rounded-circle"
+            class="rounded-circle size-small-mid"
           />
           <div>
             <span id="replier">{{ reply.replier }}</span>
@@ -166,30 +165,20 @@ h6 {
   padding: 15px 0;
 }
 
-p {
-  display: inline;
-  margin: 0;
-}
-
 #post-info {
   #post {
     padding: 20px;
     margin-bottom: 40px;
 
-    #title {
-      display: flex;
-      justify-content: space-between;
+    #clap {
+      width: 16px;
+      height: 16px;
+      margin: 0 10px;
+    }
 
-      #clap {
-        width: 16px;
-        height: 16px;
-        margin: 0 10px;
-      }
-
-      #comment {
-        font-size: $text-small;
-        margin: 0 10px;
-      }
+    #comment {
+      font-size: $text-small;
+      margin: 0 10px;
     }
   }
 }
@@ -219,11 +208,6 @@ p {
       font-size: 12px;
       color: #aaa;
     }
-  }
-
-  #avatar {
-    height: 36px;
-    width: 36px;
   }
 
   #replies {
