@@ -16,7 +16,8 @@
       <div class="col-right d-flex justify-content-between align-items-center">
         <font-awesome-icon
           icon="search"
-          class="icon icon-small"
+          class="icon icon-small mr-2"
+          id="search"
           @click="toggleSearchBox"
         />
         <input
@@ -28,7 +29,11 @@
           ref="searchBox"
           placeholder="search..."
         />
-        <font-awesome-icon :icon="['far', 'bell']" class="icon" id="bell" />
+        <font-awesome-icon
+          :icon="['far', 'bell']"
+          class="icon mr-3"
+          id="bell"
+        />
         <template v-if="isAuthenticated">
           <router-link to="/payment">
             <button class="navbar-button mr-2 ">Upgrade</button>
@@ -60,12 +65,10 @@
           <router-link :to="'/signin'" class="mr-2 navbar-button"
             >Signin</router-link
           >
-          <img
-            src="../assets/Profile.png"
-            width="32"
-            height="32"
-            id="profile"
-            alt="profile"
+          <font-awesome-icon
+            :icon="['fas', 'user-circle']"
+            class="icon-mid mr-3"
+            id="user"
           />
         </template>
       </div>
@@ -141,6 +144,12 @@ export default {
 #bell {
   width: 22px;
   height: 22px;
+}
+
+#bell,
+#search,
+#user {
+  color: #666;
 }
 
 @media screen and (max-width: 720px) {
