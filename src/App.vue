@@ -13,6 +13,9 @@ import AppNavbar from './components/AppNavbar'
 export default {
   components: {
     AppNavbar
+  },
+  created() {
+    console.log('Welcome to Simple Blog!')
   }
 }
 </script>
