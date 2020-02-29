@@ -3,7 +3,7 @@
     <div id="new-from-network">
       <div id="new-from-network-title">
         <h3>New from your network</h3>
-        <img src="https://fakeimg.pl/135x118/" alt="img" />
+        <img src="../assets/new-from-network.png" alt="img" />
       </div>
       <div id="new-from-network-posts">
         <div v-for="post in newPosts" :key="post.id" id="post-box">
@@ -47,7 +47,7 @@
       <div v-if="isAuthenticated" id="reading-list">
         <div id="reading-list-title">
           <h3>Reading list</h3>
-          <img src="https://fakeimg.pl/135x118/" alt="img" />
+          <img src="../assets/reading-list.png" alt="reading-list-img" />
         </div>
         <div id="reading-list-posts">
           <div
