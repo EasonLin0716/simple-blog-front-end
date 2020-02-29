@@ -141,6 +141,7 @@ export default {
 #bell {
   width: 22px;
   height: 22px;
+  margin-right: 5px;
 }
 
 @media screen and (max-width: 720px) {
