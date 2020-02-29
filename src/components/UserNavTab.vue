@@ -1,17 +1,34 @@
 <template>
   <div id="links">
-    <div class="link">
+    <div
+      class="link"
+      :class="
+        !(
+          currentRoute.includes('claps') ||
+          currentRoute.includes('highlights') ||
+          currentRoute.includes('responses')
+        )
+          ? 'chosen'
+          : ''
+      "
+    >
       <router-link :to="'/users/' + this.userId">Profile</router-link>
     </div>
-    <div class="link">
+    <div class="link" :class="currentRoute.includes('claps') ? 'chosen' : ''">
       <router-link :to="'/users/' + this.userId + '/claps'">Claps</router-link>
     </div>
-    <div class="link">
+    <div
+      class="link"
+      :class="currentRoute.includes('highlights') ? 'chosen' : ''"
+    >
       <router-link :to="'/users/' + this.userId + '/highlights'"
         >Highlights</router-link
       >
     </div>
-    <div class="link">
+    <div
+      class="link"
+      :class="currentRoute.includes('responses') ? 'chosen' : ''"
+    >
       <router-link :to="'/users/' + this.userId + '/responses'"
         >Responses</router-link
       >
@@ -27,8 +44,10 @@ export default {
       required: true
     }
   },
-  data() {
-    return {}
+  computed: {
+    currentRoute: function() {
+      return this.$route.path
+    }
   }
 }
 </script>
@@ -40,6 +59,11 @@ export default {
 }
 
 .link {
-  margin: 0 20px 10px 0;
+  padding-bottom: 10px;
+  margin-right: 20px;
+}
+
+.chosen {
+  border-bottom: 3px solid black;
 }
 </style>
