@@ -2,15 +2,7 @@
   <div id="links">
     <div
       class="link"
-      :class="
-        !(
-          currentRoute.includes('claps') ||
-          currentRoute.includes('highlights') ||
-          currentRoute.includes('responses')
-        )
-          ? 'chosen'
-          : ''
-      "
+      :class="Number.isInteger(+currentRoute.slice(-1)) ? 'chosen' : ''"
     >
       <router-link :to="'/users/' + this.userId">Profile</router-link>
     </div>
