@@ -32,13 +32,13 @@
     </div>
     <div id="follow">
       <router-link :to="'/users/' + this.user.id + '/followings'">
-        <span v-if="user.followings.length"
-          >{{ user.followings.length }} Following</span
+        <span v-if="user.Followings.length"
+          >{{ user.Followings.length }} Following</span
         >
       </router-link>
       <router-link :to="'/users/' + this.user.id + '/followers'">
-        <span v-if="user.followers.length"
-          >{{ user.followers.length }} Followers</span
+        <span v-if="user.Followers.length"
+          >{{ user.Followers.length }} Followers</span
         >
       </router-link>
     </div>

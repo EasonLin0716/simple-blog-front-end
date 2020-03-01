@@ -18,6 +18,9 @@ export default {
   getClaps({ userId }) {
     return apiHelper.get(`/users/${userId}/claps`)
   },
+  getUserFollowings({ userId }) {
+    return apiHelper.get(`/users/${userId}/followings`)
+  },
   putUser({ formData }) {
     return apiHelper.put(`/users/edit`, formData, {
       headers: { Authorization: `Bearer ${getToken()}` }
