@@ -9,7 +9,7 @@
     <UserFollowerList
       :userName="user.name"
       :userId="user.id"
-      :followers="user.Followers"
+      :followers="user.followers"
     />
   </div>
 </template>
@@ -38,8 +38,8 @@ export default {
         isAdmin: '',
         createdAt: '',
         updatedAt: '',
-        Followers: [],
-        Followings: []
+        followers: [],
+        followings: []
       },
       posts: []
     }
@@ -53,7 +53,11 @@ export default {
         if (statusText !== 'OK') {
           throw new Error(statusText)
         }
-        this.user = data.user
+        this.user = {
+          ...data.user,
+          followers: data.user.Followers,
+          followings: data.user.Followings
+        }
       } catch (error) {
         Toast.fire({
           icon: 'success',
