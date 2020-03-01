@@ -9,7 +9,7 @@
     <UserFollowerList
       :userName="user.name"
       :userId="user.id"
-      :followers="user.followers"
+      :followers="user.Followers"
     />
   </div>
 </template>
@@ -38,39 +38,26 @@ export default {
         isAdmin: '',
         createdAt: '',
         updatedAt: '',
-        followers: [],
-        followings: []
+        Followers: [],
+        Followings: []
       },
       posts: []
     }
   },
   methods: {
-    async fetchUserClaps(userId) {
+    async getUserFollowers(userId) {
       try {
-        const { data, statusText } = await userAPI.getClaps({
+        const { data, statusText } = await userAPI.getUserFollowings({
           userId
         })
         if (statusText !== 'OK') {
           throw new Error(statusText)
         }
-        const { user, posts } = data
-        this.user = {
-          ...this.user,
-          id: user.id,
-          name: user.name,
-          avatar: user.avatar,
-          introduction: user.introduction,
-          isAdmin: user.isAdmin,
-          createdAt: user.createdAt,
-          updatedAt: user.updatedAt,
-          followers: user.followers,
-          followings: user.followings
-        }
-        this.posts = posts
+        this.user = data.user
       } catch (error) {
         Toast.fire({
           icon: 'success',
-          title: '無法取得追隨者，請稍後再試！'
+          title: '無法取得追蹤者，請稍後再試！'
         })
       }
     },
@@ -97,12 +84,12 @@ export default {
   },
   created() {
     const { id: userId } = this.$route.params
-    this.fetchUserClaps(userId)
+    this.getUserFollowers(userId)
   },
   beforeRouteUpdate(to, from, next) {
     // 路由改變時重新抓取資料
     const { id: userId } = to.params
-    this.fetchUserClaps(userId)
+    this.getUserFollowers(userId)
     next()
   },
   computed: {

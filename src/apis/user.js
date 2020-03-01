@@ -21,6 +21,9 @@ export default {
   getUserFollowings({ userId }) {
     return apiHelper.get(`/users/${userId}/followings`)
   },
+  getUserFollowers({ userId }) {
+    return apiHelper.get(`/users/${userId}/followers`)
+  },
   putUser({ formData }) {
     return apiHelper.put(`/users/edit`, formData, {
       headers: { Authorization: `Bearer ${getToken()}` }
