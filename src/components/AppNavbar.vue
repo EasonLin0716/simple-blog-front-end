@@ -43,7 +43,7 @@
               <router-link to="/posts/create" class="dropdown-item"
                 >New Story</router-link
               >
-              <router-link to="/users/stories/public" class="dropdown-item"
+              <router-link to="/users/stories/" class="dropdown-item"
                 >Stories</router-link
               >
               <router-link
