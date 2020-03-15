@@ -60,15 +60,31 @@ const routes = [
     component: () => import('../views/Reply.vue')
   },
   {
-    path: '/users/stories/public',
-    name: 'user-stories',
-    component: () => import('../views/UserStories')
+    path: '/users/stories',
+    component: () => import('../views/UserStories.vue'),
+    children: [
+      {
+        path: '',
+        name: 'UserStoriesPosts',
+        component: () => import('@/views/components/UserStoriesPosts.vue')
+      },
+      {
+        path: 'drafts',
+        name: 'UserStoriesDrafts',
+        component: () => import('@/views/components/UserStoriesDrafts.vue')
+      }
+    ]
   },
-  {
-    path: '/users/stories/drafts',
-    name: 'user-drafts',
-    component: () => import('../views/UserDrafts')
-  },
+  // {
+  //   path: '/users/stories/public',
+  //   name: 'user-stories',
+  //   component: () => import('../views/UserStories')
+  // },
+  // {
+  //   path: '/users/stories/drafts',
+  //   name: 'user-drafts',
+  //   component: () => import('../views/UserDrafts')
+  // },
   {
     path: '/users/edit',
     name: 'user-edit',

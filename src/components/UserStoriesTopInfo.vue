@@ -22,10 +22,10 @@
         </li>
         <li
           :style="{
-            borderBottom: currentRoute.includes('public') ? '3px solid' : ''
+            borderBottom: !currentRoute.includes('drafts') ? '3px solid' : ''
           }"
         >
-          <router-link to="/users/stories/public">
+          <router-link to="/users/stories">
             Published
           </router-link>
         </li>
