@@ -68,8 +68,8 @@ export default {
   data() {
     return {
       isProcessing: false,
-      email: '',
-      password: ''
+      email: 'demo@example.com',
+      password: '12345678'
     }
   },
   methods: {
@@ -95,7 +95,7 @@ export default {
           icon: 'success',
           title: '登入成功！'
         })
-        this.$router.go('-1')
+        this.$router.go('/posts')
       } catch (error) {
         this.password = ''
         this.isProcessing = false
