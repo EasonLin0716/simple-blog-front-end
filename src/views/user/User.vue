@@ -1,5 +1,5 @@
 <template>
-  <div id="profile">
+  <div id="profile" class="user__posts">
     <UserPosts
       :posts="posts"
       :user="user"

@@ -1,5 +1,5 @@
 <template>
-  <div id="user-claps">
+  <div id="user-claps" class="user__posts">
     <UserClapsPosts :posts="posts" :user="user" />
   </div>
 </template>

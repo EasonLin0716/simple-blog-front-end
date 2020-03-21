@@ -1,7 +1,5 @@
 <template>
-  <div id="user-highlights">
-    <div style="margin-bottom: 1000px;"></div>
-  </div>
+  <div id="user-highlights" class="user__posts"></div>
 </template>
 
 <script>

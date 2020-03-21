@@ -1,5 +1,5 @@
 <template>
-  <div id="user-responses">
+  <div id="user-responses" class="user__posts">
     <UserResponsesPosts :user="user" :replies="replies" />
   </div>
 </template>
