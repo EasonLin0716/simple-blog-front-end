@@ -121,8 +121,19 @@ import { mapState } from 'vuex'
 const mojsAnimation = require('../utils/mojsAnimation')
 export default {
   name: 'UserPosts',
-  computed: {
-    ...mapState(['currentUser', 'isAuthenticated'])
+  props: {
+    posts: {
+      type: Array,
+      required: true
+    },
+    user: {
+      type: Object,
+      required: true
+    },
+    clapCount: {
+      type: Number,
+      required: true
+    }
   },
   data() {
     return {
@@ -130,6 +141,18 @@ export default {
       clapHands: require('../../static/images/clap-hands.svg'),
       isLoading: false
     }
+  },
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
+  },
+  mounted() {
+    setTimeout(() => {
+      const claps = this.$el.querySelectorAll('.clap')
+      for (let i = 0; i < claps.length; i++) {
+        const clap = claps[i]
+        mojsAnimation.clapEffect(clap, `.clap.ind${i}`, `.clap-count.ind${i}`)
+      }
+    }, 1000)
   },
   methods: {
     handleBookmark(e) {
@@ -153,29 +176,6 @@ export default {
       const { postid } = e.target.dataset
       this.$emit('after-handle-clap', postid)
     }
-  },
-  props: {
-    posts: {
-      type: Array,
-      required: true
-    },
-    user: {
-      type: Object,
-      required: true
-    },
-    clapCount: {
-      type: Number,
-      required: true
-    }
-  },
-  mounted() {
-    setTimeout(() => {
-      const claps = this.$el.querySelectorAll('.clap')
-      for (let i = 0; i < claps.length; i++) {
-        const clap = claps[i]
-        mojsAnimation.clapEffect(clap, `.clap.ind${i}`, `.clap-count.ind${i}`)
-      }
-    }, 1000)
   }
 }
 </script>

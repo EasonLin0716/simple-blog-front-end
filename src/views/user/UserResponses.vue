@@ -1,28 +1,17 @@
 <template>
-  <div id="user-claps">
-    <div class="box-mid">
-      <UserInfo :user="user" />
-      <UserNavTab :userId="user.id" />
-      <UserClapsPosts :posts="posts" :user="user" />
-    </div>
-    <AppPageFooter />
+  <div id="user-responses">
+    <UserResponsesPosts :user="user" :replies="replies" />
   </div>
 </template>
 
 <script>
-import userAPI from '../apis/user'
-import UserInfo from '../components/UserInfo'
-import UserNavTab from '../components/UserNavTab'
-import AppPageFooter from '../components/AppPageFooter'
-import UserClapsPosts from '../components/UserClapsPosts'
-import { Toast } from './../utils/helpers'
+import repliesAPI from '@/apis/replies'
+import UserResponsesPosts from '@/components/UserResponsesPosts'
+import { Toast } from '@/utils/helpers'
 export default {
-  name: 'UserClaps',
+  name: 'UserResponses',
   components: {
-    UserInfo,
-    UserNavTab,
-    UserClapsPosts,
-    AppPageFooter
+    UserResponsesPosts
   },
   data() {
     return {
@@ -37,19 +26,19 @@ export default {
         followers: [],
         followings: []
       },
-      posts: []
+      replies: []
     }
   },
   methods: {
-    async fetchUserClaps(userId) {
+    async getUserReplies(userId) {
       try {
-        const { data, statusText } = await userAPI.getClaps({
+        const { data, statusText } = await repliesAPI.getUserReplies({
           userId
         })
         if (statusText !== 'OK') {
           throw new Error(statusText)
         }
-        const { user, posts } = data
+        const { user, replies } = data
         this.user = {
           ...this.user,
           id: user.id,
@@ -62,23 +51,23 @@ export default {
           followers: user.followers,
           followings: user.followings
         }
-        this.posts = posts
+        this.replies = replies
       } catch (error) {
         Toast.fire({
-          icon: 'error',
-          title: '無法取得鼓掌資訊，請稍後再試！'
+          icon: 'success',
+          title: '無法取得回覆過的文章，請稍後再試！'
         })
       }
     }
   },
   created() {
     const { id: userId } = this.$route.params
-    this.fetchUserClaps(userId)
+    this.getUserReplies(userId)
   },
   beforeRouteUpdate(to, from, next) {
     // 路由改變時重新抓取資料
     const { id: userId } = to.params
-    this.fetchUserClaps(userId)
+    this.getUserReplies(userId)
     next()
   }
 }

@@ -75,16 +75,6 @@ const routes = [
       }
     ]
   },
-  // {
-  //   path: '/users/stories/public',
-  //   name: 'user-stories',
-  //   component: () => import('../views/UserStories')
-  // },
-  // {
-  //   path: '/users/stories/drafts',
-  //   name: 'user-drafts',
-  //   component: () => import('../views/UserDrafts')
-  // },
   {
     path: '/users/edit',
     name: 'user-edit',
@@ -92,23 +82,29 @@ const routes = [
   },
   {
     path: '/users/:id',
-    name: 'users',
-    component: () => import('../views/User.vue')
-  },
-  {
-    path: '/users/:id/claps',
-    name: 'user-claps',
-    component: () => import('../views/UserClaps.vue')
-  },
-  {
-    path: '/users/:id/highlights',
-    name: 'user-highlights',
-    component: () => import('../views/UserHighlights.vue')
-  },
-  {
-    path: '/users/:id/responses',
-    name: 'user-responses',
-    component: () => import('../views/UserResponses.vue')
+    component: () => import('@/views/user/Index.vue'),
+    children: [
+      {
+        path: '',
+        name: 'users',
+        component: () => import('../views/user/User.vue')
+      },
+      {
+        path: 'claps',
+        name: 'user-claps',
+        component: () => import('../views/user/UserClaps.vue')
+      },
+      {
+        path: 'highlights',
+        name: 'user-highlights',
+        component: () => import('../views/user/UserHighlights.vue')
+      },
+      {
+        path: 'responses',
+        name: 'user-responses',
+        component: () => import('../views/user/UserResponses.vue')
+      }
+    ]
   },
   {
     path: '/users/:id/followings',
