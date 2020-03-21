@@ -8,6 +8,7 @@
 import repliesAPI from '@/apis/replies'
 import UserResponsesPosts from '@/components/UserResponsesPosts'
 import { Toast } from '@/utils/helpers'
+import { mapState } from 'vuex'
 export default {
   name: 'UserResponses',
   components: {
@@ -59,6 +60,9 @@ export default {
         })
       }
     }
+  },
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
   },
   created() {
     const { id: userId } = this.$route.params

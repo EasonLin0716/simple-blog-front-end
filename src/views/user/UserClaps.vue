@@ -8,6 +8,7 @@
 import userAPI from '@/apis/user'
 import UserClapsPosts from '@/components/UserClapsPosts'
 import { Toast } from '@/utils/helpers'
+import { mapState } from 'vuex'
 export default {
   name: 'UserClaps',
   components: {
@@ -28,6 +29,9 @@ export default {
       },
       posts: []
     }
+  },
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
   },
   created() {
     const { id: userId } = this.$route.params

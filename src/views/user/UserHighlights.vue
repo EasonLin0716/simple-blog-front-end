@@ -3,8 +3,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'UserHighlights',
-  components: {}
+  components: {},
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
+  }
 }
 </script>

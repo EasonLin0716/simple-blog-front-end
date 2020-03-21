@@ -35,7 +35,8 @@ export default {
         updatedAt: '',
         followers: [],
         followings: []
-      }
+      },
+      posts: []
     }
   },
   computed: {

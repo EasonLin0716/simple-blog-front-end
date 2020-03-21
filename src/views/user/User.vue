@@ -15,6 +15,7 @@
 import replyAPI from '@/apis/replies'
 import UserPosts from '@/components/UserPosts'
 import { Toast } from '@/utils/helpers'
+import { mapState } from 'vuex'
 export default {
   name: 'User',
   components: {
@@ -36,6 +37,9 @@ export default {
       clapCount: 0,
       clapTimer: null
     }
+  },
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
   },
   methods: {
     afterHandleBookmark(postId) {
