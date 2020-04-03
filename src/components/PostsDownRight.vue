@@ -110,7 +110,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/_variables.scss';
+@import '../assets/sass/_variables.scss';
 
 .sticky-down {
   position: sticky;

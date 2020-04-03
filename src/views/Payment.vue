@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/_variables.scss';
+@import '../assets/sass/_variables.scss';
 h5 {
   font-size: 18px;
   color: #aaa;

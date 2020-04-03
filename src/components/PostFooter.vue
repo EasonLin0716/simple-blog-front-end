@@ -159,8 +159,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../assets/scss/_variables.scss';
-@import '../assets/scss/mixins.scss';
+@import '../assets/sass/_variables.scss';
+@import '../assets/sass/mixins.scss';
 
 #claps {
   position: relative;

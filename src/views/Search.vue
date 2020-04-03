@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/_variables.scss';
+@import '../assets/sass/_variables.scss';
 h6 {
   margin-top: 10px;
 }

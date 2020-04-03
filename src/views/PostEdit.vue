@@ -166,7 +166,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/css/medium-editor.css';
-@import '../assets/scss/mixins.scss';
+@import '../assets/sass/mixins.scss';
 
 #post-create {
   @include post-editor-container;

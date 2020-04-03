@@ -95,7 +95,7 @@ export default {
           icon: 'success',
           title: '登入成功！'
         })
-        this.$router.go('/posts')
+        this.$router.push('/posts')
       } catch (error) {
         this.password = ''
         this.isProcessing = false
