@@ -146,6 +146,30 @@ export default {
           title: '修改文章失敗，請稍後再試！'
         })
       }
+    },
+    imageDropListener() {
+      const ed = document.querySelector('#content')
+
+      ed.addEventListener('drop', () => {
+        setTimeout(async () => {
+          this.imageSrc = (
+            document.querySelector("img[src^='data:image/jpeg;base64']") ||
+            document.querySelector("img[src^='data:image/png;base64']")
+          ).src
+          const imageBase64 = this.imageSrc.split(',')[1]
+          const res = await postsAPI.postImage({ imageBase64: imageBase64 })
+          if (res.data.status === 'success') {
+            document.querySelector("img[src^='data:image/jpeg;base64']").src =
+              res.data.imgurLink
+            Toast.fire({
+              icon: 'success',
+              title: '圖片上傳成功!!'
+            })
+            // 圖片上傳成功後把 editor 內容回傳到 content 中
+            this.content = ed.innerHTML
+          }
+        }, 100)
+      })
     }
   },
   computed: {
@@ -154,6 +178,9 @@ export default {
   created() {
     const { id: postId } = this.$route.params
     this.fetchPost(postId)
+  },
+  mounted() {
+    this.imageDropListener()
   },
   beforeRouteUpdate(to, from, next) {
     // 路由改變時重新抓取資料

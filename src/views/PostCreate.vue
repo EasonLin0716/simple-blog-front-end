@@ -18,7 +18,8 @@
         :options="options"
         custom-tag="h4"
         v-on:edit="applyTextEdit"
-      />
+      >
+      </medium-editor>
       <div class="d-flex justify-content-between">
         <button :disabled="isPosting" type="submit" class="btn btn-success">
           {{ !isPosting ? 'Publish' : 'Publising...' }}
@@ -52,6 +53,7 @@ export default {
       title: '',
       content: '',
       image: '',
+      imageSrc: '',
       isPosting: false,
       options: {
         toolbar: {
@@ -85,6 +87,9 @@ export default {
       }
     }
   },
+  mounted() {
+    this.imageDropListener()
+  },
   methods: {
     handleFileChange(e) {
       const files = e.target.files
@@ -101,7 +106,6 @@ export default {
       }
     },
     applyTextEdit(ev) {
-      console.log(ev.event.target.innerHTML)
       if (ev.event.target) {
         this.content = ev.event.target.innerHTML
       }
@@ -128,6 +132,29 @@ export default {
           title: '發生錯誤，請稍後再試！'
         })
       }
+    },
+    imageDropListener() {
+      const ed = document.querySelector('#content')
+
+      ed.addEventListener('drop', () => {
+        setTimeout(async () => {
+          this.imageSrc = document.querySelector(
+            "img[src^='data:image/jpeg;base64']"
+          ).src
+          const imageBase64 = this.imageSrc.split(',')[1]
+          const res = await postsAPI.postImage({ imageBase64: imageBase64 })
+          if (res.data.status === 'success') {
+            document.querySelector("img[src^='data:image/jpeg;base64']").src =
+              res.data.imgurLink
+            Toast.fire({
+              icon: 'success',
+              title: '圖片上傳成功!!'
+            })
+            // 圖片上傳成功後把 editor 內容回傳到 content 中
+            this.content = ed.innerHTML
+          }
+        }, 100)
+      })
     }
   },
   computed: {

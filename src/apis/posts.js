@@ -23,5 +23,8 @@ export default {
   },
   searchPost(searchText) {
     return apiHelper.get(`/search?q=${searchText}`)
+  },
+  postImage(image) {
+    return apiHelper.post(`/imageUpload`, image)
   }
 }
