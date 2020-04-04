@@ -139,7 +139,7 @@ export default {
       ed.addEventListener('drop', () => {
         setTimeout(async () => {
           const image = document.querySelector(
-            "img[src^='data:image/jpeg;base64']"
+            "#post-create img[src^='data:image']"
           )
           if (!image) {
             return Toast.fire({
@@ -147,12 +147,11 @@ export default {
               title: '上傳圖片失敗',
             })
           }
-          this.imageSrc = image.src
-          const imageBase64 = this.imageSrc.split(',')[1]
+          const imageBase64 = image.src.split(',')[1]
           const res = await postsAPI.postImage({ imageBase64: imageBase64 })
           if (res.data.status === 'success') {
-            document.querySelector("img[src^='data:image/jpeg;base64']").src =
-              res.data.imgurLink
+            image.src = res.data.imgurLink
+            console.log(res.data.imgurLink)
             Toast.fire({
               icon: 'success',
               title: '圖片上傳成功!!',
