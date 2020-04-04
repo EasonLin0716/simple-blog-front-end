@@ -46,7 +46,7 @@ import { Toast } from '../utils/helpers'
 export default {
   name: 'PostCreate',
   components: {
-    'medium-editor': editor
+    'medium-editor': editor,
   },
   data() {
     return {
@@ -66,7 +66,7 @@ export default {
             'h1',
             'h2',
             'h3',
-            'quote'
+            'quote',
           ],
           diffLeft: 0,
           diffTop: -10,
@@ -78,13 +78,13 @@ export default {
           /* options which only apply when static is true */
           align: 'center',
           sticky: false,
-          updateOnEmptySelection: false
+          updateOnEmptySelection: false,
         },
         placeholder: {
           text: 'Tell your story',
-          hideOnClick: true
-        }
-      }
+          hideOnClick: true,
+        },
+      },
     }
   },
   mounted() {
@@ -120,7 +120,7 @@ export default {
         if (data.status === 'success') {
           Toast.fire({
             icon: 'success',
-            title: '文章發布成功！'
+            title: '文章發布成功！',
           })
           this.isPosting = false
           this.$router.push(`/posts/${data.PostId}`)
@@ -129,7 +129,7 @@ export default {
         this.isPosting = false
         Toast.fire({
           icon: 'error',
-          title: '發生錯誤，請稍後再試！'
+          title: '發生錯誤，請稍後再試！',
         })
       }
     },
@@ -138,9 +138,16 @@ export default {
 
       ed.addEventListener('drop', () => {
         setTimeout(async () => {
-          this.imageSrc = document.querySelector(
+          const image = document.querySelector(
             "img[src^='data:image/jpeg;base64']"
-          ).src
+          )
+          if (!image) {
+            return Toast.fire({
+              icon: 'error',
+              title: '上傳圖片失敗',
+            })
+          }
+          this.imageSrc = image.src
           const imageBase64 = this.imageSrc.split(',')[1]
           const res = await postsAPI.postImage({ imageBase64: imageBase64 })
           if (res.data.status === 'success') {
@@ -148,18 +155,18 @@ export default {
               res.data.imgurLink
             Toast.fire({
               icon: 'success',
-              title: '圖片上傳成功!!'
+              title: '圖片上傳成功!!',
             })
             // 圖片上傳成功後把 editor 內容回傳到 content 中
             this.content = ed.innerHTML
           }
         }, 100)
       })
-    }
+    },
   },
   computed: {
-    ...mapState(['currentUser'])
-  }
+    ...mapState(['currentUser']),
+  },
 }
 </script>
 
